@@ -1,0 +1,1669 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Nuovi Capelli — espaço de beleza e SPA de noivas em São Paulo. Para os dias comuns e os que mudam tudo.">
+  <title>Nuovi Capelli · O tempo que você se dá.</title>
+
+  <!-- Google Fonts: Quicksand (logo/títulos), Inter (corpo), Fraunces (momentos editoriais) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=Inter:wght@300;400;500&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================
+       TOKENS DA MARCA — NUOVI CAPELLI
+       ========================================= */
+    :root {
+      /* Cores — Modo Dia */
+      --linho:        #E8DDCB;
+      --areia:        #D4C4A8;
+      --branco-cru:   #F5EFE4;
+
+      /* Cores — Modo Noite (Ocasião / Noivas) */
+      --petroleo:     #4B6D6D;
+      --petroleo-esc: #3A5757;
+
+      /* Texto */
+      --tinta:        #2A2520;
+      --nevoa:        #9C9286;
+
+      /* Tipografia */
+      --font-logo:    'Quicksand', system-ui, sans-serif;
+      --font-sans:    'Inter', system-ui, sans-serif;
+      --font-serif:   'Fraunces', Georgia, serif;
+
+      /* Escala */
+      --max-text:     620px;
+      --max-page:     1280px;
+      --margin-x:     96px;
+      --section-y:    128px;
+
+      --radius:       2px;
+    }
+
+    /* =========================================
+       RESET
+       ========================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 1.55;
+      color: var(--tinta);
+      background: var(--linho);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+    /* =========================================
+       LOGO (recriação CSS — Quicksand bold)
+       ========================================= */
+    .logo-mark {
+      font-family: var(--font-logo);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      line-height: 0.95;
+      display: inline-block;
+    }
+    .logo-mark span { display: block; }
+
+    /* =========================================
+       CABEÇALHO — sempre visível, fundo translúcido
+       ========================================= */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 72px;
+      background: rgba(75, 109, 109, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--margin-x);
+      border-bottom: 1px solid rgba(232, 221, 203, 0.12);
+      transition: background 0.4s ease;
+    }
+    .nav.scrolled {
+      background: rgba(232, 221, 203, 0.94);
+      border-bottom-color: rgba(42, 37, 32, 0.08);
+    }
+    .nav__logo {
+      font-family: var(--font-logo);
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--linho);
+      transition: color 0.4s ease;
+    }
+    .nav.scrolled .nav__logo { color: var(--tinta); }
+    .nav__links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav__links a {
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--linho);
+      position: relative;
+      padding-bottom: 4px;
+      transition: color 0.3s ease;
+    }
+    .nav__links a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: 0;
+      width: 0;
+      height: 1px;
+      background: currentColor;
+      transition: width 0.3s ease;
+    }
+    .nav__links a:hover::after { width: 100%; }
+    .nav.scrolled .nav__links a { color: var(--tinta); }
+    .nav__cta {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 12px 24px;
+      background: var(--linho);
+      color: var(--petroleo);
+      border-radius: var(--radius);
+      transition: opacity 0.2s ease, background 0.4s ease, color 0.4s ease;
+    }
+    .nav__cta:hover { opacity: 0.88; }
+    .nav.scrolled .nav__cta {
+      background: var(--tinta);
+      color: var(--linho);
+    }
+    .nav__toggle {
+      display: none;
+      width: 28px;
+      height: 22px;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+    .nav__toggle span {
+      display: block;
+      width: 100%;
+      height: 1.5px;
+      background: var(--linho);
+      transition: background 0.4s ease;
+    }
+    .nav.scrolled .nav__toggle span { background: var(--tinta); }
+
+    /* Hero recebe padding-top pelo header fixo */
+    body { padding-top: 0; }
+
+    /* =========================================
+       HERO
+       ========================================= */
+    .hero {
+      min-height: 100vh;
+      padding: var(--margin-x);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--petroleo);
+      color: var(--linho);
+    }
+    .hero__top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      font-family: var(--font-logo);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--linho);
+    }
+    .hero__center {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-width: 880px;
+    }
+    .hero__logo {
+      width: clamp(320px, 46vw, 680px);
+      height: auto;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.2s forwards;
+    }
+    .hero__logo svg { width: 100%; height: auto; display: block; }
+    .hero__statement {
+      font-family: var(--font-serif);
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(22px, 3.2vw, 38px);
+      line-height: 1.25;
+      max-width: 720px;
+      color: var(--linho);
+      opacity: 0;
+      animation: fadeUp 1s ease 0.6s forwards;
+    }
+    .hero__bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      opacity: 0;
+      animation: fadeUp 1s ease 1s forwards;
+    }
+    .hero__scroll {
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(232, 221, 203, 0.7);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .hero__scroll::before {
+      content: '';
+      display: inline-block;
+      width: 32px;
+      height: 1px;
+      background: rgba(232, 221, 203, 0.7);
+    }
+    .hero .btn-primary {
+      background: var(--linho);
+      color: var(--petroleo);
+    }
+    .hero .btn-primary:hover { background: var(--branco-cru); }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 18px 36px;
+      background: var(--tinta);
+      color: var(--linho);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: var(--radius);
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
+
+    .btn-ghost {
+      display: inline-block;
+      padding: 18px 36px;
+      background: transparent;
+      color: var(--linho);
+      border: 1px solid var(--linho);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: var(--radius);
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+    .btn-ghost:hover { background: var(--linho); color: var(--petroleo); }
+
+    /* =========================================
+       SEÇÃO GENÉRICA
+       ========================================= */
+    section {
+      padding: var(--section-y) var(--margin-x);
+    }
+    .eyebrow {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--nevoa);
+      margin-bottom: 32px;
+    }
+    .section-title {
+      font-family: var(--font-logo);
+      font-weight: 500;
+      font-size: clamp(32px, 4vw, 56px);
+      line-height: 1.1;
+      letter-spacing: -0.005em;
+      max-width: var(--max-text);
+      margin-bottom: 48px;
+    }
+
+    /* =========================================
+       SEÇÃO: NOSSA VISÃO — manifesto compacto
+       ========================================= */
+    .visao {
+      background: var(--branco-cru);
+      padding: calc(var(--section-y) * 0.55) var(--margin-x);
+    }
+    .visao__inner {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .visao__title {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(22px, 2.6vw, 32px);
+      line-height: 1.2;
+      color: var(--tinta);
+      margin-bottom: 24px;
+    }
+    .visao__text {
+      font-family: var(--font-sans);
+      font-weight: 300;
+      font-size: clamp(14px, 1.1vw, 16px);
+      line-height: 1.65;
+      color: var(--tinta);
+      max-width: 620px;
+      margin: 0 auto 16px;
+    }
+    .visao__signature {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 20px;
+      font-family: var(--font-sans);
+      font-size: 10px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--nevoa);
+    }
+    .visao__signature::before,
+    .visao__signature::after {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: var(--nevoa);
+    }
+
+    /* =========================================
+       CARTÃO DA LOJA — Business card 9:5, gradiente
+       ========================================= */
+    .card-loja-wrap {
+      max-width: 980px;
+      margin: 0 auto 96px;
+      padding: 0;
+      perspective: 1400px;
+    }
+    .card-loja {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      aspect-ratio: 9 / 5;
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow:
+        0 40px 80px rgba(42, 37, 32, 0.22),
+        0 12px 28px rgba(42, 37, 32, 0.12);
+      transition: transform 0.6s cubic-bezier(.2,.7,.2,1), box-shadow 0.6s ease;
+      position: relative;
+    }
+    .card-loja:hover {
+      transform: translateY(-10px) rotateX(2deg) rotateY(-1.5deg);
+      box-shadow:
+        0 60px 110px rgba(42, 37, 32, 0.28),
+        0 20px 40px rgba(42, 37, 32, 0.14);
+    }
+    .card-loja__face {
+      background:
+        radial-gradient(circle at 20% 15%, rgba(232, 221, 203, 0.10), transparent 55%),
+        radial-gradient(circle at 85% 85%, rgba(232, 221, 203, 0.06), transparent 50%),
+        linear-gradient(135deg, #5A8080 0%, #4B6D6D 45%, #3A5757 100%);
+      color: var(--linho);
+      padding: 56px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-loja__face::after {
+      content: '';
+      position: absolute;
+      right: -60px; bottom: -60px;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: rgba(232, 221, 203, 0.05);
+      filter: blur(2px);
+    }
+    .card-loja__face::before {
+      content: '';
+      position: absolute;
+      left: -40px; top: -40px;
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      background: rgba(232, 221, 203, 0.04);
+      filter: blur(1px);
+    }
+    .card-loja__brand {
+      font-family: var(--font-logo);
+      font-weight: 600;
+      font-size: clamp(32px, 3.6vw, 44px);
+      line-height: 0.95;
+      letter-spacing: 0.01em;
+      position: relative;
+      z-index: 1;
+    }
+    .card-loja__brand span { display: block; }
+    .card-loja__tagline {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(15px, 1.4vw, 18px);
+      line-height: 1.4;
+      color: rgba(232, 221, 203, 0.9);
+      max-width: 260px;
+      position: relative;
+      z-index: 1;
+    }
+    .card-loja__monogram {
+      position: absolute;
+      bottom: 32px;
+      left: 48px;
+      font-family: var(--font-logo);
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.32em;
+      color: rgba(232, 221, 203, 0.55);
+      z-index: 1;
+    }
+    .card-loja__body {
+      background:
+        linear-gradient(180deg, var(--branco-cru) 0%, var(--linho) 100%);
+      padding: 56px 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      justify-content: center;
+    }
+    .card-loja__group h4 {
+      font-family: var(--font-sans);
+      font-size: 10px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--nevoa);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    .card-loja__group p {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      color: var(--tinta);
+      line-height: 1.55;
+    }
+    .card-loja__group p.muted {
+      color: var(--nevoa);
+      font-size: 13px;
+    }
+    .card-loja__divider {
+      height: 1px;
+      background: linear-gradient(90deg, rgba(42,37,32,0) 0%, rgba(42,37,32,0.14) 50%, rgba(42,37,32,0) 100%);
+      margin: 2px 0;
+    }
+    .card-loja__footer {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--petroleo);
+      font-weight: 500;
+    }
+    .card-loja__footer::before {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: var(--petroleo);
+    }
+
+    /* =========================================
+       SEÇÃO: O LUGAR — galeria editorial 3 fotos + info
+       ========================================= */
+    .lugar__title-block {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 64px;
+    }
+    .lugar__intro {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 1.15;
+      color: var(--tinta);
+      margin-top: 16px;
+    }
+    .lugar__gallery {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      grid-template-rows: repeat(2, 240px);
+      gap: 16px;
+    }
+    .lugar__photo {
+      overflow: hidden;
+      background: var(--areia);
+      position: relative;
+    }
+    .lugar__photo:nth-child(1) { grid-row: span 2; }
+    .lugar__photo:nth-child(2) { grid-column: 2; grid-row: 1; }
+    .lugar__photo:nth-child(3) { grid-column: 3; grid-row: 1 / span 2; }
+    .lugar__photo:nth-child(4) { grid-column: 2; grid-row: 2; }
+    .lugar__photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.85) contrast(0.95);
+      transition: transform 0.7s ease;
+    }
+    .lugar__photo:hover img { transform: scale(1.04); }
+    /* Vinheta degradê suave em cada foto */
+    .lugar__photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at center, transparent 55%, rgba(42, 37, 32, 0.28) 100%),
+        linear-gradient(180deg, transparent 50%, rgba(42, 37, 32, 0.20) 100%);
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+    .lugar__photo:hover::after { opacity: 0.7; }
+
+    /* =========================================
+       SEÇÃO: PLANOS E SERVIÇOS — Cards
+       ========================================= */
+    .planos__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 64px;
+      flex-wrap: wrap;
+      gap: 32px;
+    }
+    .planos__lead {
+      max-width: 480px;
+      color: var(--tinta);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    .planos__cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-bottom: 96px;
+    }
+    .plano {
+      background: var(--branco-cru);
+      padding: 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .plano:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(42, 37, 32, 0.12);
+    }
+    .plano__media {
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      position: relative;
+    }
+    .plano__media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.85) contrast(0.95);
+      transition: transform 0.8s ease;
+    }
+    .plano:hover .plano__media img { transform: scale(1.05); }
+    .plano__tag {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: var(--petroleo);
+      color: var(--linho);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border-radius: var(--radius);
+      font-weight: 500;
+    }
+    .plano__body {
+      padding: 32px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .plano__name {
+      font-family: var(--font-logo);
+      font-weight: 500;
+      font-size: 26px;
+      line-height: 1.15;
+      color: var(--tinta);
+      margin-bottom: 20px;
+    }
+    .plano__items {
+      list-style: none;
+      margin-bottom: 28px;
+    }
+    .plano__items li {
+      font-size: 14px;
+      color: var(--tinta);
+      padding: 10px 0;
+      border-top: 1px solid rgba(42, 37, 32, 0.08);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .plano__items li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--petroleo);
+      flex-shrink: 0;
+    }
+    .plano__footer {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-top: 20px;
+      border-top: 1px solid rgba(42, 37, 32, 0.12);
+    }
+    .plano__price {
+      font-family: var(--font-logo);
+      font-weight: 500;
+      font-size: 28px;
+      color: var(--petroleo);
+    }
+    .plano__price small {
+      display: block;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--nevoa);
+      margin-top: 4px;
+      font-weight: 400;
+    }
+    .plano__cta {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--tinta);
+      border-bottom: 1px solid var(--tinta);
+      padding-bottom: 3px;
+      transition: opacity 0.25s ease;
+    }
+    .plano__cta:hover { opacity: 0.6; }
+
+    /* Divisor editorial */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    .divider__line {
+      flex: 1;
+      height: 1px;
+      background: rgba(42, 37, 32, 0.15);
+    }
+    .divider__text {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--nevoa);
+    }
+
+    /* =========================================
+       SEÇÃO: OS RITUAIS
+       ========================================= */
+    .rituais__list {
+      max-width: 1000px;
+      margin-top: 64px;
+    }
+    .ritual {
+      display: grid;
+      grid-template-columns: minmax(280px, 360px) 1fr auto;
+      gap: 64px;
+      align-items: baseline;
+      padding: 32px 0;
+      border-top: 1px solid rgba(42, 37, 32, 0.12);
+      transition: padding-left 0.3s ease;
+    }
+    .ritual:last-child { border-bottom: 1px solid rgba(42, 37, 32, 0.12); }
+    .ritual:hover { padding-left: 16px; }
+    .ritual__name {
+      font-family: var(--font-logo);
+      font-weight: 500;
+      font-size: 28px;
+      letter-spacing: 0;
+      color: var(--tinta);
+      display: flex;
+      align-items: baseline;
+    }
+    .ritual__article {
+      display: inline-block;
+      width: 48px;
+      color: var(--nevoa);
+      font-weight: 400;
+    }
+    .ritual__desc {
+      font-size: 15px;
+      color: var(--tinta);
+      max-width: 380px;
+      line-height: 1.5;
+    }
+    .ritual__price {
+      font-size: 14px;
+      color: var(--tinta);
+      text-align: right;
+      white-space: nowrap;
+    }
+    .ritual__price small {
+      display: block;
+      color: var(--nevoa);
+      font-size: 12px;
+      margin-top: 4px;
+      letter-spacing: 0.05em;
+    }
+
+    /* =========================================
+       SEÇÃO: A OCASIÃO (Modo Noite — Noivas)
+       ========================================= */
+    .ocasiao {
+      background: var(--petroleo);
+      color: var(--linho);
+      padding: calc(var(--section-y) * 1.4) var(--margin-x);
+      position: relative;
+      overflow: hidden;
+    }
+    .ocasiao__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 96px;
+      align-items: center;
+      max-width: var(--max-page);
+      margin: 0 auto;
+    }
+    .ocasiao__eyebrow {
+      color: rgba(232, 221, 203, 0.65);
+      margin-bottom: 32px;
+    }
+    .ocasiao__title {
+      font-family: var(--font-serif);
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(36px, 4.5vw, 64px);
+      line-height: 1.1;
+      color: var(--linho);
+      margin-bottom: 32px;
+    }
+    .ocasiao__text {
+      font-size: 17px;
+      line-height: 1.65;
+      color: rgba(232, 221, 203, 0.88);
+      margin-bottom: 40px;
+      max-width: 520px;
+    }
+    .ocasiao__photo {
+      aspect-ratio: 4/5;
+      overflow: hidden;
+    }
+    .ocasiao__photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.7) brightness(0.92);
+    }
+
+    /* =========================================
+       SEÇÃO: QUEM CUIDA
+       ========================================= */
+    .quem {
+      background: var(--branco-cru);
+    }
+    .quem__photos {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 64px;
+    }
+    .quem__photo {
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      background: var(--areia);
+    }
+    .quem__photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.8) contrast(0.95);
+      transition: transform 0.7s ease;
+    }
+    .quem__photo:hover img { transform: scale(1.03); }
+    .quem__line {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(24px, 2.5vw, 32px);
+      max-width: var(--max-text);
+      margin-top: 64px;
+      line-height: 1.3;
+    }
+
+    /* =========================================
+       SEÇÃO: CURADORIA (placeholder discreto)
+       ========================================= */
+    .curadoria {
+      text-align: center;
+      padding-top: 96px;
+      padding-bottom: 96px;
+    }
+    .curadoria p {
+      max-width: 520px;
+      margin: 0 auto;
+      color: var(--nevoa);
+      font-size: 15px;
+    }
+    .curadoria .eyebrow { margin-bottom: 24px; }
+
+    /* =========================================
+       RODAPÉ — Cartão compacto + assinatura
+       ========================================= */
+    .footer {
+      background: var(--branco-cru);
+      padding: 96px var(--margin-x) 32px;
+      border-top: 1px solid rgba(42, 37, 32, 0.08);
+    }
+    .footer-card-wrap {
+      max-width: 720px;
+      margin: 0 auto 64px;
+    }
+    .footer-card {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      aspect-ratio: 9 / 5;
+      width: 100%;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow:
+        0 24px 50px rgba(42, 37, 32, 0.16),
+        0 8px 18px rgba(42, 37, 32, 0.08);
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+    }
+    .footer-card:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 36px 70px rgba(42, 37, 32, 0.20),
+        0 12px 24px rgba(42, 37, 32, 0.10);
+    }
+    .footer-card__face {
+      background:
+        radial-gradient(circle at 20% 15%, rgba(232, 221, 203, 0.10), transparent 55%),
+        radial-gradient(circle at 85% 85%, rgba(232, 221, 203, 0.06), transparent 50%),
+        linear-gradient(135deg, #5A8080 0%, #4B6D6D 45%, #3A5757 100%);
+      color: var(--linho);
+      padding: 36px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+    .footer-card__face::after {
+      content: '';
+      position: absolute;
+      right: -40px; bottom: -40px;
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      background: rgba(232, 221, 203, 0.05);
+    }
+    .footer-card__brand {
+      font-family: var(--font-logo);
+      font-weight: 600;
+      font-size: clamp(22px, 2.4vw, 30px);
+      line-height: 0.95;
+      position: relative;
+      z-index: 1;
+    }
+    .footer-card__brand span { display: block; }
+    .footer-card__tagline {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 13px;
+      line-height: 1.4;
+      color: rgba(232, 221, 203, 0.88);
+      max-width: 180px;
+      position: relative;
+      z-index: 1;
+    }
+    .footer-card__monogram {
+      position: absolute;
+      bottom: 20px;
+      left: 30px;
+      font-family: var(--font-logo);
+      font-weight: 500;
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      color: rgba(232, 221, 203, 0.55);
+      z-index: 1;
+    }
+    .footer-card__body {
+      background: linear-gradient(180deg, var(--branco-cru) 0%, var(--linho) 100%);
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      justify-content: center;
+    }
+    .footer-card__group h4 {
+      font-family: var(--font-sans);
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--nevoa);
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+    .footer-card__group p,
+    .footer-card__group a {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--tinta);
+      line-height: 1.55;
+      display: block;
+      transition: opacity 0.2s ease;
+    }
+    .footer-card__group a:hover { opacity: 0.6; }
+    .footer-card__divider {
+      height: 1px;
+      background: linear-gradient(90deg, rgba(42,37,32,0) 0%, rgba(42,37,32,0.14) 50%, rgba(42,37,32,0) 100%);
+    }
+    .footer-card__newsletter input {
+      width: 100%;
+      padding: 8px 0;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(42, 37, 32, 0.25);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--tinta);
+      outline: none;
+      margin-bottom: 8px;
+    }
+    .footer-card__newsletter input::placeholder { color: var(--nevoa); }
+    .footer-card__newsletter button {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--petroleo);
+      font-weight: 500;
+      border-bottom: 1px solid var(--petroleo);
+      padding-bottom: 2px;
+    }
+
+    /* Assinatura final */
+    .footer-signature {
+      text-align: center;
+      padding-top: 32px;
+      border-top: 1px solid rgba(42, 37, 32, 0.08);
+      font-family: var(--font-sans);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--nevoa);
+      line-height: 1.8;
+    }
+    .footer-signature span { display: block; }
+    .footer-signature .by {
+      margin-top: 8px;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      opacity: 0.75;
+    }
+    .footer-signature .by a {
+      color: var(--petroleo);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease;
+      font-weight: 500;
+    }
+    .footer-signature .by a:hover { border-bottom-color: var(--petroleo); }
+
+    /* Pulsar de cores no "4096" — verde · azul · laranja · roxo */
+    .color-pulse {
+      display: inline-block;
+      animation: colorCycle 4s linear infinite;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    @keyframes colorCycle {
+      0%   { color: #22C55E; }   /* verde */
+      25%  { color: #3B82F6; }   /* azul */
+      50%  { color: #F97316; }   /* laranja */
+      75%  { color: #A855F7; }   /* roxo */
+      100% { color: #22C55E; }   /* verde (loop) */
+    }
+
+    /* =========================================
+       BOTÕES FLUTUANTES — WhatsApp + Instagram
+       ========================================= */
+    .floating-actions {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 99;
+    }
+    .float-btn {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      box-shadow: 0 10px 24px rgba(42, 37, 32, 0.28);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+    .float-btn:hover {
+      transform: translateY(-3px) scale(1.06);
+      box-shadow: 0 16px 32px rgba(42, 37, 32, 0.32);
+    }
+    .float-btn svg { width: 26px; height: 26px; }
+    .float-btn--whatsapp {
+      background: #25D366;
+    }
+    .float-btn--instagram {
+      background: linear-gradient(45deg, #F58529 0%, #DD2A7B 45%, #8134AF 80%, #515BD4 100%);
+    }
+    .float-btn__label {
+      position: absolute;
+      right: calc(100% + 12px);
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--tinta);
+      color: var(--linho);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border-radius: 4px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .float-btn:hover .float-btn__label { opacity: 1; }
+
+    /* =========================================
+       ANIMAÇÕES
+       ========================================= */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =========================================
+       RESPONSIVO
+       ========================================= */
+    @media (max-width: 900px) {
+      :root {
+        --margin-x: 24px;
+        --section-y: 80px;
+      }
+      .hero__logo { width: clamp(220px, 70vw, 360px); }
+      .hero__top { font-size: 11px; }
+
+      .nav { padding: 0 24px; height: 60px; }
+      .nav__links { display: none; }
+      .nav__toggle { display: flex; }
+      .nav.nav--open .nav__links {
+        display: flex;
+        position: fixed;
+        top: 60px; left: 0; right: 0;
+        flex-direction: column;
+        background: var(--linho);
+        padding: 24px;
+        gap: 20px;
+        border-bottom: 1px solid rgba(42, 37, 32, 0.1);
+      }
+      .nav.nav--open .nav__links a { color: var(--tinta); }
+
+      .lugar__header { grid-template-columns: 1fr; gap: 32px; }
+      .lugar__gallery {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 220px 220px 220px;
+        gap: 12px;
+      }
+      .lugar__photo:nth-child(1) { grid-column: 1 / span 2; grid-row: 1; }
+      .lugar__photo:nth-child(2) { grid-column: 1; grid-row: 2; }
+      .lugar__photo:nth-child(3) { grid-column: 2; grid-row: 2; }
+      .lugar__photo:nth-child(4) { grid-column: 1 / span 2; grid-row: 3; }
+
+      .planos__cards { grid-template-columns: 1fr; gap: 20px; }
+      .planos__header { flex-direction: column; align-items: flex-start; }
+
+      .card-loja-wrap { margin-bottom: 56px; }
+      .card-loja {
+        grid-template-columns: 1fr;
+        aspect-ratio: auto;
+      }
+      .card-loja__face { padding: 36px 28px; min-height: 220px; }
+      .card-loja__body { padding: 36px 28px; }
+      .card-loja__brand { font-size: 28px; }
+      .card-loja__monogram { left: 28px; bottom: 24px; }
+      .visao { padding: 56px 24px; }
+
+      .lugar__gallery { grid-template-rows: 200px 200px 200px; }
+
+      .ocasiao__grid { grid-template-columns: 1fr; gap: 48px; }
+
+      .ritual {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 24px 0;
+      }
+      .ritual__name { font-size: 22px; }
+      .ritual__article { width: 36px; }
+      .ritual__desc { max-width: none; font-size: 14px; }
+      .ritual__price { text-align: left; font-size: 13px; }
+      .ritual__price small { display: inline; margin-top: 0; margin-left: 12px; }
+
+      .quem__photos { grid-template-columns: 1fr; gap: 16px; }
+
+      .footer { padding: 64px 24px 24px; }
+      .footer-card {
+        grid-template-columns: 1fr;
+        aspect-ratio: auto;
+      }
+      .footer-card__face { padding: 28px 24px; min-height: 180px; }
+      .footer-card__body { padding: 28px 24px; }
+      .floating-actions { right: 16px; bottom: 16px; gap: 10px; }
+      .float-btn { width: 50px; height: 50px; }
+      .float-btn svg { width: 22px; height: 22px; }
+
+      .nav { padding: 0 24px; height: 56px; }
+      .nav__cta { padding: 10px 18px; font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ CABEÇALHO — sempre visível ============ -->
+  <nav class="nav" id="nav">
+    <a href="#top" class="nav__logo">Nuovi Capelli</a>
+
+    <ul class="nav__links">
+      <li><a href="#lugar">O Lugar</a></li>
+      <li><a href="#planos">Planos</a></li>
+      <li><a href="#ocasiao">Noivas</a></li>
+      <li><a href="#quem">Quem Cuida</a></li>
+    </ul>
+
+    <a href="#planos" class="nav__cta">Reservar</a>
+
+    <button class="nav__toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <header class="hero" id="top">
+    <div class="hero__top">
+      <span>Espaço de Beleza</span>
+      <span>Jacareí · São Paulo · BR</span>
+    </div>
+
+    <div class="hero__center">
+      <h1 class="hero__logo" aria-label="Nuovi Capelli">
+        <!-- Logo SVG — recriação fiel da marca em fundo petróleo -->
+        <svg viewBox="0 0 740 360" xmlns="http://www.w3.org/2000/svg" role="img" preserveAspectRatio="xMinYMid meet">
+          <title>Nuovi Capelli</title>
+          <text x="0" y="140"
+                font-family="Quicksand, system-ui, sans-serif"
+                font-weight="500"
+                font-size="160"
+                letter-spacing="2"
+                fill="#E8DDCB">NUOVI</text>
+          <text x="0" y="290"
+                font-family="Quicksand, system-ui, sans-serif"
+                font-weight="500"
+                font-size="160"
+                letter-spacing="2"
+                fill="#E8DDCB"
+                textLength="720"
+                lengthAdjust="spacingAndGlyphs">CAPELLI</text>
+          <text x="0" y="338"
+                font-family="Inter, system-ui, sans-serif"
+                font-weight="300"
+                font-size="22"
+                letter-spacing="0.5"
+                fill="#E8DDCB"
+                opacity="0.85">Espaço de Beleza e SPA de Noivas</text>
+        </svg>
+      </h1>
+      <p class="hero__statement">
+        O tempo de você se dá para contemplar sua beleza.
+      </p>
+    </div>
+
+    <div class="hero__bottom">
+      <span class="hero__scroll">Role para conhecer</span>
+      <a href="#reservar" class="btn-primary">Reservar seu tempo</a>
+    </div>
+  </header>
+
+  <!-- ============ NOSSA VISÃO — manifesto curto ============ -->
+  <section class="visao reveal" id="visao">
+    <div class="visao__inner">
+      <p class="eyebrow">Nossa Visão</p>
+      <h2 class="visao__title">A beleza não tem pressa.</h2>
+      <p class="visao__text">
+        A Nuovi Capelli existe para devolver à mulher o tempo que ela esqueceu de se dar.
+        Aqui, cada atendimento é um ritual — feito com cuidado de casa pequena, onde a
+        hora marcada não pertence à agenda, pertence a você.
+      </p>
+      <p class="visao__text">
+        Cuidamos do dia comum e do dia que muda tudo, com a mesma atenção, o mesmo
+        silêncio acolhedor, a mesma vontade de fazer você sair daqui se reconhecendo.
+      </p>
+      <span class="visao__signature">Pausar · Respirar · Reconhecer</span>
+    </div>
+  </section>
+
+  <!-- ============ O LUGAR — Cartão + galeria ============ -->
+  <section class="lugar reveal" id="lugar">
+
+    <!-- Cartão da loja — agora acima do título -->
+    <div class="card-loja-wrap">
+      <article class="card-loja" aria-label="Cartão de visita da Nuovi Capelli">
+        <div class="card-loja__face">
+          <div class="card-loja__brand">
+            <span>nuovi</span>
+            <span>capelli</span>
+          </div>
+          <p class="card-loja__tagline">O tempo de você se dá para contemplar sua beleza.</p>
+          <span class="card-loja__monogram">EST · JACAREÍ</span>
+        </div>
+
+        <div class="card-loja__body">
+          <div class="card-loja__group">
+            <h4>Endereço</h4>
+            <p>R. Conselheiro Antônio Prado, 290<br>Parque Itamarati, Jacareí · SP</p>
+          </div>
+
+          <div class="card-loja__divider"></div>
+
+          <div class="card-loja__group">
+            <h4>Horário</h4>
+            <p>Terça a sexta · 09:00 às 20:00</p>
+            <p>Sábado · 09:00 às 18:00</p>
+          </div>
+
+          <div class="card-loja__divider"></div>
+
+          <div class="card-loja__group">
+            <p class="muted">Atendemos com hora marcada.</p>
+          </div>
+
+          <span class="card-loja__footer">Espaço de Beleza · SPA de Noivas</span>
+        </div>
+      </article>
+    </div>
+
+    <!-- Título centralizado -->
+    <div class="lugar__title-block">
+      <p class="eyebrow">O lugar</p>
+      <h2 class="lugar__intro">Onde é o nosso encontro.</h2>
+    </div>
+
+    <div class="lugar__gallery">
+      <!-- 4 fotos editoriais do espaço -->
+      <div class="lugar__photo">
+        <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1200&q=80&auto=format" alt="Ambiente do salão com luz natural">
+      </div>
+      <div class="lugar__photo">
+        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&q=80&auto=format" alt="Detalhe do atendimento">
+      </div>
+      <div class="lugar__photo">
+        <img src="https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?w=800&q=80&auto=format" alt="Bancada de produtos do salão">
+      </div>
+      <div class="lugar__photo">
+        <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=800&q=80&auto=format" alt="Detalhe arquitetônico do salão">
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PLANOS E SERVIÇOS ============ -->
+  <section class="planos" id="planos">
+    <div class="planos__header">
+      <div>
+        <p class="eyebrow">Planos e Serviços</p>
+        <h2 class="section-title">Para os dias comuns.</h2>
+      </div>
+      <p class="planos__lead">
+        Combinações pensadas para que você cuide de tudo num só encontro.
+        Cada plano reúne os serviços que conversam entre si — com valor melhor do que separados.
+      </p>
+    </div>
+
+    <!-- Cards de planos (4 combinações) -->
+    <div class="planos__cards">
+
+      <!-- Plano 1: Cabelo Completo -->
+      <article class="plano">
+        <div class="plano__media">
+          <img src="https://images.unsplash.com/photo-1560869713-7d0a29430803?w=1200&q=80&auto=format" alt="Cabelo cuidado em luz natural">
+          <span class="plano__tag">Mais Pedido</span>
+        </div>
+        <div class="plano__body">
+          <h3 class="plano__name">Cabelo Completo</h3>
+          <ul class="plano__items">
+            <li>Corte modelado</li>
+            <li>Escova de finalização</li>
+            <li>Hidratação profunda</li>
+          </ul>
+          <div class="plano__footer">
+            <div class="plano__price">R$ 320<small>economiza R$ 170</small></div>
+            <a href="https://wa.me/5512981495004?text=Oi.%20Quero%20reservar%20o%20plano%20Cabelo%20Completo." class="plano__cta">Reservar →</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Plano 2: Cor + Cuidado -->
+      <article class="plano">
+        <div class="plano__media">
+          <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=1200&q=80&auto=format" alt="Trabalho de coloração e luzes">
+          <span class="plano__tag">Premium</span>
+        </div>
+        <div class="plano__body">
+          <h3 class="plano__name">Cor &amp; Luz</h3>
+          <ul class="plano__items">
+            <li>Luzes ou mechas em camadas</li>
+            <li>Coloração de raiz</li>
+            <li>Hidratação reparadora</li>
+          </ul>
+          <div class="plano__footer">
+            <div class="plano__price">R$ 690<small>economiza R$ 190</small></div>
+            <a href="https://wa.me/5512981495004?text=Oi.%20Quero%20reservar%20o%20plano%20Cor%20e%20Luz." class="plano__cta">Reservar →</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Plano 3: Rosto Pronto -->
+      <article class="plano">
+        <div class="plano__media">
+          <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=1200&q=80&auto=format" alt="Maquiagem natural em luz suave">
+          <span class="plano__tag">Para Eventos</span>
+        </div>
+        <div class="plano__body">
+          <h3 class="plano__name">Rosto Pronto</h3>
+          <ul class="plano__items">
+            <li>Maquiagem profissional</li>
+            <li>Aplicação de cílios</li>
+            <li>Design de sobrancelha</li>
+          </ul>
+          <div class="plano__footer">
+            <div class="plano__price">R$ 380<small>economiza R$ 90</small></div>
+            <a href="https://wa.me/5512981495004?text=Oi.%20Quero%20reservar%20o%20plano%20Rosto%20Pronto." class="plano__cta">Reservar →</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Plano 4: Mãos & Pés -->
+      <article class="plano">
+        <div class="plano__media">
+          <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=1200&q=80&auto=format" alt="Cuidado de mãos e pés">
+          <span class="plano__tag">Cuidado</span>
+        </div>
+        <div class="plano__body">
+          <h3 class="plano__name">Mãos &amp; Pés</h3>
+          <ul class="plano__items">
+            <li>Manicure completa</li>
+            <li>Pedicure completa</li>
+            <li>Esmaltação de longa duração</li>
+          </ul>
+          <div class="plano__footer">
+            <div class="plano__price">R$ 180<small>economiza R$ 40</small></div>
+            <a href="https://wa.me/5512981495004?text=Oi.%20Quero%20reservar%20o%20plano%20Mãos%20e%20Pés." class="plano__cta">Reservar →</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Divisor editorial -->
+    <div class="divider">
+      <span class="divider__line"></span>
+      <span class="divider__text">Serviços avulsos</span>
+      <span class="divider__line"></span>
+    </div>
+
+    <p class="planos__lead" style="margin-bottom:48px">
+      Prefere um serviço só? Todos os itens dos planos podem ser reservados separadamente.
+    </p>
+
+    <div class="rituais__list">
+      <article class="ritual">
+        <div class="ritual__name"><span class="ritual__article">O</span>Corte</div>
+        <p class="ritual__desc">Uma hora com tesoura, espelho e conversa. Você sai outra.</p>
+        <div class="ritual__price">R$ 180 <small>1 hora</small></div>
+      </article>
+
+      <article class="ritual">
+        <div class="ritual__name"><span class="ritual__article">A</span>Escova</div>
+        <p class="ritual__desc">Água morna, escova e silêncio escolhido.</p>
+        <div class="ritual__price">R$ 110 <small>40 min</small></div>
+      </article>
+
+      <article class="ritual">
+        <div class="ritual__name"><span class="ritual__article">A</span>Hidratação</div>
+        <p class="ritual__desc">Tratamento profundo para fio cansado.</p>
+        <div class="ritual__price">R$ 200 <small>1h30</small></div>
+      </article>
+
+      <article class="ritual">
+        <div class="ritual__name"><span class="ritual__article">A</span>Coloração</div>
+        <p class="ritual__desc">Mudar o tom sem perder o seu. Conversa antes, técnica depois.</p>
+        <div class="ritual__price">a partir de R$ 320</div>
+      </article>
+
+      <article class="ritual">
+        <div class="ritual__name"><span class="ritual__article">A</span>s Luzes</div>
+        <p class="ritual__desc">Clarear sem apagar. Trabalho em camadas, leitura do fio real.</p>
+        <div class="ritual__price">a partir de R$ 420</div>
+      </article>
+
+      <article class="ritual">
+        <div class="ritual__name"><span class="ritual__article">A</span>Maquiagem</div>
+        <p class="ritual__desc">Pele real, traço editorial. Para o dia ou para a noite.</p>
+        <div class="ritual__price">R$ 220 <small>1h</small></div>
+      </article>
+
+      <article class="ritual">
+        <div class="ritual__name"><span class="ritual__article">O</span>s Cílios</div>
+        <p class="ritual__desc">Aplicação de cílios fio a fio ou tufo. Pré-evento ou rotina.</p>
+        <div class="ritual__price">R$ 160</div>
+      </article>
+
+      <article class="ritual">
+        <div class="ritual__name"><span class="ritual__article">A</span>Sobrancelha</div>
+        <p class="ritual__desc">Design e mapeamento facial. O traço certo para o seu rosto.</p>
+        <div class="ritual__price">R$ 90</div>
+      </article>
+
+      <article class="ritual">
+        <div class="ritual__name"><span class="ritual__article">A</span>Manicure</div>
+        <p class="ritual__desc">Cuidado completo com esmaltação. Mãos prontas.</p>
+        <div class="ritual__price">R$ 70</div>
+      </article>
+
+      <article class="ritual">
+        <div class="ritual__name"><span class="ritual__article">A</span>Pedicure</div>
+        <p class="ritual__desc">Cuidado completo com esmaltação. Pés leves.</p>
+        <div class="ritual__price">R$ 90</div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ A OCASIÃO — MODO NOITE (Noivas) ============ -->
+  <section class="ocasiao reveal" id="ocasiao">
+    <div class="ocasiao__grid">
+      <div class="ocasiao__text-block">
+        <p class="eyebrow ocasiao__eyebrow">SPA de Noivas</p>
+        <h2 class="ocasiao__title">E para o dia que muda tudo.</h2>
+        <p class="ocasiao__text">
+          A Nuovi cuida da semana antes, da noite antes e da manhã que importa.
+          Trial de penteado, cuidado de pele, ritual da véspera, dia da cerimônia.
+          Uma equipe pequena, dedicada apenas a você.
+        </p>
+        <p class="ocasiao__text">
+          Marque uma conversa. A gente desenha junto.
+        </p>
+        <a href="https://wa.me/5512981495004?text=Oi.%20Gostaria%20de%20conversar%20sobre%20meu%20dia." class="btn-ghost" target="_blank" rel="noopener">Conversar sobre seu dia</a>
+      </div>
+
+      <div class="ocasiao__photo">
+        <!-- Placeholder Unsplash: noiva em ambiente íntimo, luz natural -->
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80&auto=format" alt="Preparação de noiva em ambiente sereno">
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUEM CUIDA ============ -->
+  <section class="quem reveal" id="quem">
+    <p class="eyebrow">Quem cuida</p>
+    <h2 class="section-title">Um time pequeno.</h2>
+
+    <div class="quem__photos">
+      <div class="quem__photo">
+        <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=800&q=80&auto=format" alt="Profissional da Nuovi Capelli">
+      </div>
+      <div class="quem__photo">
+        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&q=80&auto=format" alt="Mãos cuidando do cabelo">
+      </div>
+      <div class="quem__photo">
+        <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=800&q=80&auto=format" alt="Detalhe do ambiente do salão">
+      </div>
+    </div>
+
+    <p class="quem__line">A gente se lembra de você.</p>
+  </section>
+
+  <!-- ============ CURADORIA (placeholder fase 2) ============ -->
+  <section class="curadoria reveal">
+    <p class="eyebrow">Curadoria</p>
+    <p>Em breve, alguns produtos que a casa usa e recomenda.<br>Sem pressa.</p>
+  </section>
+
+  <!-- ============ RODAPÉ — Cartão compacto + assinatura ============ -->
+  <footer class="footer">
+    <div class="footer-card-wrap">
+      <article class="footer-card">
+        <div class="footer-card__face">
+          <div class="footer-card__brand">
+            <span>nuovi</span>
+            <span>capelli</span>
+          </div>
+          <p class="footer-card__tagline">A beleza não tem pressa.</p>
+          <span class="footer-card__monogram">JACAREÍ · SP</span>
+        </div>
+
+        <div class="footer-card__body">
+          <div class="footer-card__group">
+            <h4>Conversar</h4>
+            <a href="https://wa.me/5512981495004" target="_blank" rel="noopener">WhatsApp · (12) 98149-5004</a>
+            <a href="https://www.instagram.com/espaconuovicapelli/" target="_blank" rel="noopener">@espaconuovicapelli</a>
+          </div>
+
+          <div class="footer-card__divider"></div>
+
+          <div class="footer-card__group footer-card__newsletter">
+            <h4>Uma carta por mês. Sem pressa.</h4>
+            <input type="email" placeholder="seu email">
+            <button>Assinar →</button>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="footer-signature">
+      <span>Nuovi Capelli · © todos os direitos reservados</span>
+      <span class="by">by · <a href="https://mezzetti4096-studio.netlify.app/" target="_blank" rel="noopener">mezzetti<span class="color-pulse">4096</span> studio</a></span>
+    </div>
+  </footer>
+
+  <!-- ============ BOTÕES FLUTUANTES — WhatsApp + Instagram ============ -->
+  <div class="floating-actions">
+    <a href="https://wa.me/5512981495004"
+       class="float-btn float-btn--whatsapp"
+       target="_blank" rel="noopener"
+       aria-label="Conversar no WhatsApp">
+      <span class="float-btn__label">WhatsApp</span>
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.464 3.488"/>
+      </svg>
+    </a>
+
+    <a href="https://www.instagram.com/espaconuovicapelli/"
+       class="float-btn float-btn--instagram"
+       target="_blank" rel="noopener"
+       aria-label="Seguir no Instagram">
+      <span class="float-btn__label">Instagram</span>
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+      </svg>
+    </a>
+  </div>
+
+  <script>
+    /* ============================================
+       NAVEGAÇÃO — muda de tom ao sair do hero
+       ============================================ */
+    const nav = document.getElementById('nav');
+    const hero = document.querySelector('.hero');
+
+    window.addEventListener('scroll', () => {
+      const heroHeight = hero.offsetHeight;
+      if (window.scrollY > heroHeight * 0.85) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+
+    /* Toggle mobile */
+    document.getElementById('navToggle')?.addEventListener('click', () => {
+      nav.classList.toggle('nav--open');
+    });
+    /* Fecha menu mobile ao clicar em link */
+    document.querySelectorAll('.nav__links a').forEach(link => {
+      link.addEventListener('click', () => nav.classList.remove('nav--open'));
+    });
+
+    /* ============================================
+       SCROLL REVEAL — seções fadem ao entrar
+       ============================================ */
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealEls.forEach(el => io.observe(el));
+
+    /* ============================================
+       NEWSLETTER — placeholder de envio
+       ============================================ */
+    document.querySelector('.footer__newsletter button')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      const input = document.querySelector('.footer__newsletter input');
+      if (input.value && input.value.includes('@')) {
+        input.value = '';
+        input.placeholder = 'Obrigada. Te escrevo logo.';
+      } else {
+        input.placeholder = 'um email válido, por favor';
+      }
+    });
+  </script>
+
+</body>
+</html>
