@@ -2,7 +2,7 @@
 
 Site institucional do **Espaço Nuovi Capelli** — espaço de beleza e SPA de noivas em Jacareí, SP.
 
-🌐 **Site no ar:** [nuovi-capelli.netlify.app](https://nuovi-capelli.netlify.app)
+🌐 **Site no ar:** [mezzetti4096.github.io/nuovi-capelli](https://mezzetti4096.github.io/nuovi-capelli/)
 📍 R. Conselheiro Antônio Prado, 290 · Parque Itamarati, Jacareí · SP
 📱 [@espaconuovicapelli](https://www.instagram.com/espaconuovicapelli/) · [WhatsApp](https://wa.me/5512981495004)
 
@@ -33,18 +33,17 @@ Arquitetura mobile-first, foco em performance e experiência editorial.
 
 ## Deploy
 
-Hospedado no **Netlify**. Para atualizar:
+Hospedado no **GitHub Pages** — deploy automático a cada push na branch `main`.
+
+Para publicar uma atualização:
 
 ```bash
-cd nuovi-capelli-site
-netlify deploy --prod --dir=.
+git add .
+git commit -m "mensagem do que mudou"
+git push
 ```
 
-Ou, com integração GitHub ativa, basta:
-
-```bash
-git add . && git commit -m "mensagem" && git push
-```
+O Pages builda em ~20-40 segundos. URL: https://mezzetti4096.github.io/nuovi-capelli/
 
 ---
 
