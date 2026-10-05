@@ -1,0 +1,11 @@
+Fontes do site Nuovi Capelli (auto-hospedadas)
+
+Quicksand, Inter e Fraunces, versões variáveis, subconjunto latin, baixadas do Google Fonts em 05/10/2026.
+Licença: SIL Open Font License 1.1 (https://openfontlicense.org). Uso livre em sites, inclusive comercial.
+
+  quicksand.woff2         Quicksand 400–700       logo, títulos, nomes e preços
+  inter.woff2             Inter 300–500           corpo, rótulos e botões
+  fraunces.woff2          Fraunces 300–600        títulos da página de noivas
+  fraunces-italico.woff2  Fraunces itálico 300–500  a frase editorial de cada bloco
+
+As @font-face estão em assets/css/comum.css.
