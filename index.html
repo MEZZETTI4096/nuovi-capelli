@@ -6,7 +6,6 @@
   <meta name="description" content="Nuovi Capelli — espaço de beleza e SPA de noivas em Jacareí, SP. Cabelo, unhas, maquiagem, estética e depilação a laser. Para os dias comuns e os que mudam tudo.">
   <link rel="canonical" href="https://mezzetti4096.github.io/nuovi-capelli/">
   <title>Nuovi Capelli · O tempo que você se dá.</title>
-  <link rel="canonical" href="https://mezzetti4096.github.io/nuovi-capelli/">
   <meta name="theme-color" content="#3A5757">
 
   <!-- Open Graph (WhatsApp, Facebook, Instagram) -->
@@ -15,7 +14,7 @@
   <meta property="og:site_name" content="Nuovi Capelli">
   <meta property="og:url" content="https://mezzetti4096.github.io/nuovi-capelli/">
   <meta property="og:title" content="Nuovi Capelli · Espaço de Beleza e SPA">
-  <meta property="og:description" content="Salão de beleza e SPA de noivas em Jacareí, SP. Para os dias comuns e os que mudam tudo.">
+  <meta property="og:description" content="Espaço de beleza e SPA de noivas em Jacareí, SP. Cabelo, unhas, maquiagem, estética e depilação a laser.">
   <meta property="og:image" content="https://mezzetti4096.github.io/nuovi-capelli/og-nuovi.jpg">
   <meta property="og:image:secure_url" content="https://mezzetti4096.github.io/nuovi-capelli/og-nuovi.jpg">
   <meta property="og:image:type" content="image/jpeg">
@@ -26,29 +25,13 @@
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Nuovi Capelli · Espaço de Beleza e SPA">
-  <meta name="twitter:description" content="Salão de beleza e SPA de noivas em Jacareí, SP. Para os dias comuns e os que mudam tudo.">
+  <meta name="twitter:description" content="Espaço de beleza e SPA de noivas em Jacareí, SP. Cabelo, unhas, maquiagem, estética e depilação a laser.">
   <meta name="twitter:image" content="https://mezzetti4096.github.io/nuovi-capelli/og-nuovi.jpg">
 
   <!-- Favicon / ícone da marca -->
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
   <link rel="icon" type="image/png" href="assets/logo.png">
   <link rel="apple-touch-icon" href="assets/logo.png">
-
-  <!-- Open Graph / compartilhamento (WhatsApp, Instagram, Facebook) -->
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="pt_BR">
-  <meta property="og:site_name" content="Nuovi Capelli">
-  <meta property="og:url" content="https://mezzetti4096.github.io/nuovi-capelli/">
-  <meta property="og:title" content="Nuovi Capelli · O tempo que você se dá.">
-  <meta property="og:description" content="Espaço de beleza e SPA de noivas em Jacareí, SP. Cabelo, unhas, maquiagem, estética e depilação a laser.">
-  <meta property="og:image" content="https://mezzetti4096.github.io/nuovi-capelli/assets/logo.png">
-  <!-- TODO: trocar og:image por uma foto real horizontal assim que a Neia enviar -->
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Nuovi Capelli · O tempo que você se dá.">
-  <meta name="twitter:description" content="Espaço de beleza e SPA de noivas em Jacareí, SP.">
-  <meta name="twitter:image" content="https://mezzetti4096.github.io/nuovi-capelli/assets/logo.png">
 
   <!-- Google Fonts: Quicksand (logo/títulos), Inter (corpo), Fraunces (momentos editoriais) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -61,10 +44,11 @@
     "@context": "https://schema.org",
     "@type": "HairSalon",
     "name": "Nuovi Capelli",
-    "image": "https://mezzetti4096.github.io/nuovi-capelli/assets/logo.png",
+    "image": "https://mezzetti4096.github.io/nuovi-capelli/og-nuovi.jpg",
+    "logo": "https://mezzetti4096.github.io/nuovi-capelli/assets/logo.png",
     "url": "https://mezzetti4096.github.io/nuovi-capelli/",
     "telephone": "+5512996556111",
-    "priceRange": "R$30 - R$1400",
+    "priceRange": "R$ 30 – R$ 1.997",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "R. Conselheiro Antônio Prado, 290, Parque Itamarati",
@@ -743,7 +727,7 @@
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--nevoa);
-      margin-top: 4px;
+      margin-bottom: 6px;
       font-weight: 400;
     }
     .plano__cta {
@@ -802,12 +786,6 @@
       color: var(--tinta);
       display: flex;
       align-items: baseline;
-    }
-    .ritual__article {
-      display: inline-block;
-      width: 48px;
-      color: var(--nevoa);
-      font-weight: 400;
     }
     .ritual__desc {
       font-size: 15px;
@@ -918,7 +896,7 @@
       border-color: var(--linho);
       background: rgba(232, 221, 203, 0.06);
     }
-    .pacote-noiva h4 {
+    .pacote-noiva__name {
       font-family: var(--font-logo);
       font-weight: 600;
       font-size: 20px;
@@ -1116,26 +1094,15 @@
       height: 1px;
       background: linear-gradient(90deg, rgba(42,37,32,0) 0%, rgba(42,37,32,0.14) 50%, rgba(42,37,32,0) 100%);
     }
-    .footer-card__newsletter input {
-      width: 100%;
-      padding: 8px 0;
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid rgba(42, 37, 32, 0.25);
-      font-family: var(--font-sans);
-      font-size: 13px;
-      color: var(--tinta);
-      outline: none;
-      margin-bottom: 8px;
-    }
-    .footer-card__newsletter input::placeholder { color: var(--nevoa); }
-    .footer-card__newsletter button {
-      font-size: 10px;
-      letter-spacing: 0.2em;
+    .footer-card__group a.footer-card__link {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 12px;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--petroleo);
+      color: var(--petroleo-esc);
       font-weight: 500;
-      border-bottom: 1px solid var(--petroleo);
+      border-bottom: 1px solid var(--petroleo-esc);
       padding-bottom: 2px;
     }
 
@@ -1263,6 +1230,7 @@
       }
       .hero__logo { width: clamp(220px, 70vw, 360px); }
       .hero__top { font-size: 11px; }
+      .hero__bottom { flex-direction: column; align-items: flex-start; gap: 28px; }
 
       .nav { padding: 0 24px; height: 60px; }
       .nav__links { display: none; }
@@ -1293,7 +1261,8 @@
       .card-loja__face { padding: 36px 28px; min-height: 220px; }
       .card-loja__body { padding: 36px 28px; }
       .card-loja__brand { font-size: 28px; }
-      .card-loja__monogram { left: 28px; bottom: 24px; }
+      .card-loja__face { gap: 20px; }
+      .card-loja__monogram { position: static; }
       .visao { padding: 56px 24px; }
 
       .ocasiao__grid { grid-template-columns: 1fr; gap: 48px; }
@@ -1305,7 +1274,6 @@
         padding: 24px 0;
       }
       .ritual__name { font-size: 22px; }
-      .ritual__article { width: 36px; }
       .ritual__desc { max-width: none; font-size: 14px; }
       .ritual__price { text-align: left; font-size: 13px; }
       .ritual__price small { display: inline; margin-top: 0; margin-left: 12px; }
@@ -1365,13 +1333,13 @@
       </h1>
       <p class="hero__tagline">Espaço de Beleza e SPA de Noivas</p>
       <p class="hero__statement">
-        O tempo de você se dá para contemplar sua beleza.
+        O tempo que você se dá para contemplar sua beleza.
       </p>
     </div>
 
     <div class="hero__bottom">
       <span class="hero__scroll">Role para conhecer</span>
-      <a href="#reservar" class="btn-primary">Reservar seu tempo</a>
+      <a href="https://wa.me/5512996556111?text=Oi.%20Quero%20reservar%20um%20hor%C3%A1rio." class="btn-primary" target="_blank" rel="noopener">Reservar seu tempo</a>
     </div>
   </header>
 
@@ -1405,7 +1373,7 @@
               <path fill="none" stroke="currentColor" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" d="M326.13,299.17c27.63,0,100.74-14.94,100.74,44.84,0,65.57-64.44,51.62-100.74,51.62M326.13,343.51v142.31M955.7,298.75v182.85M955.81,11.3v235.56M800.22,298.75v182.85h112.9M640.55,298.75v182.85h112.9M585.45,396.11h-116.43M585.45,298.75h-116.43v182.85h116.43M174.95,416.61h74.87M154.41,481.6l20.54-64.99,36.9-117.86,37.97,116.93,21.63,65.92M736.16,11.3l72.85,235.56L883.06,11.3M99.74,481.6c-48.84,0-88.44-39.6-88.44-88.44s39.6-94.4,88.44-94.4M685.07,129.08c0,65.05-52.73,117.78-117.78,117.78s-117.78-52.73-117.78-117.78,52.73-117.78,117.78-117.78,117.78,52.73,117.78,117.78ZM239.24,11.3v165.09c0,38.74,33.45,70.47,74.71,70.47s74.71-31.73,74.71-70.47V11.3M18.06,246.86V11.3l149.39,235.56V11.3"/>
             </svg>
           </div>
-          <p class="card-loja__tagline">O tempo de você se dá para contemplar sua beleza.</p>
+          <p class="card-loja__tagline">O tempo que você se dá para contemplar sua beleza.</p>
           <span class="card-loja__monogram">EST · JACAREÍ</span>
         </div>
 
@@ -1478,7 +1446,7 @@
             <li>Coloração / Tonalização</li>
           </ul>
           <div class="plano__footer">
-            <div class="plano__price">R$ 150<small>a partir de</small></div>
+            <div class="plano__price"><small>a partir de</small>R$ 150</div>
             <a href="https://wa.me/5512996556111?text=Oi.%20Quero%20agendar%20um%20hor%C3%A1rio%20para%20cabelo." class="plano__cta">Reservar →</a>
           </div>
         </div>
@@ -1498,7 +1466,7 @@
             <li>Esmaltação em gel</li>
           </ul>
           <div class="plano__footer">
-            <div class="plano__price">R$ 35<small>a partir de</small></div>
+            <div class="plano__price"><small>a partir de</small>R$ 35</div>
             <a href="https://wa.me/5512996556111?text=Oi.%20Quero%20agendar%20manicure%20e%20pedicure." class="plano__cta">Reservar →</a>
           </div>
         </div>
@@ -1518,7 +1486,7 @@
             <li>Manutenção de cílios</li>
           </ul>
           <div class="plano__footer">
-            <div class="plano__price">R$ 30<small>a partir de</small></div>
+            <div class="plano__price"><small>a partir de</small>R$ 30</div>
             <a href="https://wa.me/5512996556111?text=Oi.%20Quero%20agendar%20maquiagem%20e%20sobrancelha." class="plano__cta">Reservar →</a>
           </div>
         </div>
@@ -1538,7 +1506,7 @@
             <li>Day Spa</li>
           </ul>
           <div class="plano__footer">
-            <div class="plano__price">R$ 100<small>a partir de</small></div>
+            <div class="plano__price"><small>a partir de</small>R$ 100</div>
             <a href="https://wa.me/5512996556111?text=Oi.%20Quero%20saber%20mais%20sobre%20a%20depila%C3%A7%C3%A3o%20a%20laser." class="plano__cta">Reservar →</a>
           </div>
         </div>
@@ -1559,68 +1527,98 @@
 
     <div class="rituais__list">
       <article class="ritual">
-        <div class="ritual__name"><span class="ritual__article">O</span>Corte</div>
+        <h3 class="ritual__name">Corte feminino</h3>
         <p class="ritual__desc">Uma hora com tesoura, espelho e conversa. Você sai outra.</p>
         <div class="ritual__price">a partir de R$ 150</div>
       </article>
 
       <article class="ritual">
-        <div class="ritual__name"><span class="ritual__article">A</span>Escova</div>
-        <p class="ritual__desc">Água morna, escova e silêncio escolhido.</p>
+        <h3 class="ritual__name">Escova</h3>
+        <p class="ritual__desc">Lava e escova, com o silêncio que você escolher.</p>
         <div class="ritual__price">a partir de R$ 80</div>
       </article>
 
       <article class="ritual">
-        <div class="ritual__name"><span class="ritual__article">A</span>Hidratação</div>
-        <p class="ritual__desc">Tratamento profundo para fio cansado.</p>
-        <div class="ritual__price">a partir de R$ 150</div>
-      </article>
-
-      <article class="ritual">
-        <div class="ritual__name"><span class="ritual__article">A</span>Coloração</div>
+        <h3 class="ritual__name">Coloração e tonalização</h3>
         <p class="ritual__desc">Mudar o tom sem perder o seu. Conversa antes, técnica depois.</p>
         <div class="ritual__price">a partir de R$ 200</div>
       </article>
 
       <article class="ritual">
-        <div class="ritual__name"><span class="ritual__article">A</span>s Luzes</div>
+        <h3 class="ritual__name">Clube da Cor</h3>
+        <p class="ritual__desc">Pacote com 5 colorações para manter a cor sempre em dia.</p>
+        <div class="ritual__price">R$ 100 <small>por coloração</small></div>
+      </article>
+
+      <article class="ritual">
+        <h3 class="ritual__name">Luzes e mechas</h3>
         <p class="ritual__desc">Clarear sem apagar. Trabalho em camadas, leitura do fio real.</p>
         <div class="ritual__price">a partir de R$ 550</div>
       </article>
 
       <article class="ritual">
-        <div class="ritual__name"><span class="ritual__article">A</span>Maquiagem</div>
+        <h3 class="ritual__name">Escova progressiva sem formol</h3>
+        <p class="ritual__desc">Alisamento que respeita o fio. O valor acompanha o comprimento.</p>
+        <div class="ritual__price">a partir de R$ 260</div>
+      </article>
+
+      <article class="ritual">
+        <h3 class="ritual__name">Hidratação</h3>
+        <p class="ritual__desc">Tratamento profundo para fio cansado.</p>
+        <div class="ritual__price">a partir de R$ 150</div>
+      </article>
+
+      <article class="ritual">
+        <h3 class="ritual__name">Reconstrução</h3>
+        <p class="ritual__desc">Devolve a força ao fio que passou por química.</p>
+        <div class="ritual__price">a partir de R$ 180</div>
+      </article>
+
+      <article class="ritual">
+        <h3 class="ritual__name">Penteado</h3>
+        <p class="ritual__desc">Para festas, formaturas e o cortejo da noiva.</p>
+        <div class="ritual__price">a partir de R$ 180</div>
+      </article>
+
+      <article class="ritual">
+        <h3 class="ritual__name">Maquiagem</h3>
         <p class="ritual__desc">Pele real, traço editorial. Para o dia ou para a noite.</p>
         <div class="ritual__price">a partir de R$ 150</div>
       </article>
 
       <article class="ritual">
-        <div class="ritual__name"><span class="ritual__article">A</span>Sobrancelha</div>
+        <h3 class="ritual__name">Design de sobrancelha</h3>
         <p class="ritual__desc">Design e mapeamento facial. O traço certo para o seu rosto.</p>
         <div class="ritual__price">a partir de R$ 30</div>
       </article>
 
       <article class="ritual">
-        <div class="ritual__name"><span class="ritual__article">A</span>Manicure</div>
-        <p class="ritual__desc">Cuidado completo com esmaltação. Mãos prontas.</p>
+        <h3 class="ritual__name">Manicure</h3>
+        <p class="ritual__desc">Cutilagem e esmaltação. Mãos prontas.</p>
         <div class="ritual__price">R$ 35</div>
       </article>
 
       <article class="ritual">
-        <div class="ritual__name"><span class="ritual__article">A</span>Pedicure</div>
-        <p class="ritual__desc">Cuidado completo com esmaltação. Pés leves.</p>
+        <h3 class="ritual__name">Pedicure</h3>
+        <p class="ritual__desc">Cutilagem e esmaltação. Pés leves.</p>
         <div class="ritual__price">a partir de R$ 37</div>
       </article>
 
       <article class="ritual">
-        <div class="ritual__name"><span class="ritual__article">A</span>Depilação a Laser</div>
-        <p class="ritual__desc">Fiber Evo — laser diodo de 2ª geração. Sessão a sessão, sem pressa.</p>
+        <h3 class="ritual__name">Manicure e pedicure</h3>
+        <p class="ritual__desc">Mãos e pés no mesmo horário.</p>
+        <div class="ritual__price">a partir de R$ 68</div>
+      </article>
+
+      <article class="ritual">
+        <h3 class="ritual__name">Depilação a laser</h3>
+        <p class="ritual__desc">Fiber Evo, laser diodo de 2ª geração. Sessão a sessão, sem pressa.</p>
         <div class="ritual__price">a partir de R$ 100</div>
       </article>
     </div>
 
     <p class="planos__note">
-      Alguns serviços (unhas em gel/fibra/acrigel, extensão de cílios, micropigmentação de sobrancelha,
+      Alguns serviços (balaiagem, unhas em gel, fibra ou acrigel, extensão de cílios, micropigmentação de sobrancelha,
       maquiagem definitiva, limpeza de pele, drenagem linfática) são sob consulta —
       <a href="https://wa.me/5512996556111?text=Oi.%20Quero%20saber%20o%20valor%20de%20um%20servi%C3%A7o.">fale com a gente pelo WhatsApp</a>.
     </p>
@@ -1654,21 +1652,21 @@
     <!-- Pacotes reais de noiva -->
     <div class="ocasiao__pacotes">
       <article class="pacote-noiva">
-        <h4>Tulipa</h4>
-        <p>Pacote noiva básico</p>
-        <span class="pacote-noiva__price">Sob consulta</span>
+        <h3 class="pacote-noiva__name">Tulipa</h3>
+        <p>Prévias, penteado, maquiagem, mãos e pés</p>
+        <span class="pacote-noiva__price">A partir de R$ 1.497</span>
         <a href="https://wa.me/5512996556111?text=Oi.%20Quero%20saber%20mais%20sobre%20o%20Pacote%20Tulipa." class="pacote-noiva__link">Saiba mais →</a>
       </article>
       <article class="pacote-noiva">
-        <h4>Jasmin</h4>
-        <p>Pacote noiva intermediário</p>
-        <span class="pacote-noiva__price">Sob consulta</span>
+        <h3 class="pacote-noiva__name">Jasmin</h3>
+        <p>Tulipa + sobrancelha, hidromassagem e coffee</p>
+        <span class="pacote-noiva__price">A partir de R$ 1.797</span>
         <a href="https://wa.me/5512996556111?text=Oi.%20Quero%20saber%20mais%20sobre%20o%20Pacote%20Jasmin." class="pacote-noiva__link">Saiba mais →</a>
       </article>
       <article class="pacote-noiva pacote-noiva--featured">
-        <h4>Lótus</h4>
-        <p>Pacote noiva completo</p>
-        <span class="pacote-noiva__price">R$ 1.400</span>
+        <h3 class="pacote-noiva__name">Lótus</h3>
+        <p>A experiência completa de SPA, com espumante</p>
+        <span class="pacote-noiva__price">A partir de R$ 1.997</span>
         <a href="https://wa.me/5512996556111?text=Oi.%20Quero%20saber%20mais%20sobre%20o%20Pacote%20L%C3%B3tus." class="pacote-noiva__link">Saiba mais →</a>
       </article>
     </div>
@@ -1723,10 +1721,10 @@
 
           <div class="footer-card__divider"></div>
 
-          <div class="footer-card__group footer-card__newsletter">
-            <h4>Uma carta por mês. Sem pressa.</h4>
-            <input type="email" placeholder="seu email">
-            <button>Assinar →</button>
+          <div class="footer-card__group">
+            <h4>Novidades e horários livres</h4>
+            <p>Acompanhe no Instagram ou peça para entrar na nossa lista do WhatsApp.</p>
+            <a href="https://wa.me/5512996556111?text=Oi.%20Quero%20receber%20as%20novidades%20da%20Nuovi." class="footer-card__link" target="_blank" rel="noopener">Quero receber →</a>
           </div>
         </div>
       </article>
@@ -1810,19 +1808,6 @@
       lugarVideo.play().catch(() => {});
     }
 
-    /* ============================================
-       NEWSLETTER — placeholder de envio
-       ============================================ */
-    document.querySelector('.footer-card__newsletter button')?.addEventListener('click', (e) => {
-      e.preventDefault();
-      const input = document.querySelector('.footer-card__newsletter input');
-      if (input.value && input.value.includes('@')) {
-        input.value = '';
-        input.placeholder = 'Obrigada. Te escrevo logo.';
-      } else {
-        input.placeholder = 'um email válido, por favor';
-      }
-    });
   </script>
 
 </body>

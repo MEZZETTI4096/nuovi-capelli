@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nuovi Capelli — Dia da Noiva</title>
 <meta name="description" content="Espaço de Beleza e SPA de Noivas em Jacareí, SP. Pacotes Tulipa, Jasmin e Lótus.">
-<meta name="theme-color" content="#2c463f">
+<meta name="theme-color" content="#3A5757">
 <link rel="canonical" href="https://mezzetti4096.github.io/nuovi-capelli/noivas/">
 
 <!-- Open Graph (WhatsApp, Facebook, Instagram) -->
@@ -32,22 +32,28 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --verde-escuro:#2c463f;
-    --verde:#4c7a70;
-    --verde-claro:#7ba397;
-    --dourado:#c39a4b;
-    --dourado-claro:#e3c583;
-    --marfim:#faf6ef;
-    --marfim2:#f1ead9;
-    --texto:#26332f;
-    --texto-suave:#5c6b65;
+    /* Paleta base Nuovi Capelli (a mesma da home) */
+    --petroleo:#4B6D6D;
+    --petroleo-esc:#3A5757;
+    --petroleo-claro:#5A8080;
+    --petroleo-noite:#314A4A;
+    --petroleo-fundo:#223434;
+    --linho:#E8DDCB;
+    --branco-cru:#F5EFE4;
+    --areia:#D4C4A8;
+    --tinta:#2A2520;
+    --nevoa-texto:#696055;
+    /* Dourado: acento exclusivo do território Noivas */
+    --dourado:#C39A4B;
+    --dourado-claro:#E3C583;
+    --dourado-texto:#815B00; /* dourado para texto pequeno sobre fundo claro (4,5:1) */
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
   body{
     font-family:'Quicksand', sans-serif;
-    color:var(--texto);
-    background:var(--marfim);
+    color:var(--tinta);
+    background:var(--branco-cru);
     -webkit-font-smoothing:antialiased;
   }
   h1,h2,h3,.serif{
@@ -63,7 +69,7 @@
     font-size:12.5px;
     letter-spacing:0.28em;
     text-transform:uppercase;
-    color:var(--dourado);
+    color:var(--dourado-texto);
     font-weight:700;
     display:inline-block;
     margin-bottom:16px;
@@ -77,36 +83,36 @@
     transition:background .35s ease, box-shadow .35s ease, padding .35s ease;
   }
   .nav.scrolled{
-    background:rgba(250,246,239,0.92);
+    background:rgba(245,239,228,0.92);
     backdrop-filter:blur(10px);
-    box-shadow:0 1px 0 rgba(44,70,63,0.08);
+    box-shadow:0 1px 0 rgba(58,87,87,0.08);
     padding:12px 32px;
   }
   .nav-logo{
     font-family:'Fraunces', serif;
     font-size:20px;
     letter-spacing:0.05em;
-    color:#fff;
+    color:var(--branco-cru);
     transition:color .35s ease;
   }
-  .nav.scrolled .nav-logo{color:var(--verde-escuro);}
+  .nav.scrolled .nav-logo{color:var(--petroleo-esc);}
   .nav-cta{
     font-size:13px;
     font-weight:700;
     letter-spacing:0.03em;
     padding:10px 20px;
     border-radius:100px;
-    border:1.5px solid rgba(255,255,255,0.8);
-    color:#fff;
+    border:1.5px solid rgba(245,239,228,0.8);
+    color:var(--branco-cru);
     text-decoration:none;
     transition:all .35s ease;
     white-space:nowrap;
   }
   .nav.scrolled .nav-cta{
-    border-color:var(--verde-escuro);
-    color:var(--verde-escuro);
+    border-color:var(--petroleo-esc);
+    color:var(--petroleo-esc);
   }
-  .nav-cta:hover{background:var(--dourado); border-color:var(--dourado); color:#fff !important;}
+  .nav-cta:hover{background:var(--dourado); border-color:var(--dourado); color:var(--tinta) !important;}
 
   /* ---------- Hero ---------- */
   .hero{
@@ -114,7 +120,7 @@
     min-height:100vh;
     display:flex;
     align-items:flex-end;
-    background:#1c2e29;
+    background:var(--petroleo-fundo);
     overflow:hidden;
   }
   .hero img{
@@ -126,13 +132,13 @@
     content:"";
     position:absolute; inset:0;
     background:
-      linear-gradient(180deg, rgba(28,46,41,0.35) 0%, rgba(28,46,41,0.15) 35%, rgba(24,40,35,0.55) 78%, rgba(20,34,30,0.88) 100%);
+      linear-gradient(180deg, rgba(34,52,52,0.35) 0%, rgba(34,52,52,0.15) 35%, rgba(26,42,42,0.55) 78%, rgba(18,32,32,0.88) 100%);
   }
   .hero-content{
     position:relative; z-index:2;
     width:100%;
     padding:0 32px 72px;
-    color:#fff;
+    color:var(--branco-cru);
   }
   .hero-inner{max-width:1120px; margin:0 auto;}
   .hero-eyebrow{
@@ -143,13 +149,13 @@
     font-size:clamp(46px, 8vw, 92px);
     line-height:0.98;
     font-weight:400;
-    color:#fff;
+    color:var(--branco-cru);
   }
   .hero-sub{
     font-family:'Fraunces', serif;
     font-style:italic;
     font-size:clamp(16px, 2.2vw, 21px);
-    color:var(--marfim2);
+    color:var(--linho);
     margin-top:18px;
     max-width:480px;
     font-weight:400;
@@ -168,23 +174,23 @@
   }
   .btn-primary{
     background:var(--dourado);
-    color:#fff;
+    color:var(--tinta);
     box-shadow:0 8px 24px rgba(195,154,75,0.35);
   }
   .btn-primary:hover{transform:translateY(-2px); box-shadow:0 12px 28px rgba(195,154,75,0.45);}
   .btn-ghost{
-    border:1.5px solid rgba(255,255,255,0.55);
-    color:#fff;
+    border:1.5px solid rgba(245,239,228,0.55);
+    color:var(--branco-cru);
   }
-  .btn-ghost:hover{border-color:#fff; background:rgba(255,255,255,0.08);}
+  .btn-ghost:hover{border-color:var(--branco-cru); background:rgba(245,239,228,0.08);}
   .scroll-cue{
     position:absolute; bottom:28px; left:50%; transform:translateX(-50%);
-    z-index:2; color:rgba(255,255,255,0.75); font-size:11px;
+    z-index:2; color:rgba(245,239,228,0.75); font-size:11px;
     letter-spacing:0.25em; text-transform:uppercase;
     display:flex; flex-direction:column; align-items:center; gap:10px;
   }
   .scroll-cue::after{
-    content:""; width:1px; height:34px; background:rgba(255,255,255,0.55);
+    content:""; width:1px; height:34px; background:rgba(245,239,228,0.55);
     animation:scrollpulse 2s ease-in-out infinite;
   }
   @keyframes scrollpulse{0%,100%{opacity:0.3;} 50%{opacity:1;}}
@@ -192,7 +198,7 @@
   /* ---------- Story ---------- */
   .story{
     padding:120px 0 100px;
-    background:var(--marfim);
+    background:var(--branco-cru);
   }
   .story-grid{
     display:grid;
@@ -203,18 +209,18 @@
   .story-img{
     border-radius:4px;
     overflow:hidden;
-    box-shadow:0 30px 60px -20px rgba(44,70,63,0.35);
+    box-shadow:0 30px 60px -20px rgba(58,87,87,0.35);
   }
   .story h2{
     font-size:clamp(30px, 3.6vw, 42px);
-    color:var(--verde-escuro);
+    color:var(--petroleo-esc);
     line-height:1.15;
     margin-bottom:22px;
   }
   .story p{
     font-size:16.5px;
     line-height:1.75;
-    color:var(--texto-suave);
+    color:var(--nevoa-texto);
     max-width:440px;
   }
   .story-quote{
@@ -222,13 +228,13 @@
     font-family:'Fraunces', serif;
     font-style:italic;
     font-size:19px;
-    color:var(--dourado);
+    color:var(--dourado-texto);
   }
 
   /* ---------- Espaço ---------- */
   .espaco{
-    background:var(--verde-escuro);
-    color:var(--marfim);
+    background:var(--petroleo-esc);
+    color:var(--branco-cru);
     padding:110px 0;
     position:relative;
   }
@@ -240,13 +246,13 @@
   }
   .espaco h2{
     font-size:clamp(30px, 3.6vw, 42px);
-    color:#fff;
+    color:var(--branco-cru);
     margin-bottom:22px;
   }
   .espaco p{
     font-size:16.5px;
     line-height:1.75;
-    color:rgba(250,246,239,0.8);
+    color:rgba(245,239,228,0.8);
     max-width:440px;
   }
   .espaco-img{
@@ -258,17 +264,17 @@
   /* ---------- Pacotes ---------- */
   .pacotes{
     padding:120px 0 60px;
-    background:var(--marfim);
+    background:var(--linho);
     text-align:center;
   }
   .pacotes-head{max-width:640px; margin:0 auto 76px;}
   .pacotes-head h2{
     font-size:clamp(32px, 4vw, 46px);
-    color:var(--verde-escuro);
+    color:var(--petroleo-esc);
   }
   .pacotes-head p{
     margin-top:16px;
-    color:var(--texto-suave);
+    color:var(--nevoa-texto);
     font-size:16px;
     line-height:1.7;
   }
@@ -276,7 +282,7 @@
     display:flex; justify-content:center; align-items:center; gap:10px;
     margin-bottom:10px;
   }
-  .bloom{width:9px; height:9px; border-radius:50%; background:var(--marfim2);}
+  .bloom{width:9px; height:9px; border-radius:50%; background:var(--areia);}
   .bloom.on{background:var(--dourado);}
 
   .cards{
@@ -286,43 +292,43 @@
     text-align:left;
   }
   .card{
-    background:#fff;
+    background:var(--branco-cru);
     border-radius:6px;
     overflow:hidden;
-    box-shadow:0 20px 45px -18px rgba(44,70,63,0.28);
+    box-shadow:0 20px 45px -18px rgba(58,87,87,0.28);
     display:flex;
     flex-direction:column;
     transition:transform .3s ease, box-shadow .3s ease;
   }
-  .card:hover{transform:translateY(-6px); box-shadow:0 28px 55px -18px rgba(44,70,63,0.4);}
+  .card:hover{transform:translateY(-6px); box-shadow:0 28px 55px -18px rgba(58,87,87,0.4);}
   .card-img{aspect-ratio:4/5; overflow:hidden;}
   .card-img img{width:100%; height:100%; object-fit:cover;}
   .card-body{padding:30px 28px 32px; display:flex; flex-direction:column; flex:1;}
   .card-tier{
     font-size:11.5px; letter-spacing:0.24em; text-transform:uppercase;
-    color:var(--dourado); font-weight:700; margin-bottom:8px;
+    color:var(--dourado-texto); font-weight:700; margin-bottom:8px;
   }
   .card-body h3{
-    font-size:26px; color:var(--verde-escuro); margin-bottom:18px;
+    font-size:26px; color:var(--petroleo-esc); margin-bottom:18px;
   }
   .card-body h3 span{
     display:block; font-family:'Quicksand'; font-size:12.5px; font-weight:600;
-    letter-spacing:0.08em; text-transform:uppercase; color:var(--texto-suave);
+    letter-spacing:0.08em; text-transform:uppercase; color:var(--nevoa-texto);
     margin-top:4px;
   }
   .card-list{list-style:none; margin-bottom:26px; flex:1;}
   .card-list li{
-    font-size:14.5px; color:var(--texto); padding:8px 0;
-    border-bottom:1px dashed rgba(44,70,63,0.14);
+    font-size:14.5px; color:var(--tinta); padding:8px 0;
+    border-bottom:1px dashed rgba(58,87,87,0.14);
     display:flex; align-items:baseline; gap:8px;
   }
   .card-list li:last-child{border-bottom:none;}
   .card-list li::before{
     content:"◆"; font-size:6px; color:var(--dourado); position:relative; top:-2px;
   }
-  .card-price-label{font-size:12px; color:var(--texto-suave); margin-bottom:2px;}
+  .card-price-label{font-size:12px; color:var(--nevoa-texto); margin-bottom:2px;}
   .card-price{
-    font-family:'Fraunces', serif; font-size:28px; color:var(--verde-escuro); font-weight:500;
+    font-family:'Fraunces', serif; font-size:28px; color:var(--petroleo-esc); font-weight:500;
   }
   .card.featured{
     border:1.5px solid var(--dourado);
@@ -331,7 +337,7 @@
   .card.featured::before{
     content:"Mais escolhido";
     position:absolute; top:18px; right:-38px;
-    background:var(--dourado); color:#fff;
+    background:var(--dourado); color:var(--tinta);
     font-size:10.5px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;
     padding:6px 44px;
     transform:rotate(40deg);
@@ -341,7 +347,7 @@
   /* ---------- Personalize ---------- */
   .add-ons{
     padding:110px 0;
-    background:var(--marfim2);
+    background:var(--linho);
   }
   .add-grid{
     display:grid;
@@ -349,26 +355,26 @@
     gap:60px;
     align-items:center;
   }
-  .add-img{border-radius:4px; overflow:hidden; box-shadow:0 24px 50px -18px rgba(44,70,63,0.3);}
-  .add-ons h2{font-size:clamp(28px,3.4vw,38px); color:var(--verde-escuro); margin-bottom:10px;}
-  .add-ons > .add-grid > div:last-child > p.subtitle{color:var(--texto-suave); margin-bottom:30px; font-size:15.5px;}
+  .add-img{border-radius:4px; overflow:hidden; box-shadow:0 24px 50px -18px rgba(58,87,87,0.3);}
+  .add-ons h2{font-size:clamp(28px,3.4vw,38px); color:var(--petroleo-esc); margin-bottom:10px;}
+  .add-ons > .add-grid > div:last-child > p.subtitle{color:var(--nevoa-texto); margin-bottom:30px; font-size:15.5px;}
   .price-list{list-style:none;}
   .price-list li{
     display:flex; justify-content:space-between; align-items:baseline;
     padding:13px 0;
-    border-bottom:1px solid rgba(44,70,63,0.14);
+    border-bottom:1px solid rgba(58,87,87,0.14);
     font-size:15px;
   }
-  .price-list li span:first-child{color:var(--texto);}
+  .price-list li span:first-child{color:var(--tinta);}
   .price-list li span:last-child{
-    font-family:'Fraunces', serif; color:var(--dourado); font-weight:600; font-size:16px;
+    font-family:'Fraunces', serif; color:var(--dourado-texto); font-weight:600; font-size:16px;
     white-space:nowrap; margin-left:16px;
   }
 
   /* ---------- Madrinhas ---------- */
   .madrinhas{
     padding:110px 0;
-    background:var(--marfim);
+    background:var(--branco-cru);
   }
   .mad-grid{
     display:grid;
@@ -376,21 +382,21 @@
     gap:60px;
     align-items:center;
   }
-  .madrinhas h2{font-size:clamp(28px,3.4vw,38px); color:var(--verde-escuro); margin-bottom:14px;}
-  .madrinhas p.subtitle{color:var(--texto-suave); margin-bottom:30px; font-size:15.5px; max-width:420px;}
+  .madrinhas h2{font-size:clamp(28px,3.4vw,38px); color:var(--petroleo-esc); margin-bottom:14px;}
+  .madrinhas p.subtitle{color:var(--nevoa-texto); margin-bottom:30px; font-size:15.5px; max-width:420px;}
   .mad-table{width:100%; border-collapse:collapse;}
-  .mad-table tr{border-bottom:1px solid rgba(44,70,63,0.14);}
+  .mad-table tr{border-bottom:1px solid rgba(58,87,87,0.14);}
   .mad-table tr:last-child{border-bottom:none;}
   .mad-table td{padding:14px 0; font-size:15px;}
   .mad-table td:last-child{
-    text-align:right; font-family:'Fraunces', serif; color:var(--dourado); font-weight:600; font-size:16px;
+    text-align:right; font-family:'Fraunces', serif; color:var(--dourado-texto); font-weight:600; font-size:16px;
   }
-  .mad-img{border-radius:4px; overflow:hidden; box-shadow:0 24px 50px -18px rgba(44,70,63,0.3);}
+  .mad-img{border-radius:4px; overflow:hidden; box-shadow:0 24px 50px -18px rgba(58,87,87,0.3);}
 
   /* ---------- CTA final ---------- */
   .cta-final{
-    background:var(--verde-escuro);
-    color:#fff;
+    background:var(--petroleo-esc);
+    color:var(--branco-cru);
     text-align:center;
     padding:110px 32px;
   }
@@ -401,27 +407,27 @@
     line-height:1.15;
   }
   .cta-final p{
-    color:rgba(250,246,239,0.75);
+    color:rgba(245,239,228,0.75);
     max-width:520px; margin:0 auto 38px;
     font-size:16.5px; line-height:1.7;
   }
 
   /* ---------- Footer ---------- */
   footer{
-    background:#213a34;
-    color:rgba(250,246,239,0.75);
+    background:var(--petroleo-noite);
+    color:rgba(245,239,228,0.75);
     padding:56px 32px 34px;
   }
   .footer-grid{
     max-width:1120px; margin:0 auto;
     display:flex; justify-content:space-between; flex-wrap:wrap; gap:32px;
     padding-bottom:32px;
-    border-bottom:1px solid rgba(250,246,239,0.14);
+    border-bottom:1px solid rgba(245,239,228,0.14);
   }
-  .footer-logo{font-family:'Fraunces', serif; font-size:22px; color:#fff; margin-bottom:10px;}
+  .footer-logo{font-family:'Fraunces', serif; font-size:22px; color:var(--branco-cru); margin-bottom:10px;}
   .footer-col a{
     display:block; text-decoration:none; font-size:14.5px; margin-top:10px;
-    color:rgba(250,246,239,0.8);
+    color:rgba(245,239,228,0.8);
     transition:color .2s ease;
   }
   .footer-col a:hover{color:var(--dourado-claro);}
@@ -431,7 +437,7 @@
   }
   .footer-bottom{
     max-width:1120px; margin:24px auto 0;
-    font-size:12.5px; color:rgba(250,246,239,0.5);
+    font-size:12.5px; color:rgba(245,239,228,0.5);
     display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
   }
 
@@ -637,8 +643,8 @@
         <li><span>Limpeza de pele</span><span>R$ 130</span></li>
         <li><span>Massagem relaxante</span><span>R$ 130</span></li>
         <li><span>Alongamento de unha de fibra de vidro</span><span>R$ 150</span></li>
-        <li><span>Esmaltação em gel</span><span>R$ 70</span></li>
-        <li><span>Design de sobrancelha</span><span>R$ 35</span></li>
+        <li><span>Esmaltação em gel</span><span>R$ 80</span></li>
+        <li><span>Design de sobrancelha</span><span>R$ 30</span></li>
         <li><span>Depilação egípcia (buço)</span><span>R$ 15</span></li>
       </ul>
     </div>
