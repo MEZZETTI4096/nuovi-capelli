@@ -658,6 +658,27 @@
       transition: transform 0.8s ease;
     }
     .plano:hover .plano__media img { transform: scale(1.05); }
+    /* Card ainda sem foto real: painel com as cores da marca (mesmo degradê do cartão da loja) */
+    .plano__media--marca {
+      background:
+        radial-gradient(circle at 20% 15%, rgba(232, 221, 203, 0.10), transparent 55%),
+        radial-gradient(circle at 85% 85%, rgba(232, 221, 203, 0.06), transparent 50%),
+        linear-gradient(135deg, #5A8080 0%, #4B6D6D 45%, #3A5757 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+    }
+    .plano__frase {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(26px, 2.6vw, 34px);
+      line-height: 1.2;
+      color: var(--branco-cru);
+      text-align: center;
+    }
+    .plano__media--marca .plano__tag { background: var(--branco-cru); color: var(--petroleo-esc); }
     .plano__tag {
       position: absolute;
       top: 16px;
@@ -1435,7 +1456,7 @@
       <!-- Categoria 1: Cabelo -->
       <article class="plano">
         <div class="plano__media">
-          <img src="https://images.unsplash.com/photo-1560869713-7d0a29430803?w=1200&q=80&auto=format" alt="Cabelo cuidado em luz natural" width="1200" height="675" loading="lazy">
+          <img src="assets/img/plano-cabelo.webp" alt="Cabelo loiro com ondas suaves, finalizado na Nuovi Capelli" width="1200" height="675" loading="lazy">
           <span class="plano__tag">Mais Pedido</span>
         </div>
         <div class="plano__body">
@@ -1454,8 +1475,8 @@
 
       <!-- Categoria 2: Unhas -->
       <article class="plano">
-        <div class="plano__media">
-          <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=1200&q=80&auto=format" alt="Cuidado de mãos e pés" width="1200" height="675" loading="lazy">
+        <div class="plano__media plano__media--marca">
+          <p class="plano__frase" aria-hidden="true">Mãos prontas.</p>
           <span class="plano__tag">Cuidado</span>
         </div>
         <div class="plano__body">
@@ -1474,8 +1495,8 @@
 
       <!-- Categoria 3: Rosto & Olhar -->
       <article class="plano">
-        <div class="plano__media">
-          <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=1200&q=80&auto=format" alt="Maquiagem natural em luz suave" width="1200" height="675" loading="lazy">
+        <div class="plano__media plano__media--marca">
+          <p class="plano__frase" aria-hidden="true">O traço certo.</p>
           <span class="plano__tag">Para Eventos</span>
         </div>
         <div class="plano__body">
@@ -1494,8 +1515,8 @@
 
       <!-- Categoria 4: Estética & Depilação a Laser -->
       <article class="plano">
-        <div class="plano__media">
-          <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=1200&q=80&auto=format" alt="Ambiente de cuidado e bem-estar" width="1200" height="675" loading="lazy">
+        <div class="plano__media plano__media--marca">
+          <p class="plano__frase" aria-hidden="true">Sem pressa.</p>
           <span class="plano__tag">Novidade</span>
         </div>
         <div class="plano__body">
@@ -1679,13 +1700,13 @@
 
     <div class="quem__photos">
       <div class="quem__photo">
-        <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=800&q=80&auto=format" alt="Profissional da Nuovi Capelli" width="800" height="1067" loading="lazy">
+        <img src="assets/img/quem-equipe.webp" alt="A equipe da Nuovi Capelli reunida no salão, brindando" width="900" height="1200" loading="lazy">
       </div>
       <div class="quem__photo">
-        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&q=80&auto=format" alt="Mãos cuidando do cabelo" width="800" height="1067" loading="lazy">
+        <img src="assets/img/quem-neia.webp" alt="Néia, à frente da Nuovi Capelli, sorrindo com a tesoura na mão" width="720" height="960" loading="lazy">
       </div>
       <div class="quem__photo">
-        <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=800&q=80&auto=format" alt="Detalhe do ambiente do salão" width="800" height="1067" loading="lazy">
+        <img src="assets/img/quem-mechas.webp" alt="Mão da cabeleireira mostrando mechas loiras em camadas" width="900" height="1200" loading="lazy">
       </div>
     </div>
 
