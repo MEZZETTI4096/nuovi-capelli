@@ -461,6 +461,21 @@
       color: var(--tinta);
       line-height: 1.55;
     }
+    .card-loja__mapa {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 44px;
+      margin-top: 2px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--petroleo-esc);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 4px;
+    }
+    .card-loja__mapa:hover { text-decoration-thickness: 2px; }
+    .card-loja__mapa .icone { width: 18px; height: 18px; }
     .card-loja__group p.muted {
       color: var(--nevoa-texto);
       font-size: 15px;
@@ -1255,7 +1270,7 @@
 <header class="cab" data-cab>
   <div class="cab__dentro">
     <a class="cab__logo" href="./" aria-current="page">Nuovi Capelli</a>
-    <nav class="cab__nav" id="cab-menu" aria-label="Principal"><ul class="cab__links"><li><a href="#planos">Serviços</a></li><li><a href="noivas/">Noivas</a></li><li><a href="#quem">Quem cuida</a></li><li><a href="#onde">Onde estamos</a></li></ul></nav>
+    <nav class="cab__nav" id="cab-menu" aria-label="Principal"><ul class="cab__links"><li><a href="servicos/">Serviços</a></li><li><a href="noivas/">Noivas</a></li><li><a href="#quem">Quem cuida</a></li><li><a href="#onde">Onde estamos</a></li><li class="cab__insta"><a href="https://www.instagram.com/espaconuovicapelli/" target="_blank" rel="noopener"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-instagram"/></svg><span class="cab__insta-curto">Instagram</span><span class="cab__insta-longo">@espaconuovicapelli</span></a></li></ul></nav>
     <a class="cab__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%20um%20hor%C3%A1rio." target="_blank" rel="noopener"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span>Agendar</span></a>
     <button class="cab__menu" type="button" aria-expanded="false" aria-controls="cab-menu"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-menu"/></svg><span>Menu</span></button>
   </div>
@@ -1329,6 +1344,7 @@
           <div class="card-loja__group">
             <p class="card-loja__rotulo">Endereço</p>
             <p>R. Conselheiro Antônio Prado, 290<br>Parque Itamarati, Jacareí · SP</p>
+            <a class="card-loja__mapa" href="https://www.google.com/maps/search/?api=1&amp;query=R.%20Conselheiro%20Ant%C3%B4nio%20Prado%2C%20290%2C%20Parque%20Itamarati%2C%20Jacare%C3%AD%20-%20SP" target="_blank" rel="noopener"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg>Ver no mapa<span class="so-leitor"> (abre o Google Maps)</span></a>
           </div>
 
           <div class="card-loja__divider"></div>
@@ -1746,7 +1762,7 @@
     </div>
     <nav class="rod__col" aria-label="Rodapé">
       <h2 class="rod__titulo">Navegar</h2>
-      <ul class="rod__lista"><li><a class="rod__item" href="#planos"><span>Serviços</span></a></li><li><a class="rod__item" href="noivas/"><span>Noivas</span></a></li><li><a class="rod__item" href="#quem"><span>Quem cuida</span></a></li><li><a class="rod__item" href="#onde"><span>Onde estamos</span></a></li></ul>
+      <ul class="rod__lista"><li><a class="rod__item" href="servicos/"><span>Serviços</span></a></li><li><a class="rod__item" href="noivas/"><span>Noivas</span></a></li><li><a class="rod__item" href="#quem"><span>Quem cuida</span></a></li><li><a class="rod__item" href="#onde"><span>Onde estamos</span></a></li></ul>
     </nav>
   </div>
   <div class="rod__base">

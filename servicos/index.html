@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Serviços e preços · Nuovi Capelli</title>
+  <meta name="description" content="Serviços e preços da Nuovi Capelli em Jacareí, SP: cabelo, unhas, rosto e olhar, estética e laser. Monte seu horário e envie pelo WhatsApp.">
+  <link rel="canonical" href="https://mezzetti4096.github.io/nuovi-capelli/servicos/">
+  <meta name="theme-color" content="#3A5757">
+
+  <!-- Open Graph (WhatsApp, Facebook, Instagram) -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Nuovi Capelli">
+  <meta property="og:url" content="https://mezzetti4096.github.io/nuovi-capelli/servicos/">
+  <meta property="og:title" content="Serviços e preços · Nuovi Capelli">
+  <meta property="og:description" content="Cabelo, unhas, rosto e olhar, estética e laser em Jacareí, SP. Monte seu horário e envie pelo WhatsApp.">
+  <meta property="og:image" content="https://mezzetti4096.github.io/nuovi-capelli/og-nuovi.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Nuovi Capelli, espaço de beleza e SPA em Jacareí (SP)">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Serviços e preços · Nuovi Capelli">
+  <meta name="twitter:description" content="Cabelo, unhas, rosto e olhar, estética e laser em Jacareí, SP. Monte seu horário e envie pelo WhatsApp.">
+  <meta name="twitter:image" content="https://mezzetti4096.github.io/nuovi-capelli/og-nuovi.jpg">
+
+  <!-- HEAD-COMUM:INICIO -->
+<link rel="icon" type="image/svg+xml" href="../assets/logo.svg">
+<link rel="icon" type="image/png" href="../assets/logo.png">
+<link rel="apple-touch-icon" href="../assets/logo.png">
+<link rel="preload" href="../assets/fontes/quicksand.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fontes/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/comum.css">
+<script src="../assets/js/comum.js" defer></script>
+<!-- HEAD-COMUM:FIM -->
+
+  <style>
+    /* =========================================
+       CARDÁPIO DE SERVIÇOS — /servicos/
+       Tokens, cabeçalho, rodapé e ícones: assets/css/comum.css
+       Abas e linhas: geradas por gerar-servicos.py (marcador CARDAPIO)
+       ========================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    [hidden] { display: none !important; }
+
+    /* Zoom padrão de 90% no computador, igual às outras páginas */
+    @media (min-width: 901px) { html { zoom: 0.9; } }
+
+    body {
+      font-family: var(--fonte-texto);
+      font-size: var(--t-corpo);
+      line-height: 1.55;
+      color: var(--tinta);
+      background: var(--linho);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+    .faixa { max-width: 960px; margin: 0 auto; padding: 0 var(--gutter); }
+
+    /* ===== SEÇÃO: TOPO ===== */
+    .topo { padding-top: calc(var(--cab-h) + 56px); padding-bottom: 32px; }
+    .topo__titulo {
+      font-family: var(--fonte-logo);
+      font-weight: 500;
+      font-size: clamp(34px, 5vw, 52px);
+      line-height: 1.1;
+    }
+    .topo__frase {
+      margin-top: 12px;
+      font-family: var(--fonte-serifa);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(19px, 2.2vw, 23px);
+      line-height: 1.35;
+      max-width: 560px;
+    }
+
+    /* Busca */
+    .busca { margin-top: 32px; max-width: 520px; }
+    .busca__rotulo { display: block; font-size: 15px; font-weight: 500; margin-bottom: 8px; }
+    .busca__campo { position: relative; }
+    .busca__campo .icone {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      color: var(--nevoa-texto);
+      pointer-events: none;
+    }
+    .busca input {
+      width: 100%;
+      min-height: 50px;
+      padding: 0 16px 0 46px;
+      border: 1px solid rgba(42, 37, 32, 0.28);
+      border-radius: 2px;
+      background: var(--branco-cru);
+      color: var(--tinta);
+      font: 400 16px/1.2 var(--fonte-texto); /* 16 px: o iPhone não dá zoom ao focar */
+    }
+    .busca input::placeholder { color: var(--nevoa-texto); }
+    .busca input:focus-visible { outline: 2px solid var(--petroleo-esc); outline-offset: 2px; }
+
+    /* ===== SEÇÃO: ABAS (fixas no topo ao rolar) ===== */
+    .abas {
+      position: sticky;
+      top: var(--cab-h);
+      z-index: 50;
+      background: var(--linho); /* sólido: o texto não aparece por trás das abas fixas */
+      border-bottom: 1px solid rgba(42, 37, 32, 0.12);
+    }
+    .abas__dentro {
+      position: relative;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+      display: flex;
+      align-items: stretch;
+      gap: 8px;
+      overflow-x: auto;
+      scroll-snap-type: x proximity;
+      scrollbar-width: none;
+    }
+    .abas__dentro::-webkit-scrollbar { display: none; }
+    .abas__lista {
+      display: flex;
+      gap: 4px;
+      flex: 1 0 auto;
+    }
+    .abas__aba,
+    .abas__noivas {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 56px;
+      padding: 0 14px;
+      border-bottom: 2px solid transparent;
+      color: var(--nevoa-texto);
+      font: 500 15px/1 var(--fonte-texto);
+      white-space: nowrap;
+      text-decoration: none;
+      scroll-snap-align: start;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .abas__aba .icone,
+    .abas__noivas .icone { width: 20px; height: 20px; }
+    .abas__aba:hover,
+    .abas__noivas:hover { color: var(--tinta); }
+    .abas__aba[aria-selected="true"] { color: var(--tinta); border-bottom-color: var(--petroleo-esc); }
+    .abas__aba:focus-visible,
+    .abas__noivas:focus-visible { outline-offset: -4px; }
+    .abas__conta {
+      min-width: 22px;
+      padding: 3px 6px;
+      border-radius: 999px;
+      background: var(--petroleo-esc);
+      color: var(--branco-cru);
+      font-size: var(--t-rotulo);
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+    }
+    .abas__noivas {
+      flex-shrink: 0;
+      border-left: 1px solid rgba(42, 37, 32, 0.12);
+      padding-left: 16px;
+    }
+    html:not(.js) .abas { display: none; }
+
+    /* ===== SEÇÃO: PAINÉIS E LINHAS ===== */
+    .paineis { max-width: 960px; margin: 0 auto; padding: 8px var(--gutter) 48px; }
+    .painel__titulo {
+      font-family: var(--fonte-logo);
+      font-weight: 500;
+      font-size: 30px;
+      margin-top: 40px;
+    }
+    html.js .painel__titulo {
+      position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+    }
+    .grupo { margin-top: 32px; }
+    .grupo__titulo {
+      font-family: var(--fonte-logo);
+      font-weight: 600;
+      font-size: 18px;
+      color: var(--petroleo-esc);
+      padding-bottom: 8px;
+    }
+    .item {
+      border-top: 1px solid rgba(42, 37, 32, 0.12);
+      scroll-margin-top: calc(var(--cab-h) + 72px); /* livra o cabeçalho e as abas */
+    }
+    .grupo .item:last-child { border-bottom: 1px solid rgba(42, 37, 32, 0.12); }
+    .item__linha { display: flex; align-items: center; gap: 12px; }
+    .item__abrir {
+      flex: 1;
+      min-width: 0;
+      min-height: 64px;
+      padding: 14px 0;
+      display: grid;
+      grid-template-columns: 1fr auto auto 12px;
+      align-items: center;
+      gap: 20px;
+      text-align: left;
+    }
+    .item__nome {
+      font-family: var(--fonte-logo);
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 1.3;
+      color: var(--tinta);
+    }
+    .item__abrir:hover .item__nome { color: var(--petroleo-esc); }
+    .item__dur {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: var(--t-apoio);
+      color: var(--nevoa-texto);
+      white-space: nowrap;
+    }
+    .item__dur .icone { width: 16px; height: 16px; }
+    .item__preco {
+      font-size: var(--t-apoio);
+      color: var(--petroleo-esc);
+      font-weight: 500;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+      grid-column: 3;
+    }
+    .item__add {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 44px;
+      padding: 0 14px 0 10px;
+      border: 1px solid var(--petroleo-esc);
+      border-radius: 999px;
+      color: var(--petroleo-esc);
+      font-size: var(--t-apoio);
+      font-weight: 500;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    .item__add .icone { width: 18px; height: 18px; }
+    .item__add:hover { background: rgba(58, 87, 87, 0.08); }
+    .item__add[aria-pressed="true"] { background: var(--petroleo-esc); color: var(--branco-cru); }
+    html:not(.js) .item__add,
+    html:not(.js) .item__abrir .expande__icone { display: none; }
+
+    /* Detalhes que abrem */
+    .item__detalhes { padding: 0 0 20px; max-width: 680px; }
+    .item__texto { font-size: 15px; line-height: 1.6; }
+    .item__info { list-style: none; display: grid; gap: 6px; margin-top: 12px; }
+    .item__info li { display: flex; gap: 8px; align-items: flex-start; font-size: var(--t-apoio); color: var(--nevoa-texto); }
+    .item__info .icone { width: 16px; height: 16px; margin-top: 2px; }
+    .item__cuidado { margin-top: 8px; font-size: var(--t-apoio); color: var(--nevoa-texto); }
+    .item__cuidado strong { color: var(--tinta); font-weight: 500; }
+    .servico__tags { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+    .servico__tags li {
+      font-size: var(--t-rotulo);
+      line-height: 1.3;
+      padding: 5px 10px;
+      border: 1px solid rgba(58, 87, 87, 0.28);
+      border-radius: 999px;
+      color: var(--petroleo-esc);
+      background: var(--branco-cru);
+    }
+    .servico__comprimentos { display: flex; gap: 24px; margin-top: 12px; font-variant-numeric: tabular-nums; }
+    .servico__comprimentos dt { font-size: var(--t-rotulo); color: var(--nevoa-texto); }
+    .servico__comprimentos dd { font-family: var(--fonte-logo); font-size: 17px; color: var(--petroleo-esc); }
+
+    /* Componente que se expande (o mesmo da home) */
+    .expande__painel { display: grid; grid-template-rows: 1fr; }
+    .expande__conteudo { min-height: 0; overflow: hidden; }
+    html.js .expande__painel { grid-template-rows: 0fr; transition: grid-template-rows 380ms var(--ease-saida); }
+    html.js .expande__conteudo {
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity 220ms ease-out, transform 380ms var(--ease-saida);
+    }
+    html.js .expande__painel--aberto { grid-template-rows: 1fr; }
+    html.js .expande__painel--aberto > .expande__conteudo {
+      opacity: 1;
+      transform: none;
+      transition: opacity 320ms ease-out 60ms, transform 380ms var(--ease-saida);
+    }
+    /* Seta (e não "+") para abrir: o "+" é do botão Adicionar */
+    .expande__icone { position: relative; width: 12px; height: 12px; color: var(--petroleo-esc); transition: transform 380ms var(--ease-saida); }
+    .expande__icone::before {
+      content: '';
+      position: absolute;
+      left: 2px;
+      top: 0;
+      width: 7px;
+      height: 7px;
+      border-right: 1.5px solid currentColor;
+      border-bottom: 1.5px solid currentColor;
+      transform: rotate(45deg);
+    }
+    [data-expande][aria-expanded="true"] .expande__icone { transform: rotate(180deg); }
+    @media (prefers-reduced-motion: reduce) {
+      html.js .expande__painel,
+      html.js .expande__conteudo,
+      .expande__icone,
+      .abas__aba,
+      .item__add { transition: none !important; }
+    }
+
+    /* Nota e busca sem resultado */
+    .nota { margin-top: 40px; font-size: 15px; color: var(--nevoa-texto); max-width: 640px; }
+    .nota a, .vazio a { color: var(--petroleo-esc); font-weight: 500; text-underline-offset: 3px; }
+    .vazio {
+      margin-top: 40px;
+      padding: 32px;
+      background: var(--branco-cru);
+      border-radius: 2px;
+      font-size: 16px;
+    }
+
+    /* ===== SEÇÃO: MEU HORÁRIO (barra fixa) ===== */
+    body.tem-horario { --barra-h: calc(88px + env(safe-area-inset-bottom, 0px)); }
+    body.tem-horario .agendar-fixo { display: none; }
+    .horario {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 160;
+      background: rgba(245, 239, 228, 0.97);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(42, 37, 32, 0.12);
+      box-shadow: 0 -12px 32px rgba(42, 37, 32, 0.08);
+    }
+    .horario__dentro {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 14px var(--gutter) calc(14px + env(safe-area-inset-bottom, 0px));
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .horario__resumo { flex: 1; font-size: 15px; line-height: 1.4; }
+    .horario__resumo b { font-weight: 500; }
+    .horario__limpar {
+      min-height: 44px;
+      padding: 0 8px;
+      font-size: 15px;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      color: var(--tinta);
+    }
+    .horario__enviar {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 22px;
+      border-radius: 2px;
+      background: var(--petroleo-esc);
+      color: var(--branco-cru);
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .horario__enviar:focus-visible { outline: 2px solid var(--petroleo-esc); outline-offset: 3px; }
+
+    /* ===== RESPONSIVO ===== */
+    @media (max-width: 900px) {
+      .abas__aba, .abas__noivas { padding: 0 12px; }
+      /* mais abas à direita: a borda esmaece */
+      .abas__dentro { -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 40px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 40px), transparent); }
+      /* No celular: nome numa linha; duração e preço embaixo, quebrando se precisar */
+      .item__abrir {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 4px 14px;
+        position: relative;
+        padding-right: 24px;
+      }
+      .item__nome { flex-basis: 100%; }
+      .item__abrir .expande__icone { position: absolute; right: 4px; top: 20px; }
+      .item__preco { text-align: left; }
+      .item__add { padding: 0 12px 0 8px; }
+      body.tem-horario { --barra-h: calc(124px + env(safe-area-inset-bottom, 0px)); }
+      .horario__dentro { flex-wrap: wrap; gap: 8px 12px; padding-top: 12px; }
+      .horario__resumo { flex-basis: 100%; }
+      .horario__enviar { flex: 1; }
+    }
+    @media (max-width: 340px) {
+      .item__add > span:not(.so-leitor) { display: none; } /* só o ícone + nome para o leitor de tela em telas muito estreitas */
+      .item__add { padding: 0 12px; }
+    }
+  </style>
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+  <!-- ICONES:INICIO -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+<!-- Ícones: Lucide 1.52.0 (lucide.dev, licença ISC) · WhatsApp e Instagram: marcas dos donos · logo: Nuovi Capelli -->
+<symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+<symbol id="i-calendar-clock" viewBox="0 0 24 24"><path d="M16 14v2.2l1.6 1"/><path d="M16 2v3"/><path d="M21 7.338V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h2.338"/><path d="M3 9h5.859"/><path d="M8 2v3"/><circle cx="16" cy="16" r="6"/></symbol>
+<symbol id="i-car" viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+<symbol id="i-credit-card" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/><path d="M6 14h2"/></symbol>
+<symbol id="i-droplets" viewBox="0 0 24 24"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-flower-2" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1"/><circle cx="12" cy="8" r="2"/><path d="M12 10v12"/><path d="M12 22c4.2 0 7-1.667 7-5-4.2 0-7 1.667-7 5Z"/><path d="M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z"/></symbol>
+<symbol id="i-hand" viewBox="0 0 24 24"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></symbol>
+<symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></symbol>
+<symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z"/><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
+<symbol id="i-repeat" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></symbol>
+<symbol id="i-scissors" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></symbol>
+<symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/><path d="M20 2v4"/><path d="M22 4h-4"/><circle cx="4" cy="20" r="2"/></symbol>
+<symbol id="i-tag" viewBox="0 0 24 24"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></symbol>
+<symbol id="i-wind" viewBox="0 0 24 24"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+<symbol id="i-whatsapp" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.464 3.488"/></symbol>
+<symbol id="i-instagram" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></symbol>
+<symbol id="i-logo" viewBox="0 0 967.11 497.12"><path fill="none" stroke="currentColor" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" d="M326.13,299.17c27.63,0,100.74-14.94,100.74,44.84,0,65.57-64.44,51.62-100.74,51.62M326.13,343.51v142.31M955.7,298.75v182.85M955.81,11.3v235.56M800.22,298.75v182.85h112.9M640.55,298.75v182.85h112.9M585.45,396.11h-116.43M585.45,298.75h-116.43v182.85h116.43M174.95,416.61h74.87M154.41,481.6l20.54-64.99,36.9-117.86,37.97,116.93,21.63,65.92M736.16,11.3l72.85,235.56L883.06,11.3M99.74,481.6c-48.84,0-88.44-39.6-88.44-88.44s39.6-94.4,88.44-94.4M685.07,129.08c0,65.05-52.73,117.78-117.78,117.78s-117.78-52.73-117.78-117.78,52.73-117.78,117.78-117.78,117.78,52.73,117.78,117.78ZM239.24,11.3v165.09c0,38.74,33.45,70.47,74.71,70.47s74.71-31.73,74.71-70.47V11.3M18.06,246.86V11.3l149.39,235.56V11.3"/></symbol>
+</svg>
+<!-- ICONES:FIM -->
+
+  <!-- ============ CABEÇALHO, RODAPÉ E AGENDAR — carimbados pelo casca.py ============ -->
+  <!-- CABECALHO:INICIO -->
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+<header class="cab" data-cab>
+  <div class="cab__dentro">
+    <a class="cab__logo" href="../">Nuovi Capelli</a>
+    <nav class="cab__nav" id="cab-menu" aria-label="Principal"><ul class="cab__links"><li><a href="./" aria-current="page">Serviços</a></li><li><a href="../noivas/">Noivas</a></li><li><a href="../#quem">Quem cuida</a></li><li><a href="../#onde">Onde estamos</a></li><li class="cab__insta"><a href="https://www.instagram.com/espaconuovicapelli/" target="_blank" rel="noopener"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-instagram"/></svg><span class="cab__insta-curto">Instagram</span><span class="cab__insta-longo">@espaconuovicapelli</span></a></li></ul></nav>
+    <a class="cab__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%20um%20hor%C3%A1rio." target="_blank" rel="noopener"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span>Agendar</span></a>
+    <button class="cab__menu" type="button" aria-expanded="false" aria-controls="cab-menu"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-menu"/></svg><span>Menu</span></button>
+  </div>
+</header>
+<!-- CABECALHO:FIM -->
+
+  <main id="conteudo" tabindex="-1">
+
+    <!-- ============ TOPO — título e busca ============ -->
+    <section class="topo faixa">
+      <h1 class="topo__titulo">Serviços e preços</h1>
+      <p class="topo__frase">Escolha com calma. Monte seu horário e mande pelo WhatsApp.</p>
+
+      <div class="busca" role="search">
+        <label class="busca__rotulo" for="busca">Buscar serviço</label>
+        <div class="busca__campo">
+          <svg class="icone" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
+          <input type="search" id="busca" autocomplete="off" placeholder="Ex.: escova, manicure, laser" aria-describedby="aviso">
+        </div>
+      </div>
+      <p class="so-leitor" id="aviso" aria-live="polite"></p>
+    </section>
+
+    <!-- ============ CARDÁPIO — abas e painéis gerados da planilha ============ -->
+    <!-- CARDAPIO:INICIO -->
+<div class="abas">
+<div class="abas__dentro">
+<div class="abas__lista" role="tablist" aria-label="Categorias de serviço">
+<button class="abas__aba" type="button" role="tab" id="aba-cabelo" aria-controls="painel-cabelo" aria-selected="true" tabindex="0"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-scissors"/></svg><span>Cabelo</span><span class="abas__conta" hidden></span></button>
+<button class="abas__aba" type="button" role="tab" id="aba-unhas" aria-controls="painel-unhas" aria-selected="false" tabindex="-1"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-hand"/></svg><span>Unhas</span><span class="abas__conta" hidden></span></button>
+<button class="abas__aba" type="button" role="tab" id="aba-rosto" aria-controls="painel-rosto" aria-selected="false" tabindex="-1"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-eye"/></svg><span>Rosto &amp; Olhar</span><span class="abas__conta" hidden></span></button>
+<button class="abas__aba" type="button" role="tab" id="aba-estetica" aria-controls="painel-estetica" aria-selected="false" tabindex="-1"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-sparkles"/></svg><span>Estética &amp; Laser</span><span class="abas__conta" hidden></span></button>
+</div>
+<a class="abas__noivas" href="../noivas/#pacotes"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-flower-2"/></svg><span>Noivas</span></a>
+</div>
+</div>
+<div class="paineis">
+<section class="painel" role="tabpanel" id="painel-cabelo" aria-labelledby="aba-cabelo"><h2 class="painel__titulo">Cabelo</h2><div class="grupo"><h3 class="grupo__titulo">Cortes</h3><div class="item" id="corte-feminino" data-expande-caixa data-id="corte-feminino" data-nome="Corte feminino" data-preco="150" data-preco-txt="a partir de R$ 150" data-min="60" data-busca="corte feminino uma hora com tesoura espelho e conversa voce sai outra corte reto repicado em camadas long short layers chanel long bob undercut feminino franja reta cortina lateral"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-corte-feminino"><span class="item__nome">Corte feminino</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>60 min</span><span class="item__preco">a partir de R$ 150</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Corte feminino ao meu horário</span></button></div><div class="expande__painel" id="det-corte-feminino"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Corte de cabelo feminino com higienização (lavagem) e secagem inclusas.</p><ul class="servico__tags" aria-label="Variações"><li>Corte reto</li><li>Repicado</li><li>Em camadas (long/short layers)</li><li>Chanel</li><li>Long bob</li><li>Undercut feminino</li><li>Franja (reta, cortina, lateral)</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 60 min</span></li><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-repeat"/></svg><span>Manutenção: Recomenda-se manutenção a cada 2 a 3 meses</span></li></ul></div></div></div></div><div class="item" id="corte-masculino" data-expande-caixa data-id="corte-masculino" data-nome="Corte masculino" data-preco="60" data-preco-txt="a partir de R$ 60" data-min="30" data-busca="corte masculino"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-corte-masculino"><span class="item__nome">Corte masculino</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>30 min</span><span class="item__preco">a partir de R$ 60</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Corte masculino ao meu horário</span></button></div><div class="expande__painel" id="det-corte-masculino"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Corte masculino com higienização e secagem.</p><ul class="servico__tags" aria-label="Variações"><li>Social</li><li>Degradê (low, mid, high fade)</li><li>Undercut</li><li>Militar</li><li>Com risco/desenho</li><li>Acabamento na navalha</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 30 min</span></li><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-repeat"/></svg><span>Manutenção: Manutenção ideal a cada 15 a 30 dias</span></li></ul></div></div></div></div><div class="item" id="corte-infantil" data-expande-caixa data-id="corte-infantil" data-nome="Corte infantil" data-preco="60" data-preco-txt="a partir de R$ 60" data-min="30" data-busca="corte infantil"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-corte-infantil"><span class="item__nome">Corte infantil</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>30 min</span><span class="item__preco">a partir de R$ 60</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Corte infantil ao meu horário</span></button></div><div class="expande__painel" id="det-corte-infantil"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Corte adaptado ao público infantil, com abordagem lúdica e paciente.</p><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 30 min</span></li></ul></div></div></div></div><div class="item" id="corte-a-maquina" data-expande-caixa data-id="corte-a-maquina" data-nome="Corte a máquina" data-preco="30" data-preco-txt="a partir de R$ 30" data-min="30" data-busca="corte a maquina"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-corte-a-maquina"><span class="item__nome">Corte a máquina</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>30 min</span><span class="item__preco">a partir de R$ 30</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Corte a máquina ao meu horário</span></button></div><div class="expande__painel" id="det-corte-a-maquina"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Corte masculino com higienização e secagem.</p><ul class="servico__tags" aria-label="Variações"><li>Social</li><li>Degradê (low, mid, high fade)</li><li>Undercut</li><li>Militar</li><li>Com risco/desenho</li><li>Acabamento na navalha</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 30 min</span></li><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-repeat"/></svg><span>Manutenção: Manutenção ideal a cada 15 a 30 dias</span></li></ul></div></div></div></div></div><div class="grupo"><h3 class="grupo__titulo">Lavagem, escova e penteado</h3><div class="item" id="higienizacao" data-expande-caixa data-id="higienizacao" data-nome="Higienização" data-preco="30" data-preco-txt="a partir de R$ 30" data-min="20" data-busca="higienizacao higienizacao simples lavagem especial com produtos direcionados higienizacao secagem"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-higienizacao"><span class="item__nome">Higienização</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>20 a 30 min</span><span class="item__preco">a partir de R$ 30</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Higienização ao meu horário</span></button></div><div class="expande__painel" id="det-higienizacao"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Lavagem dos cabelos, podendo ser simples ou com produtos específicos conforme a necessidade do fio.</p><ul class="servico__tags" aria-label="Variações"><li>Higienização simples</li><li>Lavagem especial com produtos direcionados</li><li>Higienização + secagem</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 20 a 30 min</span></li></ul></div></div></div></div><div class="item" id="escova-e-prancha" data-expande-caixa data-id="escova-e-prancha" data-nome="Escova e prancha" data-preco="40" data-preco-txt="a partir de R$ 40" data-min="30" data-busca="escova e prancha"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-escova-e-prancha"><span class="item__nome">Escova e prancha</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>30 a 60 min</span><span class="item__preco">a partir de R$ 40</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Escova e prancha ao meu horário</span></button></div><div class="expande__painel" id="det-escova-e-prancha"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Lavagem seguida de escovação para modelar e alinhar os fios.</p><ul class="servico__tags" aria-label="Variações"><li>Escova simples (lava e escova)</li><li>Escova com prancha</li><li>Escova modelada com ondas</li><li>Baby liss/cachos</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 30 a 60 min</span></li></ul></div></div></div></div><div class="item" id="escova" data-expande-caixa data-id="escova" data-nome="Escova" data-preco="80" data-preco-txt="a partir de R$ 80" data-min="30" data-busca="escova lava e escova com o silencio que voce escolher"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-escova"><span class="item__nome">Escova</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>30 a 60 min</span><span class="item__preco">a partir de R$ 80</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Escova ao meu horário</span></button></div><div class="expande__painel" id="det-escova"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Lavagem seguida de escovação para modelar e alinhar os fios.</p><ul class="servico__tags" aria-label="Variações"><li>Escova simples (lava e escova)</li><li>Escova com prancha</li><li>Escova modelada com ondas</li><li>Baby liss/cachos</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 30 a 60 min</span></li></ul></div></div></div></div><div class="item" id="baby-liss-cachos" data-expande-caixa data-id="baby-liss-cachos" data-nome="Baby liss / cachos" data-preco="35" data-preco-txt="a partir de R$ 35" data-min="30" data-busca="baby liss cachos"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-baby-liss-cachos"><span class="item__nome">Baby liss / cachos</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>30 a 60 min</span><span class="item__preco">a partir de R$ 35</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Baby liss / cachos ao meu horário</span></button></div><div class="expande__painel" id="det-baby-liss-cachos"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Lavagem seguida de escovação para modelar e alinhar os fios.</p><ul class="servico__tags" aria-label="Variações"><li>Escova simples (lava e escova)</li><li>Escova com prancha</li><li>Escova modelada com ondas</li><li>Baby liss/cachos</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 30 a 60 min</span></li></ul></div></div></div></div><div class="item" id="penteado" data-expande-caixa data-id="penteado" data-nome="Penteado" data-preco="180" data-preco-txt="a partir de R$ 180" data-min="" data-busca="penteado para festas formaturas e o cortejo da noiva"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-penteado"><span class="item__nome">Penteado</span><span class="item__preco">a partir de R$ 180</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Penteado ao meu horário</span></button></div><div class="expande__painel" id="det-penteado"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Penteado</p></div></div></div></div></div><div class="grupo"><h3 class="grupo__titulo">Tratamentos</h3><div class="item" id="hidratacao" data-expande-caixa data-id="hidratacao" data-nome="Hidratação" data-preco="150" data-preco-txt="a partir de R$ 150" data-min="60" data-busca="hidratacao tratamento profundo para fio cansado hidratacao simples com ampolas hidratacao penetraitt para fios muito danificados potencializada com ozonio"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-hidratacao"><span class="item__nome">Hidratação</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>60 a 90 min</span><span class="item__preco">a partir de R$ 150</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Hidratação ao meu horário</span></button></div><div class="expande__painel" id="det-hidratacao"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Reposição de água e nutrientes nos fios para devolver maciez e brilho.</p><ul class="servico__tags" aria-label="Variações"><li>Hidratação simples</li><li>Com ampolas</li><li>Hidratação Penetraitt (para fios muito danificados)</li><li>Potencializada com ozônio</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 60 a 90 min</span></li></ul></div></div></div></div><div class="item" id="nutricao" data-expande-caixa data-id="nutricao" data-nome="Nutrição" data-preco="120" data-preco-txt="a partir de R$ 120" data-min="60" data-busca="nutricao nutricao simples com oleos vegetais produtos naturais davines"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-nutricao"><span class="item__nome">Nutrição</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>60 min</span><span class="item__preco">a partir de R$ 120</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Nutrição ao meu horário</span></button></div><div class="expande__painel" id="det-nutricao"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Reposição de lipídios (óleos e massa) nos fios.</p><ul class="servico__tags" aria-label="Variações"><li>Nutrição simples</li><li>Com óleos vegetais</li><li>Produtos naturais (Davines)</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 60 min</span></li></ul></div></div></div></div><div class="item" id="reconstrucao" data-expande-caixa data-id="reconstrucao" data-nome="Reconstrução" data-preco="180" data-preco-txt="a partir de R$ 180" data-min="60" data-busca="reconstrucao devolve a forca ao fio que passou por quimica"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-reconstrucao"><span class="item__nome">Reconstrução</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>60 a 90 min</span><span class="item__preco">a partir de R$ 180</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Reconstrução ao meu horário</span></button></div><div class="expande__painel" id="det-reconstrucao"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Reposição de massa e proteína (queratina, aminoácidos) na fibra capilar.</p><ul class="servico__tags" aria-label="Variações"><li>Reconstrução simples</li><li>Cauterização Capilar</li><li>Protocolo Prévia (tratamento profissional intensivo)</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 60 a 90 min</span></li></ul></div></div></div></div><div class="item" id="cauterizacao-capilar" data-expande-caixa data-id="cauterizacao-capilar" data-nome="Cauterização capilar" data-preco="80" data-preco-txt="a partir de R$ 80" data-min="120" data-busca="cauterizacao capilar cauterizacao com ou sem selagem termica pode ser associada a outros tratamentos"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-cauterizacao-capilar"><span class="item__nome">Cauterização capilar</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>2h</span><span class="item__preco">a partir de R$ 80</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Cauterização capilar ao meu horário</span></button></div><div class="expande__painel" id="det-cauterizacao-capilar"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Tratamento de selagem e reposição de nutrientes que reduz o frizz e sela as cutículas.</p><ul class="servico__tags" aria-label="Variações"><li>Cauterização com ou sem selagem térmica</li><li>Pode ser associada a outros tratamentos</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 2h</span></li></ul></div></div></div></div><div class="item" id="tratamento-capilar-previa" data-expande-caixa data-id="tratamento-capilar-previa" data-nome="Tratamento capilar PRÉVIA" data-preco="200" data-preco-txt="a partir de R$ 200" data-min="60" data-busca="tratamento capilar previa"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-tratamento-capilar-previa"><span class="item__nome">Tratamento capilar PRÉVIA</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>60 a 90 min</span><span class="item__preco">a partir de R$ 200</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Tratamento capilar PRÉVIA ao meu horário</span></button></div><div class="expande__painel" id="det-tratamento-capilar-previa"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Reposição de massa e proteína (queratina, aminoácidos) na fibra capilar.</p><ul class="servico__tags" aria-label="Variações"><li>Reconstrução simples</li><li>Cauterização Capilar</li><li>Protocolo Prévia (tratamento profissional intensivo)</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 60 a 90 min</span></li></ul></div></div></div></div></div><div class="grupo"><h3 class="grupo__titulo">Cor e mechas</h3><div class="item" id="coloracao-tonalizacao" data-expande-caixa data-id="coloracao-tonalizacao" data-nome="Coloração / tonalização" data-preco="200" data-preco-txt="a partir de R$ 200" data-min="60" data-busca="coloracao tonalizacao mudar o tom sem perder o seu conversa antes tecnica depois"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-coloracao-tonalizacao"><span class="item__nome">Coloração / tonalização</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>60 min a 2h</span><span class="item__preco">a partir de R$ 200</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Coloração / tonalização ao meu horário</span></button></div><div class="expande__painel" id="det-coloracao-tonalizacao"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Alteração ou realce da cor dos fios com tintura permanente ou tonalizante.</p><ul class="servico__tags" aria-label="Variações"><li>Coloração permanente</li><li>Tonalização (sem amônia, mais suave)</li><li>Coloração Inoa (sem amônia e sem odor)</li><li>Davines (natural)</li><li>Keune</li><li>Camuflagem (foco em brancos)</li><li>Aplicação de coloração (cliente traz o produto)</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 60 min a 2h</span></li></ul></div></div></div></div><div class="item" id="aplicacao-de-coloracao" data-expande-caixa data-id="aplicacao-de-coloracao" data-nome="Aplicação de coloração" data-preco="90" data-preco-txt="a partir de R$ 90" data-min="60" data-busca="aplicacao de coloracao"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-aplicacao-de-coloracao"><span class="item__nome">Aplicação de coloração</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>60 min a 2h</span><span class="item__preco">a partir de R$ 90</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Aplicação de coloração ao meu horário</span></button></div><div class="expande__painel" id="det-aplicacao-de-coloracao"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Alteração ou realce da cor dos fios com tintura permanente ou tonalizante.</p><ul class="servico__tags" aria-label="Variações"><li>Coloração permanente</li><li>Tonalização (sem amônia, mais suave)</li><li>Coloração Inoa (sem amônia e sem odor)</li><li>Davines (natural)</li><li>Keune</li><li>Camuflagem (foco em brancos)</li><li>Aplicação de coloração (cliente traz o produto)</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 60 min a 2h</span></li></ul></div></div></div></div><div class="item" id="camuflagem" data-expande-caixa data-id="camuflagem" data-nome="Camuflagem" data-preco="160" data-preco-txt="a partir de R$ 160" data-min="60" data-busca="camuflagem"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-camuflagem"><span class="item__nome">Camuflagem</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>60 min a 2h</span><span class="item__preco">a partir de R$ 160</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Camuflagem ao meu horário</span></button></div><div class="expande__painel" id="det-camuflagem"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Alteração ou realce da cor dos fios com tintura permanente ou tonalizante.</p><ul class="servico__tags" aria-label="Variações"><li>Coloração permanente</li><li>Tonalização (sem amônia, mais suave)</li><li>Coloração Inoa (sem amônia e sem odor)</li><li>Davines (natural)</li><li>Keune</li><li>Camuflagem (foco em brancos)</li><li>Aplicação de coloração (cliente traz o produto)</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 60 min a 2h</span></li></ul></div></div></div></div><div class="item" id="coloracao-inoa" data-expande-caixa data-id="coloracao-inoa" data-nome="Coloração Inoa" data-preco="140" data-preco-txt="a partir de R$ 140" data-min="60" data-busca="coloracao inoa"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-coloracao-inoa"><span class="item__nome">Coloração Inoa</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>60 min a 2h</span><span class="item__preco">a partir de R$ 140</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Coloração Inoa ao meu horário</span></button></div><div class="expande__painel" id="det-coloracao-inoa"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Alteração ou realce da cor dos fios com tintura permanente ou tonalizante.</p><ul class="servico__tags" aria-label="Variações"><li>Coloração permanente</li><li>Tonalização (sem amônia, mais suave)</li><li>Coloração Inoa (sem amônia e sem odor)</li><li>Davines (natural)</li><li>Keune</li><li>Camuflagem (foco em brancos)</li><li>Aplicação de coloração (cliente traz o produto)</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 60 min a 2h</span></li></ul></div></div></div></div><div class="item" id="mechas" data-expande-caixa data-id="mechas" data-nome="Mechas" data-preco="550" data-preco-txt="a partir de R$ 550" data-min="90" data-busca="mechas mechas mais largas para um claro que aparece"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-mechas"><span class="item__nome">Mechas</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>1h30 a 4h</span><span class="item__preco">a partir de R$ 550</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Mechas ao meu horário</span></button></div><div class="expande__painel" id="det-mechas"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Técnicas de clareamento parcial dos fios para criar contraste, luminosidade e dimensão.</p><ul class="servico__tags" aria-label="Variações"><li>Luzes (mechas bem finas com papel)</li><li>Mechas (mais largas e contrastantes)</li><li>Mechas Californianas</li><li>Invertidas</li><li>Reflexo</li><li>Strong</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 1h30 a 4h</span></li></ul></div></div></div></div><div class="item" id="luzes" data-expande-caixa data-id="luzes" data-nome="Luzes" data-preco="550" data-preco-txt="a partir de R$ 550" data-min="90" data-busca="luzes clarear sem apagar trabalho em camadas leitura do fio real"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-luzes"><span class="item__nome">Luzes</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>1h30 a 4h</span><span class="item__preco">a partir de R$ 550</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Luzes ao meu horário</span></button></div><div class="expande__painel" id="det-luzes"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Técnicas de clareamento parcial dos fios para criar contraste, luminosidade e dimensão.</p><ul class="servico__tags" aria-label="Variações"><li>Luzes (mechas bem finas com papel)</li><li>Mechas (mais largas e contrastantes)</li><li>Mechas Californianas</li><li>Invertidas</li><li>Reflexo</li><li>Strong</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 1h30 a 4h</span></li></ul></div></div></div></div></div><div class="grupo"><h3 class="grupo__titulo">Alisamento e alongamento</h3><div class="item" id="escova-progressiva-sem-formol" data-expande-caixa data-id="escova-progressiva-sem-formol" data-nome="Escova progressiva sem formol" data-preco="260" data-preco-txt="a partir de R$ 260" data-min="150" data-busca="escova progressiva sem formol alisamento que respeita o fio o valor acompanha o comprimento progressiva sem formol realinhamento termico escova portier relaxamento capilar para cabelos crespos"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-escova-progressiva-sem-formol"><span class="item__nome">Escova progressiva sem formol</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>2h30</span><span class="item__preco">a partir de R$ 260</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Escova progressiva sem formol ao meu horário</span></button></div><div class="expande__painel" id="det-escova-progressiva-sem-formol"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Alisamento/redução de volume que alisa até 100% dos fios sem formol.</p><ul class="servico__tags" aria-label="Variações"><li>Progressiva sem formol</li><li>Realinhamento térmico (Escova Portier)</li><li>Relaxamento capilar (para cabelos crespos)</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 2h30</span></li></ul></div></div></div></div><div class="item" id="mega-hair-alongamento" data-expande-caixa data-id="mega-hair-alongamento" data-nome="Mega hair / alongamento" data-preco="300" data-preco-txt="a partir de R$ 300" data-min="120" data-busca="mega hair alongamento mega hair com queratina fita invisivel adesiva costurado entrelace"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-mega-hair-alongamento"><span class="item__nome">Mega hair / alongamento</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>2h ou mais</span><span class="item__preco">a partir de R$ 300</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Mega hair / alongamento ao meu horário</span></button></div><div class="expande__painel" id="det-mega-hair-alongamento"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Aplicação de mechas de cabelo para alongar, dar volume ou ambos.</p><ul class="servico__tags" aria-label="Variações"><li>Mega hair com queratina</li><li>Fita invisível (adesiva)</li><li>Costurado</li><li>Entrelace</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 2h ou mais</span></li><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-repeat"/></svg><span>Manutenção: Requer manutenção periódica conforme o crescimento natural</span></li></ul></div></div></div></div></div><div class="grupo"><h3 class="grupo__titulo">Clubes</h3><div class="item" id="clube-da-cor" data-expande-caixa data-id="clube-da-cor" data-nome="Clube da Cor" data-preco="100" data-preco-txt="R$ 100" data-min="" data-busca="clube da cor pacote com 5 coloracoes para manter a cor sempre em dia"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-clube-da-cor"><span class="item__nome">Clube da Cor</span><span class="item__preco">R$ 100</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Clube da Cor ao meu horário</span></button></div><div class="expande__painel" id="det-clube-da-cor"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Pacote de 5 colorações</p></div></div></div></div><div class="item" id="escova-clube-da-cor" data-expande-caixa data-id="escova-clube-da-cor" data-nome="Escova Clube da Cor" data-preco="40" data-preco-txt="R$ 40" data-min="" data-busca="escova clube da cor"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-escova-clube-da-cor"><span class="item__nome">Escova Clube da Cor</span><span class="item__preco">R$ 40</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Escova Clube da Cor ao meu horário</span></button></div><div class="expande__painel" id="det-escova-clube-da-cor"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Escova do pacote</p></div></div></div></div></div></section>
+<section class="painel" role="tabpanel" id="painel-unhas" aria-labelledby="aba-unhas"><h2 class="painel__titulo">Unhas</h2><div class="grupo"><h3 class="grupo__titulo">Mãos e pés</h3><div class="item" id="manicure" data-expande-caixa data-id="manicure" data-nome="Manicure" data-preco="35" data-preco-txt="R$ 35" data-min="30" data-busca="manicure cutilagem e esmaltacao maos prontas"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-manicure"><span class="item__nome">Manicure</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>30 min a 2h</span><span class="item__preco">R$ 35</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Manicure ao meu horário</span></button></div><div class="expande__painel" id="det-manicure"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Cuidado, cutilação e esmaltação das unhas das mãos e/ou dos pés.</p><ul class="servico__tags" aria-label="Variações"><li>Manicure</li><li>Pedicure</li><li>Combo Manicure e Pedicure</li><li>Francesinha</li><li>Esmaltação em gel (maior durabilidade)</li><li>Spa das mãos/pés</li><li>Versão masculina</li><li>Apenas esmaltação</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 30 min a 2h (combo)</span></li></ul></div></div></div></div><div class="item" id="pedicure" data-expande-caixa data-id="pedicure" data-nome="Pedicure" data-preco="37" data-preco-txt="a partir de R$ 37" data-min="30" data-busca="pedicure cutilagem e esmaltacao pes leves"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-pedicure"><span class="item__nome">Pedicure</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>30 min a 2h</span><span class="item__preco">a partir de R$ 37</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Pedicure ao meu horário</span></button></div><div class="expande__painel" id="det-pedicure"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Cuidado, cutilação e esmaltação das unhas das mãos e/ou dos pés.</p><ul class="servico__tags" aria-label="Variações"><li>Manicure</li><li>Pedicure</li><li>Combo Manicure e Pedicure</li><li>Francesinha</li><li>Esmaltação em gel (maior durabilidade)</li><li>Spa das mãos/pés</li><li>Versão masculina</li><li>Apenas esmaltação</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 30 min a 2h (combo)</span></li></ul></div></div></div></div><div class="item" id="manicure-e-pedicure" data-expande-caixa data-id="manicure-e-pedicure" data-nome="Manicure e pedicure" data-preco="68" data-preco-txt="a partir de R$ 68" data-min="30" data-busca="manicure e pedicure maos e pes no mesmo horario"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-manicure-e-pedicure"><span class="item__nome">Manicure e pedicure</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>30 min a 2h</span><span class="item__preco">a partir de R$ 68</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Manicure e pedicure ao meu horário</span></button></div><div class="expande__painel" id="det-manicure-e-pedicure"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Cuidado, cutilação e esmaltação das unhas das mãos e/ou dos pés.</p><ul class="servico__tags" aria-label="Variações"><li>Manicure</li><li>Pedicure</li><li>Combo Manicure e Pedicure</li><li>Francesinha</li><li>Esmaltação em gel (maior durabilidade)</li><li>Spa das mãos/pés</li><li>Versão masculina</li><li>Apenas esmaltação</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 30 min a 2h (combo)</span></li></ul></div></div></div></div><div class="item" id="manicure-esmaltacao-em-gel" data-expande-caixa data-id="manicure-esmaltacao-em-gel" data-nome="Manicure - esmaltação em gel" data-preco="80" data-preco-txt="a partir de R$ 80" data-min="30" data-busca="manicure esmaltacao em gel"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-manicure-esmaltacao-em-gel"><span class="item__nome">Manicure - esmaltação em gel</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>30 min a 2h</span><span class="item__preco">a partir de R$ 80</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Manicure - esmaltação em gel ao meu horário</span></button></div><div class="expande__painel" id="det-manicure-esmaltacao-em-gel"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Cuidado, cutilação e esmaltação das unhas das mãos e/ou dos pés.</p><ul class="servico__tags" aria-label="Variações"><li>Manicure</li><li>Pedicure</li><li>Combo Manicure e Pedicure</li><li>Francesinha</li><li>Esmaltação em gel (maior durabilidade)</li><li>Spa das mãos/pés</li><li>Versão masculina</li><li>Apenas esmaltação</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 30 min a 2h (combo)</span></li></ul></div></div></div></div><div class="item" id="esmaltacao-maos" data-expande-caixa data-id="esmaltacao-maos" data-nome="Esmaltação - mãos" data-preco="15" data-preco-txt="a partir de R$ 15" data-min="30" data-busca="esmaltacao maos"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-esmaltacao-maos"><span class="item__nome">Esmaltação - mãos</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>30 min a 2h</span><span class="item__preco">a partir de R$ 15</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Esmaltação - mãos ao meu horário</span></button></div><div class="expande__painel" id="det-esmaltacao-maos"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Cuidado, cutilação e esmaltação das unhas das mãos e/ou dos pés.</p><ul class="servico__tags" aria-label="Variações"><li>Manicure</li><li>Pedicure</li><li>Combo Manicure e Pedicure</li><li>Francesinha</li><li>Esmaltação em gel (maior durabilidade)</li><li>Spa das mãos/pés</li><li>Versão masculina</li><li>Apenas esmaltação</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 30 min a 2h (combo)</span></li></ul></div></div></div></div><div class="item" id="esmaltacao-pes" data-expande-caixa data-id="esmaltacao-pes" data-nome="Esmaltação - pés" data-preco="15" data-preco-txt="a partir de R$ 15" data-min="30" data-busca="esmaltacao pes"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-esmaltacao-pes"><span class="item__nome">Esmaltação - pés</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>30 min a 2h</span><span class="item__preco">a partir de R$ 15</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Esmaltação - pés ao meu horário</span></button></div><div class="expande__painel" id="det-esmaltacao-pes"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Cuidado, cutilação e esmaltação das unhas das mãos e/ou dos pés.</p><ul class="servico__tags" aria-label="Variações"><li>Manicure</li><li>Pedicure</li><li>Combo Manicure e Pedicure</li><li>Francesinha</li><li>Esmaltação em gel (maior durabilidade)</li><li>Spa das mãos/pés</li><li>Versão masculina</li><li>Apenas esmaltação</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 30 min a 2h (combo)</span></li></ul></div></div></div></div><div class="item" id="spa-dos-pes" data-expande-caixa data-id="spa-dos-pes" data-nome="Spa dos pés" data-preco="70" data-preco-txt="a partir de R$ 70" data-min="30" data-busca="spa dos pes"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-spa-dos-pes"><span class="item__nome">Spa dos pés</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>30 min a 2h</span><span class="item__preco">a partir de R$ 70</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Spa dos pés ao meu horário</span></button></div><div class="expande__painel" id="det-spa-dos-pes"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Cuidado, cutilação e esmaltação das unhas das mãos e/ou dos pés.</p><ul class="servico__tags" aria-label="Variações"><li>Manicure</li><li>Pedicure</li><li>Combo Manicure e Pedicure</li><li>Francesinha</li><li>Esmaltação em gel (maior durabilidade)</li><li>Spa das mãos/pés</li><li>Versão masculina</li><li>Apenas esmaltação</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 30 min a 2h (combo)</span></li></ul></div></div></div></div><div class="item" id="renovacao-podal" data-expande-caixa data-id="renovacao-podal" data-nome="Renovação podal" data-preco="70" data-preco-txt="a partir de R$ 70" data-min="30" data-busca="renovacao podal"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-renovacao-podal"><span class="item__nome">Renovação podal</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>30 min a 2h</span><span class="item__preco">a partir de R$ 70</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Renovação podal ao meu horário</span></button></div><div class="expande__painel" id="det-renovacao-podal"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Cuidado, cutilação e esmaltação das unhas das mãos e/ou dos pés.</p><ul class="servico__tags" aria-label="Variações"><li>Manicure</li><li>Pedicure</li><li>Combo Manicure e Pedicure</li><li>Francesinha</li><li>Esmaltação em gel (maior durabilidade)</li><li>Spa das mãos/pés</li><li>Versão masculina</li><li>Apenas esmaltação</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 30 min a 2h (combo)</span></li></ul></div></div></div></div></div></section>
+<section class="painel" role="tabpanel" id="painel-rosto" aria-labelledby="aba-rosto"><h2 class="painel__titulo">Rosto &amp; Olhar</h2><div class="grupo"><h3 class="grupo__titulo">Sobrancelha</h3><div class="item" id="design-de-sobrancelha" data-expande-caixa data-id="design-de-sobrancelha" data-nome="Design de sobrancelha" data-preco="30" data-preco-txt="a partir de R$ 30" data-min="30" data-busca="design de sobrancelha design e mapeamento facial o traco certo para o seu rosto design com pinca cera linha mais preciso e sem dor com henna preenche e define com tintura"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-design-de-sobrancelha"><span class="item__nome">Design de sobrancelha</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>30 min</span><span class="item__preco">a partir de R$ 30</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Design de sobrancelha ao meu horário</span></button></div><div class="expande__painel" id="det-design-de-sobrancelha"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Modelagem das sobrancelhas para harmonizar com o rosto (visagismo).</p><ul class="servico__tags" aria-label="Variações"><li>Design com pinça</li><li>Cera</li><li>Linha (mais preciso e sem dor)</li><li>Com henna (preenche e define)</li><li>Com tintura</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 30 min</span></li><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-repeat"/></svg><span>Manutenção: Manutenção a cada 15 a 30 dias</span></li></ul></div></div></div></div></div><div class="grupo"><h3 class="grupo__titulo">Maquiagem</h3><div class="item" id="maquiagem" data-expande-caixa data-id="maquiagem" data-nome="Maquiagem" data-preco="150" data-preco-txt="a partir de R$ 150" data-min="60" data-busca="maquiagem pele real traco editorial para o dia ou para a noite social noiva madrinha debutante com ou sem cilios posticos"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-maquiagem"><span class="item__nome">Maquiagem</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>60 a 90 min</span><span class="item__preco">a partir de R$ 150</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Maquiagem ao meu horário</span></button></div><div class="expande__painel" id="det-maquiagem"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Maquiagem profissional para eventos, ensaios e ocasiões especiais.</p><ul class="servico__tags" aria-label="Variações"><li>Social</li><li>Noiva</li><li>Madrinha</li><li>Debutante</li><li>Com ou sem cílios postiços</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 60 a 90 min</span></li></ul></div></div></div></div></div><div class="grupo"><h3 class="grupo__titulo">Cílios</h3><div class="item" id="manutencao-de-cilios" data-expande-caixa data-id="manutencao-de-cilios" data-nome="Manutenção de cílios" data-preco="60" data-preco-txt="a partir de R$ 60" data-min="60" data-busca="manutencao de cilios fio a fio classico volume russo hibrido brasileiro"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-manutencao-de-cilios"><span class="item__nome">Manutenção de cílios</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>60 min a 2h</span><span class="item__preco">a partir de R$ 60</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Manutenção de cílios ao meu horário</span></button></div><div class="expande__painel" id="det-manutencao-de-cilios"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Aplicação de fios sintéticos cílio a cílio para alongar e dar volume ao olhar.</p><ul class="servico__tags" aria-label="Variações"><li>Fio a fio (clássico)</li><li>Volume russo</li><li>Híbrido</li><li>Brasileiro</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 60 min a 2h</span></li></ul></div></div></div></div></div></section>
+<section class="painel" role="tabpanel" id="painel-estetica" aria-labelledby="aba-estetica"><h2 class="painel__titulo">Estética &amp; Laser</h2><div class="grupo"><h3 class="grupo__titulo">Depilação a laser</h3><div class="item" id="depilacao-a-laser" data-expande-caixa data-id="depilacao-a-laser" data-nome="Depilação a laser" data-preco="100" data-preco-txt="a partir de R$ 100" data-min="15" data-busca="depilacao a laser fiber evo laser diodo de 2a geracao sessao a sessao sem pressa fiber evo laser de diodo 2a geracao mais rapido e potente light sheer"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-depilacao-a-laser"><span class="item__nome">Depilação a laser</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>15 a 60 min por região</span><span class="item__preco">a partir de R$ 100</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Depilação a laser ao meu horário</span></button></div><div class="expande__painel" id="det-depilacao-a-laser"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Redução progressiva e duradoura dos pelos com laser de diodo.</p><ul class="servico__tags" aria-label="Variações"><li>Fiber Evo (laser de diodo 2ª geração, mais rápido e potente)</li><li>Light Sheer</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 15 a 60 min por região</span></li><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-repeat"/></svg><span>Manutenção: Protocolo geralmente de 8 a 10 sessões, a cada 30 a 45 dias</span></li></ul></div></div></div></div></div><div class="grupo"><h3 class="grupo__titulo">Depilação com cera</h3><div class="item" id="buco" data-expande-caixa data-id="buco" data-nome="Buço" data-preco="12" data-preco-txt="a partir de R$ 12" data-min="10" data-busca="buco"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-buco"><span class="item__nome">Buço</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>10 a 60 min</span><span class="item__preco">a partir de R$ 12</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Buço ao meu horário</span></button></div><div class="expande__painel" id="det-buco"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Remoção dos pelos pela raiz com cera quente ou fria.</p><ul class="servico__tags" aria-label="Variações"><li>Buço</li><li>Axilas</li><li>Meia perna</li><li>Perna inteira</li><li>Virilha simples</li><li>Virilha completa</li><li>Braços</li><li>Rosto</li><li>Combos (perna + virilha + axila)</li><li>Versão masculina</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 10 a 60 min conforme a região</span></li></ul></div></div></div></div><div class="item" id="axilas" data-expande-caixa data-id="axilas" data-nome="Axilas" data-preco="18" data-preco-txt="a partir de R$ 18" data-min="10" data-busca="axilas"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-axilas"><span class="item__nome">Axilas</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>10 a 60 min</span><span class="item__preco">a partir de R$ 18</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Axilas ao meu horário</span></button></div><div class="expande__painel" id="det-axilas"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Remoção dos pelos pela raiz com cera quente ou fria.</p><ul class="servico__tags" aria-label="Variações"><li>Buço</li><li>Axilas</li><li>Meia perna</li><li>Perna inteira</li><li>Virilha simples</li><li>Virilha completa</li><li>Braços</li><li>Rosto</li><li>Combos (perna + virilha + axila)</li><li>Versão masculina</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 10 a 60 min conforme a região</span></li></ul></div></div></div></div><div class="item" id="meia-perna" data-expande-caixa data-id="meia-perna" data-nome="Meia perna" data-preco="24" data-preco-txt="a partir de R$ 24" data-min="10" data-busca="meia perna"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-meia-perna"><span class="item__nome">Meia perna</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>10 a 60 min</span><span class="item__preco">a partir de R$ 24</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Meia perna ao meu horário</span></button></div><div class="expande__painel" id="det-meia-perna"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Remoção dos pelos pela raiz com cera quente ou fria.</p><ul class="servico__tags" aria-label="Variações"><li>Buço</li><li>Axilas</li><li>Meia perna</li><li>Perna inteira</li><li>Virilha simples</li><li>Virilha completa</li><li>Braços</li><li>Rosto</li><li>Combos (perna + virilha + axila)</li><li>Versão masculina</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 10 a 60 min conforme a região</span></li></ul></div></div></div></div><div class="item" id="perna-inteira" data-expande-caixa data-id="perna-inteira" data-nome="Perna inteira" data-preco="44" data-preco-txt="a partir de R$ 44" data-min="10" data-busca="perna inteira"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-perna-inteira"><span class="item__nome">Perna inteira</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>10 a 60 min</span><span class="item__preco">a partir de R$ 44</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Perna inteira ao meu horário</span></button></div><div class="expande__painel" id="det-perna-inteira"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Remoção dos pelos pela raiz com cera quente ou fria.</p><ul class="servico__tags" aria-label="Variações"><li>Buço</li><li>Axilas</li><li>Meia perna</li><li>Perna inteira</li><li>Virilha simples</li><li>Virilha completa</li><li>Braços</li><li>Rosto</li><li>Combos (perna + virilha + axila)</li><li>Versão masculina</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 10 a 60 min conforme a região</span></li></ul></div></div></div></div><div class="item" id="virilha-simples" data-expande-caixa data-id="virilha-simples" data-nome="Virilha simples" data-preco="35" data-preco-txt="a partir de R$ 35" data-min="10" data-busca="virilha simples"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-virilha-simples"><span class="item__nome">Virilha simples</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>10 a 60 min</span><span class="item__preco">a partir de R$ 35</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Virilha simples ao meu horário</span></button></div><div class="expande__painel" id="det-virilha-simples"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Remoção dos pelos pela raiz com cera quente ou fria.</p><ul class="servico__tags" aria-label="Variações"><li>Buço</li><li>Axilas</li><li>Meia perna</li><li>Perna inteira</li><li>Virilha simples</li><li>Virilha completa</li><li>Braços</li><li>Rosto</li><li>Combos (perna + virilha + axila)</li><li>Versão masculina</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 10 a 60 min conforme a região</span></li></ul></div></div></div></div><div class="item" id="virilha-completa" data-expande-caixa data-id="virilha-completa" data-nome="Virilha completa" data-preco="49" data-preco-txt="a partir de R$ 49" data-min="10" data-busca="virilha completa"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-virilha-completa"><span class="item__nome">Virilha completa</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>10 a 60 min</span><span class="item__preco">a partir de R$ 49</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Virilha completa ao meu horário</span></button></div><div class="expande__painel" id="det-virilha-completa"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Remoção dos pelos pela raiz com cera quente ou fria.</p><ul class="servico__tags" aria-label="Variações"><li>Buço</li><li>Axilas</li><li>Meia perna</li><li>Perna inteira</li><li>Virilha simples</li><li>Virilha completa</li><li>Braços</li><li>Rosto</li><li>Combos (perna + virilha + axila)</li><li>Versão masculina</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 10 a 60 min conforme a região</span></li></ul></div></div></div></div></div><div class="grupo"><h3 class="grupo__titulo">Massagem e estética</h3><div class="item" id="massagem-relaxante" data-expande-caixa data-id="massagem-relaxante" data-nome="Massagem relaxante" data-preco="130" data-preco-txt="a partir de R$ 130" data-min="60" data-busca="massagem relaxante"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-massagem-relaxante"><span class="item__nome">Massagem relaxante</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>60 min</span><span class="item__preco">a partir de R$ 130</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Massagem relaxante ao meu horário</span></button></div><div class="expande__painel" id="det-massagem-relaxante"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Massagens corporais com finalidade relaxante ou de estímulo à circulação linfática.</p><ul class="servico__tags" aria-label="Variações"><li>Relaxante</li><li>Drenagem linfática (manual/local)</li><li>Modeladora</li><li>Pós-operatório</li><li>Com pedras/velas/cristais</li><li>Day Spa</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 60 min</span></li></ul></div></div></div></div><div class="item" id="day-spa-massagem-relaxante" data-expande-caixa data-id="day-spa-massagem-relaxante" data-nome="Day spa - massagem relaxante" data-preco="110" data-preco-txt="a partir de R$ 110" data-min="60" data-busca="day spa massagem relaxante"><div class="item__linha"><button class="item__abrir" type="button" data-expande aria-expanded="true" aria-controls="det-day-spa-massagem-relaxante"><span class="item__nome">Day spa - massagem relaxante</span><span class="item__dur"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>60 min</span><span class="item__preco">a partir de R$ 110</span><span class="expande__icone" aria-hidden="true"></span></button><button class="item__add" type="button" aria-pressed="false"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>Adicionar</span><span class="so-leitor"> Day spa - massagem relaxante ao meu horário</span></button></div><div class="expande__painel" id="det-day-spa-massagem-relaxante"><div class="expande__conteudo"><div class="item__detalhes"><p class="item__texto">Massagens corporais com finalidade relaxante ou de estímulo à circulação linfática.</p><ul class="servico__tags" aria-label="Variações"><li>Relaxante</li><li>Drenagem linfática (manual/local)</li><li>Modeladora</li><li>Pós-operatório</li><li>Com pedras/velas/cristais</li><li>Day Spa</li></ul><ul class="item__info"><li><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Duração: 60 min</span></li></ul></div></div></div></div></div></section>
+</div>
+<!-- CARDAPIO:FIM -->
+
+    <div class="faixa">
+      <p class="vazio" id="vazio" hidden>
+        Nenhum serviço encontrado. <a href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20queria%20saber%20de%20um%20servi%C3%A7o." target="_blank" rel="noopener">Fale com a gente no WhatsApp</a>.
+      </p>
+      <p class="nota">
+        Alguns serviços (balaiagem, unhas em gel, fibra ou acrigel, extensão de cílios, micropigmentação,
+        limpeza de pele, drenagem linfática) são sob consulta.
+        <a href="https://wa.me/5512996556111?text=Oi.%20Quero%20saber%20o%20valor%20de%20um%20servi%C3%A7o." target="_blank" rel="noopener">Fale com a gente no WhatsApp</a>.
+      </p>
+    </div>
+
+  </main>
+
+  <!-- ============ MEU HORÁRIO — barra fixa com os serviços escolhidos ============ -->
+  <div class="horario" id="horario" hidden>
+    <div class="horario__dentro">
+      <p class="horario__resumo" id="horario-resumo"></p>
+      <button class="horario__limpar" type="button" id="horario-limpar">Limpar</button>
+      <a class="horario__enviar" id="horario-enviar" href="https://wa.me/5512996556111" target="_blank" rel="noopener">
+        <svg class="icone" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg>Enviar pelo WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <!-- RODAPE:INICIO -->
+<footer class="rod">
+  <div class="rod__dentro">
+    <div class="rod__marca">
+      <svg class="rod__logo" viewBox="0 0 967.11 497.12" role="img" aria-label="Nuovi Capelli"><use href="#i-logo"/></svg>
+      <p class="rod__frase">A beleza não tem pressa.</p>
+    </div>
+    <div class="rod__col">
+      <h2 class="rod__titulo">Onde estamos</h2>
+      <ul class="rod__lista">
+        <li><a class="rod__item" href="https://www.google.com/maps/search/?api=1&amp;query=R.%20Conselheiro%20Ant%C3%B4nio%20Prado%2C%20290%2C%20Parque%20Itamarati%2C%20Jacare%C3%AD%20-%20SP" target="_blank" rel="noopener"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg><span>R. Conselheiro Antônio Prado, 290<br>Parque Itamarati, Jacareí · SP</span></a></li>
+        <li><p class="rod__item"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-calendar-clock"/></svg><span>Terça a sexta, 9h às 20h<br>Sábado, 9h às 18h<br>Com hora marcada</span></p></li>
+      </ul>
+    </div>
+    <div class="rod__col">
+      <h2 class="rod__titulo">Conversar</h2>
+      <ul class="rod__lista">
+        <li><a class="rod__item" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%20um%20hor%C3%A1rio." target="_blank" rel="noopener"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span>WhatsApp (12) 99655-6111</span></a></li>
+        <li><a class="rod__item" href="https://www.instagram.com/espaconuovicapelli/" target="_blank" rel="noopener"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-instagram"/></svg><span>@espaconuovicapelli</span></a></li>
+        <li><a class="rod__item" href="https://wa.me/5512996556111?text=Oi.%20Quero%20receber%20as%20novidades%20e%20os%20hor%C3%A1rios%20livres%20da%20Nuovi." target="_blank" rel="noopener"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg><span>Receber novidades e horários livres</span></a></li>
+      </ul>
+    </div>
+    <nav class="rod__col" aria-label="Rodapé">
+      <h2 class="rod__titulo">Navegar</h2>
+      <ul class="rod__lista"><li><a class="rod__item" href="./"><span>Serviços</span></a></li><li><a class="rod__item" href="../noivas/"><span>Noivas</span></a></li><li><a class="rod__item" href="../#quem"><span>Quem cuida</span></a></li><li><a class="rod__item" href="../#onde"><span>Onde estamos</span></a></li></ul>
+    </nav>
+  </div>
+  <div class="rod__base">
+    <p>© 2026 Nuovi Capelli · Espaço de Beleza e SPA de Noivas · Jacareí, SP</p>
+    <p>Site por <a class="rod__estudio" href="https://mezzetti4096-studio.netlify.app/" target="_blank" rel="noopener">mezzetti<span class="rod__4096">4096</span> studio</a></p>
+  </div>
+</footer>
+<!-- RODAPE:FIM -->
+
+  <!-- AGENDAR:INICIO -->
+<div class="agendar-fixo" data-agendar>
+  <a class="agendar-fixo__botao" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%20um%20hor%C3%A1rio." target="_blank" rel="noopener"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span>Agendar<span class="agendar-fixo__extra"> pelo WhatsApp</span></span></a>
+</div>
+<!-- AGENDAR:FIM -->
+
+  <script>
+    /* Cabeçalho e menu: ../assets/js/comum.js */
+    const WHATS = '5512996556111';
+    const menosMovimento = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const aviso = document.getElementById('aviso');
+    const avisar = (texto) => { aviso.textContent = ''; setTimeout(() => { aviso.textContent = texto; }, 60); };
+
+    /* ============================================
+       EXPANSÍVEIS — cada serviço abre com detalhes
+       ============================================ */
+    document.querySelectorAll('[data-expande]').forEach(botao => {
+      const painel = document.getElementById(botao.getAttribute('aria-controls'));
+      const caixa = botao.closest('[data-expande-caixa]');
+      const marcar = (aberto) => {
+        botao.setAttribute('aria-expanded', String(aberto));
+        painel.classList.toggle('expande__painel--aberto', aberto);
+        painel.inert = !aberto;
+      };
+      marcar(false);
+      botao.addEventListener('click', () => marcar(botao.getAttribute('aria-expanded') !== 'true'));
+      caixa.abrirDetalhes = () => marcar(true);
+    });
+
+    /* ============================================
+       ENDEREÇO — ?s=… guarda a seleção, #… a aba ou o serviço
+       ============================================ */
+    const selecao = new Set();
+    const escreverEndereco = (hash) => {
+      const busca = selecao.size ? '?s=' + [...selecao].join(',') : '';
+      history.replaceState(null, '', location.pathname + busca + (hash ?? location.hash));
+    };
+
+    /* ============================================
+       ABAS — padrão ARIA: setas, Home e End; #cabelo na URL
+       ============================================ */
+    const lista = document.querySelector('[role="tablist"]');
+    const rolagem = lista.parentElement; /* .abas__dentro rola na horizontal no celular */
+    const abas = [...document.querySelectorAll('[role="tab"]')];
+    const painelDa = (aba) => document.getElementById(aba.getAttribute('aria-controls'));
+    const abaAtual = () => abas.find(a => a.getAttribute('aria-selected') === 'true');
+
+    const ativar = (aba, { foco = false, endereco = true } = {}) => {
+      abas.forEach(a => {
+        const sel = a === aba;
+        a.setAttribute('aria-selected', String(sel));
+        a.tabIndex = sel ? 0 : -1;
+        painelDa(a).hidden = !sel;
+      });
+      if (foco) aba.focus();
+      /* a aba escolhida fica à vista na rolagem horizontal do celular */
+      if (aba.offsetLeft < rolagem.scrollLeft || aba.offsetLeft + aba.offsetWidth > rolagem.scrollLeft + rolagem.clientWidth - 40) {
+        rolagem.scrollLeft = aba.offsetLeft - 16;
+      }
+      if (endereco) escreverEndereco('#' + aba.id.replace('aba-', ''));
+    };
+    /* Ao trocar de aba com a página rolada, volta ao começo da lista (logo abaixo das abas) */
+    const voltarAoInicioDaLista = () => {
+      const barra = document.querySelector('.abas');
+      const topo = document.querySelector('.paineis').getBoundingClientRect().top + scrollY - barra.offsetHeight - barra.getBoundingClientRect().top;
+      if (scrollY > topo) scrollTo({ top: topo, behavior: 'instant' });
+    };
+
+    abas.forEach(aba => aba.addEventListener('click', () => { ativar(aba); voltarAoInicioDaLista(); }));
+    lista.addEventListener('keydown', (ev) => {
+      const i = abas.indexOf(document.activeElement);
+      if (i < 0) return;
+      const proxima = { ArrowRight: (i + 1) % abas.length, ArrowLeft: (i - 1 + abas.length) % abas.length, Home: 0, End: abas.length - 1 }[ev.key];
+      if (proxima === undefined) return;
+      ev.preventDefault();
+      ativar(abas[proxima], { foco: true });
+    });
+
+    const irPeloEndereco = () => {
+      const alvo = decodeURIComponent(location.hash.slice(1));
+      const aba = alvo && document.getElementById('aba-' + alvo);
+      if (aba) return ativar(aba, { endereco: false });
+      const item = alvo && document.getElementById(alvo);
+      const painel = item && item.closest('[role="tabpanel"]');
+      if (!painel) return ativar(abaAtual() || abas[0], { endereco: false });
+      ativar(abas.find(a => painelDa(a) === painel), { endereco: false });
+      item.abrirDetalhes?.();
+      setTimeout(() => item.scrollIntoView({ block: 'start', behavior: 'instant' }), 60); /* link direto: já abre no serviço */
+    };
+
+    /* ============================================
+       BUSCA — sem diferenciar acentos, em todas as abas
+       ============================================ */
+    const campo = document.getElementById('busca');
+    const vazio = document.getElementById('vazio');
+    const semAcento = (t) => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+    let esperaAviso;
+
+    campo.addEventListener('input', () => {
+      const termos = semAcento(campo.value).split(/\s+/).filter(Boolean);
+      const porAba = new Map();
+      let total = 0;
+      abas.forEach(aba => {
+        const painel = painelDa(aba);
+        let n = 0;
+        painel.querySelectorAll('.item').forEach(item => {
+          const casa = termos.every(t => (' ' + item.dataset.busca).includes(' ' + t)); /* pelo começo das palavras */
+          item.hidden = !casa;
+          if (casa) n++;
+        });
+        painel.querySelectorAll('.grupo').forEach(g => { g.hidden = !g.querySelector('.item:not([hidden])'); });
+        const conta = aba.querySelector('.abas__conta');
+        conta.textContent = n;
+        conta.hidden = !termos.length;
+        porAba.set(aba, n);
+        total += n;
+      });
+      vazio.hidden = !(termos.length && total === 0);
+      if (termos.length && total && porAba.get(abaAtual()) === 0) ativar(abas.find(a => porAba.get(a) > 0));
+      clearTimeout(esperaAviso);
+      if (termos.length) {
+        esperaAviso = setTimeout(() => avisar(total ? `${total} ${total === 1 ? 'serviço encontrado' : 'serviços encontrados'}` : 'Nenhum serviço encontrado'), 500);
+      }
+    });
+
+    /* ============================================
+       MONTAR MEU HORÁRIO — escolher vários serviços e enviar a lista pelo WhatsApp
+       ============================================ */
+    const itens = new Map([...document.querySelectorAll('.item')].map(i => [i.dataset.id, i]));
+    const barra = document.getElementById('horario');
+    const resumo = document.getElementById('horario-resumo');
+    const enviar = document.getElementById('horario-enviar');
+
+    const reais = (v) => 'R$ ' + v.toLocaleString('pt-BR', { minimumFractionDigits: v % 1 ? 2 : 0, maximumFractionDigits: 2 });
+    const horas = (m) => {
+      const h = Math.floor(m / 60), r = m % 60;
+      return h ? `${h}h${r ? String(r).padStart(2, '0') : ''}` : `${r} min`;
+    };
+
+    const atualizar = () => {
+      itens.forEach((item, id) => {
+        const botao = item.querySelector('.item__add');
+        const escolhido = selecao.has(id);
+        botao.setAttribute('aria-pressed', String(escolhido));
+        botao.querySelector('use').setAttribute('href', escolhido ? '#i-check' : '#i-plus');
+      });
+      const escolhidos = [...selecao].map(id => itens.get(id).dataset);
+      let minutos = 0, semDuracao = false, preco = 0, consulta = false;
+      escolhidos.forEach(d => {
+        if (d.min) minutos += Number(d.min); else semDuracao = true;
+        if (d.preco) preco += Number(d.preco); else consulta = true;
+      });
+      const partes = [];
+      if (minutos) partes.push(`~${horas(minutos)}${semDuracao ? ' ou mais' : ''}`);
+      if (preco) partes.push(`a partir de ${reais(preco)}${consulta ? ' + sob consulta' : ''}`);
+      else if (consulta) partes.push('sob consulta');
+      const n = escolhidos.length;
+      resumo.innerHTML = `Meu horário: <b>${n} ${n === 1 ? 'serviço' : 'serviços'}</b>` + (partes.length ? ' · ' + partes.join(' · ') : '');
+
+      const total = [preco ? `a partir de ${reais(preco)}${consulta ? ' + sob consulta' : ''}` : '', minutos ? `cerca de ${horas(minutos)}${semDuracao ? ' ou mais' : ''}` : '']
+        .filter(Boolean).join(' · ');
+      const mensagem = ['Oi. Vim pelo site e quero agendar:', ...escolhidos.map(d => `• ${d.nome} (${d.precoTxt})`)]
+        .concat(total ? [`Total estimado: ${total}.`] : [], ['Qual dia e horário vocês têm?']).join('\n');
+      enviar.href = `https://wa.me/${WHATS}?text=` + encodeURIComponent(mensagem);
+
+      barra.hidden = !n;
+      document.body.classList.toggle('tem-horario', n > 0);
+      escreverEndereco();
+    };
+
+    document.addEventListener('click', (ev) => {
+      const botao = ev.target.closest('.item__add');
+      if (!botao) return;
+      const item = botao.closest('.item');
+      const id = item.dataset.id;
+      if (selecao.has(id)) selecao.delete(id); else selecao.add(id);
+      atualizar();
+      avisar(`${selecao.has(id) ? 'Adicionado ao' : 'Removido do'} seu horário: ${item.dataset.nome}.`);
+    });
+    document.getElementById('horario-limpar').addEventListener('click', () => {
+      selecao.clear();
+      atualizar();
+      avisar('Seu horário foi limpo.');
+      abaAtual()?.focus({ preventScroll: true }); /* o botão Limpar some; o foco volta para as abas */
+    });
+
+    /* ============================================
+       INÍCIO — restaura ?s=… e #… do endereço
+       ============================================ */
+    (new URLSearchParams(location.search).get('s') || '').split(',').forEach(id => { if (itens.has(id)) selecao.add(id); });
+    irPeloEndereco();
+    addEventListener('hashchange', irPeloEndereco);
+    if (selecao.size) atualizar();
+  </script>
+
+</body>
+</html>

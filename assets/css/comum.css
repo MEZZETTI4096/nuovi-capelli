@@ -197,6 +197,9 @@ main:focus { outline: none; }
 }
 .cab__links a:hover,
 .cab__links a[aria-current="page"] { text-decoration-line: underline; }
+.cab__insta a { gap: 8px; }
+.cab__insta .icone { width: 18px; height: 18px; }
+.cab__insta-longo { display: none; }
 .cab__agendar {
   display: inline-flex;
   align-items: center;
@@ -273,6 +276,10 @@ main:focus { outline: none; }
     font-family: var(--fonte-logo);
     font-size: 20px;
   }
+  .cab__insta a { gap: 12px; }
+  .cab__insta .icone { width: 22px; height: 22px; }
+  .cab__insta-curto { display: none; }
+  .cab__insta-longo { display: inline; }
 
   /* Sem JavaScript: os links ficam visíveis numa linha que rola */
   html:not(.js) .cab__menu { display: none; }
