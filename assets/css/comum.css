@@ -400,7 +400,10 @@ a.rod__item:hover span {
   .rod__marca { grid-column: 1 / -1; }
 }
 @media (max-width: 560px) {
-  .rod__dentro { grid-template-columns: 1fr; gap: 32px; }
+  .rod { padding-top: 48px; }
+  .rod__dentro { grid-template-columns: 1fr; gap: 28px; }
+  .rod__col:last-child .rod__lista { display: grid; grid-template-columns: 1fr 1fr; column-gap: 16px; } /* Navegar em duas colunas */
+  .rod__base { margin-top: 32px; }
 }
 
 /* ===== AGENDAR FIXO =====
