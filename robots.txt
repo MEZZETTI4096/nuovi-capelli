@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mezzetti4096.github.io/nuovi-capelli/sitemap.xml

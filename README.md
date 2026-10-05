@@ -4,7 +4,7 @@ Site institucional do **Espaço Nuovi Capelli** — espaço de beleza e SPA de n
 
 🌐 **Site no ar:** [mezzetti4096.github.io/nuovi-capelli](https://mezzetti4096.github.io/nuovi-capelli/)
 📍 R. Conselheiro Antônio Prado, 290 · Parque Itamarati, Jacareí · SP
-📱 [@espaconuovicapelli](https://www.instagram.com/espaconuovicapelli/) · [WhatsApp](https://wa.me/5512981495004)
+📱 [@espaconuovicapelli](https://www.instagram.com/espaconuovicapelli/) · [WhatsApp](https://wa.me/5512996556111)
 
 ---
 
