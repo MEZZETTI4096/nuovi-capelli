@@ -50,6 +50,8 @@
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
+  /* Zoom padrão de 90% no computador, igual à home. No celular fica em 100%. */
+  @media (min-width: 901px){ html{zoom:0.9;} html .hero{min-height:calc(100vh / 0.9);} }
   body{
     font-family:'Quicksand', sans-serif;
     color:var(--tinta);

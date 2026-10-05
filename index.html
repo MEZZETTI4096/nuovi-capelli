@@ -115,6 +115,13 @@
 
     html { scroll-behavior: smooth; }
 
+    /* Zoom padrão de 90% no computador (pedido da Neia, 05/10/2026).
+       No celular fica em 100% para não diminuir o texto. */
+    @media (min-width: 901px) {
+      html { zoom: 0.9; }
+      html .hero { min-height: calc(100vh / 0.9); } /* o hero continua ocupando a tela inteira */
+    }
+
     body {
       font-family: var(--font-sans);
       font-weight: 400;
