@@ -93,6 +93,11 @@
       /* Texto */
       --tinta:        #2A2520;
       --nevoa:        #9C9286;
+      --nevoa-texto:  #696055; /* névoa para texto pequeno (4,6:1 no linho) */
+
+      /* Movimento dos cards que abrem */
+      --ease-abre:    cubic-bezier(0.23, 1, 0.32, 1);
+      --dur-abre:     380ms;
 
       /* Tipografia */
       --font-logo:    'Quicksand', system-ui, sans-serif;
@@ -114,6 +119,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     html { scroll-behavior: smooth; }
+    [id] { scroll-margin-top: 84px; } /* âncoras não ficam sob o menu fixo */
 
     /* Zoom padrão de 90% no computador (pedido da Neia, 05/10/2026).
        No celular fica em 100% para não diminuir o texto. */
@@ -635,6 +641,7 @@
     .planos__cards {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
+      align-items: start; /* o card que abre não estica o vizinho */
       gap: 24px;
       margin-bottom: 96px;
     }
@@ -1248,6 +1255,226 @@
       transform: translateY(0);
     }
 
+
+    /* =========================================
+       EXPANSÍVEIS — cards que abrem com detalhes
+       (conteúdo gerado por gerar-servicos.py a partir do questionário)
+       ========================================= */
+    .expande__painel {
+      display: grid;
+      grid-template-rows: 1fr;
+    }
+    .expande__conteudo { min-height: 0; overflow: hidden; }
+    html.js .expande__painel {
+      grid-template-rows: 0fr;
+      transition: grid-template-rows var(--dur-abre) var(--ease-abre);
+    }
+    html.js .expande__conteudo {
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity 220ms ease-out, transform var(--dur-abre) var(--ease-abre);
+    }
+    html.js .expande__painel--aberto { grid-template-rows: 1fr; }
+    html.js .expande__painel--aberto > .expande__conteudo {
+      opacity: 1;
+      transform: none;
+      transition: opacity 320ms ease-out 60ms, transform var(--dur-abre) var(--ease-abre);
+    }
+    html:not(.js) .expande__botao { display: none; }
+
+    .expande__botao {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--petroleo-esc);
+      font-weight: 500;
+      padding: 10px 0;
+      min-height: 44px;
+    }
+    .expande__icone {
+      position: relative;
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      transition: transform var(--dur-abre) var(--ease-abre);
+    }
+    .expande__icone::before,
+    .expande__icone::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 6.5px;
+      width: 14px; height: 1px;
+      background: currentColor;
+    }
+    .expande__icone::after { transform: rotate(90deg); }
+    [data-expande][aria-expanded="true"] .expande__icone { transform: rotate(135deg); }
+    .expande__botao:focus-visible,
+    .servico__agendar:focus-visible { outline: 2px solid var(--petroleo-esc); outline-offset: 3px; }
+
+    /* Lista de serviços dentro dos cards de categoria */
+    .plano__expande { margin-top: 12px; align-self: flex-start; }
+    .servicos { display: grid; padding-top: 4px; }
+    .servicos__grupo {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--nevoa-texto);
+      font-weight: 500;
+      padding: 22px 0 6px;
+    }
+    .servico { border-top: 1px solid rgba(42, 37, 32, 0.1); }
+    .servico__linha {
+      width: 100%;
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      padding: 12px 0;
+      min-height: 44px;
+      text-align: left;
+    }
+    .servico__linha .expande__icone { align-self: center; color: var(--petroleo-esc); width: 11px; height: 11px; }
+    .servico__linha .expande__icone::before,
+    .servico__linha .expande__icone::after { width: 11px; top: 5px; }
+    .servico__nome {
+      flex: 1;
+      font-family: var(--font-logo);
+      font-weight: 500;
+      font-size: 17px;
+      color: var(--tinta);
+    }
+    .servico__preco {
+      font-size: 13px;
+      color: var(--petroleo-esc);
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+    .servico__linha:hover .servico__nome { color: var(--petroleo-esc); }
+    .servico__linha:focus-visible { outline: 2px solid var(--petroleo-esc); outline-offset: 2px; }
+    .servico__detalhes { padding: 0 0 16px; }
+    .servico__texto {
+      margin-top: 0;
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--tinta);
+    }
+    .servico__tags {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+    .servico__tags li {
+      font-size: 12px;
+      line-height: 1.3;
+      padding: 5px 10px;
+      border: 1px solid rgba(58, 87, 87, 0.28);
+      border-radius: 999px;
+      color: var(--petroleo-esc);
+      background: var(--branco-cru);
+    }
+    .servico__comprimentos {
+      display: flex;
+      gap: 20px;
+      margin-top: 12px;
+      font-variant-numeric: tabular-nums;
+    }
+    .servico__comprimentos dt {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--nevoa-texto);
+    }
+    .servico__comprimentos dd { font-family: var(--font-logo); font-size: 17px; color: var(--petroleo-esc); }
+    .servico__meta {
+      margin-top: 10px;
+      font-size: 12.5px;
+      line-height: 1.5;
+      color: var(--nevoa-texto);
+    }
+    .servico__agendar {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--tinta);
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 2px;
+    }
+    .servico__agendar:hover { color: var(--petroleo-esc); }
+
+    /* Serviços avulsos: a linha abre por inteiro */
+    .ritual { grid-template-columns: minmax(240px, 320px) 1fr auto auto; gap: 40px; }
+    .ritual__expande { justify-self: end; }
+    .ritual__expande .expande__rotulo {
+      position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+    }
+    .ritual__painel { grid-column: 1 / -1; }
+    .ritual__detalhes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px 40px;
+      padding: 8px 0;
+    }
+    .ritual__bloco h4 {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--nevoa-texto);
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+    .ritual__bloco p { font-size: 14px; line-height: 1.6; color: var(--tinta); }
+    .ritual__bloco--largo { grid-column: 1 / -1; }
+    .ritual__bloco .servico__tags { margin-top: 2px; }
+    .ritual__detalhes .servico__agendar { grid-column: 1 / -1; justify-self: start; margin-top: 0; }
+
+    /* Pacotes de noiva na home */
+    .pacote-noiva__expande { display: flex; color: var(--branco-cru); margin-top: 8px; }
+    .pacote-noiva__itens {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      padding: 8px 0 4px;
+    }
+    .pacote-noiva__itens li {
+      font-size: 14px;
+      color: var(--branco-cru);
+      padding-left: 18px;
+      position: relative;
+    }
+    .pacote-noiva__itens li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0.6em;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--areia);
+    }
+    .pacote-noiva__info { list-style: none; margin-top: 12px; font-size: 13px; color: var(--branco-cru); display: grid; gap: 6px; }
+    .pacote-noiva__pagina {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--branco-cru);
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html.js .expande__painel,
+      html.js .expande__conteudo,
+      .expande__icone { transition: none !important; }
+    }
+
     /* =========================================
        RESPONSIVO
        ========================================= */
@@ -1279,6 +1506,10 @@
       .lugar__video { height: 260px; }
 
       .planos__cards { grid-template-columns: 1fr; gap: 20px; }
+      .servico__preco { font-size: 12px; }
+      .ritual__expande { justify-self: start; }
+      .ritual__expande .expande__rotulo { position: static; width: auto; height: auto; clip-path: none; }
+      .ritual__detalhes { grid-template-columns: 1fr; gap: 16px; }
       .planos__header { flex-direction: column; align-items: flex-start; }
 
       .card-loja-wrap { margin-bottom: 56px; }
@@ -1323,6 +1554,7 @@
       .nav__cta { padding: 10px 18px; font-size: 11px; }
     }
   </style>
+  <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
 
@@ -1461,7 +1693,7 @@
     <div class="planos__cards">
 
       <!-- Categoria 1: Cabelo -->
-      <article class="plano">
+      <article class="plano" id="cabelo" data-expande-caixa>
         <div class="plano__media">
           <img src="assets/img/plano-cabelo.webp" alt="Cabelo loiro com ondas suaves, finalizado na Nuovi Capelli" width="1200" height="675" loading="lazy">
           <span class="plano__tag">Mais Pedido</span>
@@ -1477,11 +1709,16 @@
             <div class="plano__price"><small>a partir de</small>R$ 150</div>
             <a href="https://wa.me/5512996556111?text=Oi.%20Quero%20agendar%20um%20hor%C3%A1rio%20para%20cabelo." class="plano__cta">Reservar →</a>
           </div>
+          <!-- DETALHES:cabelo:INICIO -->
+          <button class="expande__botao plano__expande" type="button" data-expande aria-expanded="true" aria-controls="detalhes-cabelo" data-abrir="Ver os 24 serviços" data-fechar="Fechar"><span class="expande__rotulo">Fechar</span><span class="expande__icone" aria-hidden="true"></span></button>
+          <div class="expande__painel" id="detalhes-cabelo"><div class="expande__conteudo"><div class="servicos"><h4 class="servicos__grupo">Cortes</h4><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="cabelo-corte-feminino"><span class="servico__nome">Corte feminino</span><span class="servico__preco">a partir de R$ 150</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="cabelo-corte-feminino"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Uma hora com tesoura, espelho e conversa. Você sai outra.</p><ul class="servico__tags" aria-label="Variações"><li>Corte reto</li><li>Repicado</li><li>Em camadas (long/short layers)</li><li>Chanel</li><li>Long bob</li><li>Undercut feminino</li><li>Franja (reta, cortina, lateral)</li></ul><p class="servico__meta">60 min · Recomenda-se manutenção a cada 2 a 3 meses</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Corte%20feminino." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="cabelo-corte-masculino"><span class="servico__nome">Corte masculino</span><span class="servico__preco">a partir de R$ 60</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="cabelo-corte-masculino"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Corte masculino com higienização e secagem.</p><ul class="servico__tags" aria-label="Variações"><li>Social</li><li>Degradê (low, mid, high fade)</li><li>Undercut</li><li>Militar</li><li>Com risco/desenho</li><li>Acabamento na navalha</li></ul><p class="servico__meta">30 min · Manutenção ideal a cada 15 a 30 dias</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Corte%20masculino." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="cabelo-corte-infantil"><span class="servico__nome">Corte infantil</span><span class="servico__preco">a partir de R$ 60</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="cabelo-corte-infantil"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Corte adaptado ao público infantil, com abordagem lúdica e paciente.</p><p class="servico__meta">30 min</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Corte%20infantil." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="cabelo-corte-a-maquina"><span class="servico__nome">Corte a máquina</span><span class="servico__preco">a partir de R$ 30</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="cabelo-corte-a-maquina"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Corte masculino com higienização e secagem.</p><ul class="servico__tags" aria-label="Variações"><li>Social</li><li>Degradê (low, mid, high fade)</li><li>Undercut</li><li>Militar</li><li>Com risco/desenho</li><li>Acabamento na navalha</li></ul><p class="servico__meta">30 min · Manutenção ideal a cada 15 a 30 dias</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Corte%20a%20m%C3%A1quina." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><h4 class="servicos__grupo">Lavagem, escova e penteado</h4><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="cabelo-higienizacao"><span class="servico__nome">Higienização</span><span class="servico__preco">a partir de R$ 30</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="cabelo-higienizacao"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Lavagem dos cabelos, podendo ser simples ou com produtos específicos conforme a necessidade do fio.</p><ul class="servico__tags" aria-label="Variações"><li>Higienização simples</li><li>Lavagem especial com produtos direcionados</li><li>Higienização + secagem</li></ul><p class="servico__meta">20 a 30 min</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Higieniza%C3%A7%C3%A3o." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="cabelo-escova-e-prancha"><span class="servico__nome">Escova e prancha</span><span class="servico__preco">a partir de R$ 40</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="cabelo-escova-e-prancha"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Lavagem seguida de escovação para modelar e alinhar os fios.</p><ul class="servico__tags" aria-label="Variações"><li>Escova simples (lava e escova)</li><li>Escova com prancha</li><li>Escova modelada com ondas</li><li>Baby liss/cachos</li></ul><p class="servico__meta">30 a 60 min</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Escova%20e%20prancha." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="cabelo-escova"><span class="servico__nome">Escova</span><span class="servico__preco">a partir de R$ 80</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="cabelo-escova"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Lava e escova, com o silêncio que você escolher.</p><ul class="servico__tags" aria-label="Variações"><li>Escova simples (lava e escova)</li><li>Escova com prancha</li><li>Escova modelada com ondas</li><li>Baby liss/cachos</li></ul><p class="servico__meta">30 a 60 min</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Escova." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="cabelo-baby-liss-cachos"><span class="servico__nome">Baby liss / cachos</span><span class="servico__preco">a partir de R$ 35</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="cabelo-baby-liss-cachos"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Lavagem seguida de escovação para modelar e alinhar os fios.</p><ul class="servico__tags" aria-label="Variações"><li>Escova simples (lava e escova)</li><li>Escova com prancha</li><li>Escova modelada com ondas</li><li>Baby liss/cachos</li></ul><p class="servico__meta">30 a 60 min</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Baby%20liss%20%2F%20cachos." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="cabelo-penteado"><span class="servico__nome">Penteado</span><span class="servico__preco">a partir de R$ 180</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="cabelo-penteado"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Para festas, formaturas e o cortejo da noiva.</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Penteado." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><h4 class="servicos__grupo">Tratamentos</h4><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="cabelo-hidratacao"><span class="servico__nome">Hidratação</span><span class="servico__preco">a partir de R$ 150</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="cabelo-hidratacao"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Tratamento profundo para fio cansado.</p><ul class="servico__tags" aria-label="Variações"><li>Hidratação simples</li><li>Com ampolas</li><li>Hidratação Penetraitt (para fios muito danificados)</li><li>Potencializada com ozônio</li></ul><p class="servico__meta">60 a 90 min</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Hidrata%C3%A7%C3%A3o." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="cabelo-nutricao"><span class="servico__nome">Nutrição</span><span class="servico__preco">a partir de R$ 120</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="cabelo-nutricao"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Reposição de lipídios (óleos e massa) nos fios.</p><ul class="servico__tags" aria-label="Variações"><li>Nutrição simples</li><li>Com óleos vegetais</li><li>Produtos naturais (Davines)</li></ul><p class="servico__meta">60 min</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Nutri%C3%A7%C3%A3o." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="cabelo-reconstrucao"><span class="servico__nome">Reconstrução</span><span class="servico__preco">a partir de R$ 180</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="cabelo-reconstrucao"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Devolve a força ao fio que passou por química.</p><ul class="servico__tags" aria-label="Variações"><li>Reconstrução simples</li><li>Cauterização Capilar</li><li>Protocolo Prévia (tratamento profissional intensivo)</li></ul><p class="servico__meta">60 a 90 min</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Reconstru%C3%A7%C3%A3o." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="cabelo-cauterizacao-capilar"><span class="servico__nome">Cauterização capilar</span><span class="servico__preco">a partir de R$ 80</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="cabelo-cauterizacao-capilar"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Tratamento de selagem e reposição de nutrientes que reduz o frizz e sela as cutículas.</p><ul class="servico__tags" aria-label="Variações"><li>Cauterização com ou sem selagem térmica</li><li>Pode ser associada a outros tratamentos</li></ul><p class="servico__meta">2h</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Cauteriza%C3%A7%C3%A3o%20capilar." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="cabelo-tratamento-capilar-previa"><span class="servico__nome">Tratamento capilar PRÉVIA</span><span class="servico__preco">a partir de R$ 200</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="cabelo-tratamento-capilar-previa"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Reposição de massa e proteína (queratina, aminoácidos) na fibra capilar.</p><ul class="servico__tags" aria-label="Variações"><li>Reconstrução simples</li><li>Cauterização Capilar</li><li>Protocolo Prévia (tratamento profissional intensivo)</li></ul><p class="servico__meta">60 a 90 min</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Tratamento%20capilar%20PR%C3%89VIA." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><h4 class="servicos__grupo">Cor e mechas</h4><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="cabelo-coloracao-tonalizacao"><span class="servico__nome">Coloração / tonalização</span><span class="servico__preco">a partir de R$ 200</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="cabelo-coloracao-tonalizacao"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Mudar o tom sem perder o seu. Conversa antes, técnica depois.</p><ul class="servico__tags" aria-label="Variações"><li>Coloração permanente</li><li>Tonalização (sem amônia, mais suave)</li><li>Coloração Inoa (sem amônia e sem odor)</li><li>Davines (natural)</li><li>Keune</li><li>Camuflagem (foco em brancos)</li><li>Aplicação de coloração (cliente traz o produto)</li></ul><p class="servico__meta">60 min a 2h</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Colora%C3%A7%C3%A3o%20%2F%20tonaliza%C3%A7%C3%A3o." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="cabelo-aplicacao-de-coloracao"><span class="servico__nome">Aplicação de coloração</span><span class="servico__preco">a partir de R$ 90</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="cabelo-aplicacao-de-coloracao"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Alteração ou realce da cor dos fios com tintura permanente ou tonalizante.</p><ul class="servico__tags" aria-label="Variações"><li>Coloração permanente</li><li>Tonalização (sem amônia, mais suave)</li><li>Coloração Inoa (sem amônia e sem odor)</li><li>Davines (natural)</li><li>Keune</li><li>Camuflagem (foco em brancos)</li><li>Aplicação de coloração (cliente traz o produto)</li></ul><p class="servico__meta">60 min a 2h</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Aplica%C3%A7%C3%A3o%20de%20colora%C3%A7%C3%A3o." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="cabelo-camuflagem"><span class="servico__nome">Camuflagem</span><span class="servico__preco">a partir de R$ 160</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="cabelo-camuflagem"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Alteração ou realce da cor dos fios com tintura permanente ou tonalizante.</p><ul class="servico__tags" aria-label="Variações"><li>Coloração permanente</li><li>Tonalização (sem amônia, mais suave)</li><li>Coloração Inoa (sem amônia e sem odor)</li><li>Davines (natural)</li><li>Keune</li><li>Camuflagem (foco em brancos)</li><li>Aplicação de coloração (cliente traz o produto)</li></ul><p class="servico__meta">60 min a 2h</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Camuflagem." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="cabelo-coloracao-inoa"><span class="servico__nome">Coloração Inoa</span><span class="servico__preco">a partir de R$ 140</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="cabelo-coloracao-inoa"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Alteração ou realce da cor dos fios com tintura permanente ou tonalizante.</p><ul class="servico__tags" aria-label="Variações"><li>Coloração permanente</li><li>Tonalização (sem amônia, mais suave)</li><li>Coloração Inoa (sem amônia e sem odor)</li><li>Davines (natural)</li><li>Keune</li><li>Camuflagem (foco em brancos)</li><li>Aplicação de coloração (cliente traz o produto)</li></ul><p class="servico__meta">60 min a 2h</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Colora%C3%A7%C3%A3o%20Inoa." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="cabelo-mechas"><span class="servico__nome">Mechas</span><span class="servico__preco">a partir de R$ 550</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="cabelo-mechas"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Mechas mais largas, para um claro que aparece.</p><ul class="servico__tags" aria-label="Variações"><li>Luzes (mechas bem finas com papel)</li><li>Mechas (mais largas e contrastantes)</li><li>Mechas Californianas</li><li>Invertidas</li><li>Reflexo</li><li>Strong</li></ul><p class="servico__meta">1h30 a 4h</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Mechas." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="cabelo-luzes"><span class="servico__nome">Luzes</span><span class="servico__preco">a partir de R$ 550</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="cabelo-luzes"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Clarear sem apagar. Trabalho em camadas, leitura do fio real.</p><ul class="servico__tags" aria-label="Variações"><li>Luzes (mechas bem finas com papel)</li><li>Mechas (mais largas e contrastantes)</li><li>Mechas Californianas</li><li>Invertidas</li><li>Reflexo</li><li>Strong</li></ul><p class="servico__meta">1h30 a 4h</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Luzes." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><h4 class="servicos__grupo">Alisamento e alongamento</h4><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="cabelo-escova-progressiva-sem-formol"><span class="servico__nome">Escova progressiva sem formol</span><span class="servico__preco">a partir de R$ 260</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="cabelo-escova-progressiva-sem-formol"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Alisamento que respeita o fio. O valor acompanha o comprimento.</p><ul class="servico__tags" aria-label="Variações"><li>Progressiva sem formol</li><li>Realinhamento térmico (Escova Portier)</li><li>Relaxamento capilar (para cabelos crespos)</li></ul><p class="servico__meta">2h30</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Escova%20progressiva%20sem%20formol." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="cabelo-mega-hair-alongamento"><span class="servico__nome">Mega hair / alongamento</span><span class="servico__preco">a partir de R$ 300</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="cabelo-mega-hair-alongamento"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Aplicação de mechas de cabelo para alongar, dar volume ou ambos.</p><ul class="servico__tags" aria-label="Variações"><li>Mega hair com queratina</li><li>Fita invisível (adesiva)</li><li>Costurado</li><li>Entrelace</li></ul><p class="servico__meta">2h ou mais · Requer manutenção periódica conforme o crescimento natural</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Mega%20hair%20%2F%20alongamento." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><h4 class="servicos__grupo">Clubes</h4><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="cabelo-clube-da-cor"><span class="servico__nome">Clube da Cor</span><span class="servico__preco">R$ 100</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="cabelo-clube-da-cor"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Pacote com 5 colorações para manter a cor sempre em dia.</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Clube%20da%20Cor." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="cabelo-escova-clube-da-cor"><span class="servico__nome">Escova Clube da Cor</span><span class="servico__preco">R$ 40</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="cabelo-escova-clube-da-cor"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Escova do pacote</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Escova%20Clube%20da%20Cor." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div></div></div></div>
+          
+<!-- DETALHES:cabelo:FIM -->
         </div>
       </article>
 
       <!-- Categoria 2: Unhas -->
-      <article class="plano">
+      <article class="plano" id="unhas" data-expande-caixa>
         <div class="plano__media plano__media--marca">
           <p class="plano__frase" aria-hidden="true">Mãos prontas.</p>
           <span class="plano__tag">Cuidado</span>
@@ -1497,11 +1734,16 @@
             <div class="plano__price"><small>a partir de</small>R$ 35</div>
             <a href="https://wa.me/5512996556111?text=Oi.%20Quero%20agendar%20manicure%20e%20pedicure." class="plano__cta">Reservar →</a>
           </div>
+          <!-- DETALHES:unhas:INICIO -->
+          <button class="expande__botao plano__expande" type="button" data-expande aria-expanded="true" aria-controls="detalhes-unhas" data-abrir="Ver os 8 serviços" data-fechar="Fechar"><span class="expande__rotulo">Fechar</span><span class="expande__icone" aria-hidden="true"></span></button>
+          <div class="expande__painel" id="detalhes-unhas"><div class="expande__conteudo"><div class="servicos"><h4 class="servicos__grupo">Mãos e pés</h4><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="unhas-manicure"><span class="servico__nome">Manicure</span><span class="servico__preco">R$ 35</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="unhas-manicure"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Cutilagem e esmaltação. Mãos prontas.</p><ul class="servico__tags" aria-label="Variações"><li>Manicure</li><li>Pedicure</li><li>Combo Manicure e Pedicure</li><li>Francesinha</li><li>Esmaltação em gel (maior durabilidade)</li><li>Spa das mãos/pés</li><li>Versão masculina</li><li>Apenas esmaltação</li></ul><p class="servico__meta">30 min a 2h (combo)</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Manicure." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="unhas-pedicure"><span class="servico__nome">Pedicure</span><span class="servico__preco">a partir de R$ 37</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="unhas-pedicure"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Cutilagem e esmaltação. Pés leves.</p><ul class="servico__tags" aria-label="Variações"><li>Manicure</li><li>Pedicure</li><li>Combo Manicure e Pedicure</li><li>Francesinha</li><li>Esmaltação em gel (maior durabilidade)</li><li>Spa das mãos/pés</li><li>Versão masculina</li><li>Apenas esmaltação</li></ul><p class="servico__meta">30 min a 2h (combo)</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Pedicure." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="unhas-manicure-e-pedicure"><span class="servico__nome">Manicure e pedicure</span><span class="servico__preco">a partir de R$ 68</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="unhas-manicure-e-pedicure"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Mãos e pés no mesmo horário.</p><ul class="servico__tags" aria-label="Variações"><li>Manicure</li><li>Pedicure</li><li>Combo Manicure e Pedicure</li><li>Francesinha</li><li>Esmaltação em gel (maior durabilidade)</li><li>Spa das mãos/pés</li><li>Versão masculina</li><li>Apenas esmaltação</li></ul><p class="servico__meta">30 min a 2h (combo)</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Manicure%20e%20pedicure." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="unhas-manicure-esmaltacao-em-gel"><span class="servico__nome">Manicure - esmaltação em gel</span><span class="servico__preco">a partir de R$ 80</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="unhas-manicure-esmaltacao-em-gel"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Cuidado, cutilação e esmaltação das unhas das mãos e/ou dos pés.</p><ul class="servico__tags" aria-label="Variações"><li>Manicure</li><li>Pedicure</li><li>Combo Manicure e Pedicure</li><li>Francesinha</li><li>Esmaltação em gel (maior durabilidade)</li><li>Spa das mãos/pés</li><li>Versão masculina</li><li>Apenas esmaltação</li></ul><p class="servico__meta">30 min a 2h (combo)</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Manicure%20-%20esmalta%C3%A7%C3%A3o%20em%20gel." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="unhas-esmaltacao-maos"><span class="servico__nome">Esmaltação - mãos</span><span class="servico__preco">a partir de R$ 15</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="unhas-esmaltacao-maos"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Cuidado, cutilação e esmaltação das unhas das mãos e/ou dos pés.</p><ul class="servico__tags" aria-label="Variações"><li>Manicure</li><li>Pedicure</li><li>Combo Manicure e Pedicure</li><li>Francesinha</li><li>Esmaltação em gel (maior durabilidade)</li><li>Spa das mãos/pés</li><li>Versão masculina</li><li>Apenas esmaltação</li></ul><p class="servico__meta">30 min a 2h (combo)</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Esmalta%C3%A7%C3%A3o%20-%20m%C3%A3os." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="unhas-esmaltacao-pes"><span class="servico__nome">Esmaltação - pés</span><span class="servico__preco">a partir de R$ 15</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="unhas-esmaltacao-pes"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Cuidado, cutilação e esmaltação das unhas das mãos e/ou dos pés.</p><ul class="servico__tags" aria-label="Variações"><li>Manicure</li><li>Pedicure</li><li>Combo Manicure e Pedicure</li><li>Francesinha</li><li>Esmaltação em gel (maior durabilidade)</li><li>Spa das mãos/pés</li><li>Versão masculina</li><li>Apenas esmaltação</li></ul><p class="servico__meta">30 min a 2h (combo)</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Esmalta%C3%A7%C3%A3o%20-%20p%C3%A9s." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="unhas-spa-dos-pes"><span class="servico__nome">Spa dos pés</span><span class="servico__preco">a partir de R$ 70</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="unhas-spa-dos-pes"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Cuidado, cutilação e esmaltação das unhas das mãos e/ou dos pés.</p><ul class="servico__tags" aria-label="Variações"><li>Manicure</li><li>Pedicure</li><li>Combo Manicure e Pedicure</li><li>Francesinha</li><li>Esmaltação em gel (maior durabilidade)</li><li>Spa das mãos/pés</li><li>Versão masculina</li><li>Apenas esmaltação</li></ul><p class="servico__meta">30 min a 2h (combo)</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Spa%20dos%20p%C3%A9s." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="unhas-renovacao-podal"><span class="servico__nome">Renovação podal</span><span class="servico__preco">a partir de R$ 70</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="unhas-renovacao-podal"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Cuidado, cutilação e esmaltação das unhas das mãos e/ou dos pés.</p><ul class="servico__tags" aria-label="Variações"><li>Manicure</li><li>Pedicure</li><li>Combo Manicure e Pedicure</li><li>Francesinha</li><li>Esmaltação em gel (maior durabilidade)</li><li>Spa das mãos/pés</li><li>Versão masculina</li><li>Apenas esmaltação</li></ul><p class="servico__meta">30 min a 2h (combo)</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Renova%C3%A7%C3%A3o%20podal." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div></div></div></div>
+          
+<!-- DETALHES:unhas:FIM -->
         </div>
       </article>
 
       <!-- Categoria 3: Rosto & Olhar -->
-      <article class="plano">
+      <article class="plano" id="rosto" data-expande-caixa>
         <div class="plano__media plano__media--marca">
           <p class="plano__frase" aria-hidden="true">O traço certo.</p>
           <span class="plano__tag">Para Eventos</span>
@@ -1517,11 +1759,16 @@
             <div class="plano__price"><small>a partir de</small>R$ 30</div>
             <a href="https://wa.me/5512996556111?text=Oi.%20Quero%20agendar%20maquiagem%20e%20sobrancelha." class="plano__cta">Reservar →</a>
           </div>
+          <!-- DETALHES:rosto:INICIO -->
+          <button class="expande__botao plano__expande" type="button" data-expande aria-expanded="true" aria-controls="detalhes-rosto" data-abrir="Ver os 3 serviços" data-fechar="Fechar"><span class="expande__rotulo">Fechar</span><span class="expande__icone" aria-hidden="true"></span></button>
+          <div class="expande__painel" id="detalhes-rosto"><div class="expande__conteudo"><div class="servicos"><h4 class="servicos__grupo">Sobrancelha</h4><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="rosto-design-de-sobrancelha"><span class="servico__nome">Design de sobrancelha</span><span class="servico__preco">a partir de R$ 30</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="rosto-design-de-sobrancelha"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Design e mapeamento facial. O traço certo para o seu rosto.</p><ul class="servico__tags" aria-label="Variações"><li>Design com pinça</li><li>Cera</li><li>Linha (mais preciso e sem dor)</li><li>Com henna (preenche e define)</li><li>Com tintura</li></ul><p class="servico__meta">30 min · Manutenção a cada 15 a 30 dias</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Design%20de%20sobrancelha." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><h4 class="servicos__grupo">Maquiagem</h4><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="rosto-maquiagem"><span class="servico__nome">Maquiagem</span><span class="servico__preco">a partir de R$ 150</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="rosto-maquiagem"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Pele real, traço editorial. Para o dia ou para a noite.</p><ul class="servico__tags" aria-label="Variações"><li>Social</li><li>Noiva</li><li>Madrinha</li><li>Debutante</li><li>Com ou sem cílios postiços</li></ul><p class="servico__meta">60 a 90 min</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Maquiagem." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><h4 class="servicos__grupo">Cílios</h4><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="rosto-manutencao-de-cilios"><span class="servico__nome">Manutenção de cílios</span><span class="servico__preco">a partir de R$ 60</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="rosto-manutencao-de-cilios"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Aplicação de fios sintéticos cílio a cílio para alongar e dar volume ao olhar.</p><ul class="servico__tags" aria-label="Variações"><li>Fio a fio (clássico)</li><li>Volume russo</li><li>Híbrido</li><li>Brasileiro</li></ul><p class="servico__meta">60 min a 2h</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Manuten%C3%A7%C3%A3o%20de%20c%C3%ADlios." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div></div></div></div>
+          
+<!-- DETALHES:rosto:FIM -->
         </div>
       </article>
 
       <!-- Categoria 4: Estética & Depilação a Laser -->
-      <article class="plano">
+      <article class="plano" id="estetica" data-expande-caixa>
         <div class="plano__media plano__media--marca">
           <p class="plano__frase" aria-hidden="true">Sem pressa.</p>
           <span class="plano__tag">Novidade</span>
@@ -1537,6 +1784,11 @@
             <div class="plano__price"><small>a partir de</small>R$ 100</div>
             <a href="https://wa.me/5512996556111?text=Oi.%20Quero%20saber%20mais%20sobre%20a%20depila%C3%A7%C3%A3o%20a%20laser." class="plano__cta">Reservar →</a>
           </div>
+          <!-- DETALHES:estetica:INICIO -->
+          <button class="expande__botao plano__expande" type="button" data-expande aria-expanded="true" aria-controls="detalhes-estetica" data-abrir="Ver os 9 serviços" data-fechar="Fechar"><span class="expande__rotulo">Fechar</span><span class="expande__icone" aria-hidden="true"></span></button>
+          <div class="expande__painel" id="detalhes-estetica"><div class="expande__conteudo"><div class="servicos"><h4 class="servicos__grupo">Depilação a laser</h4><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="estetica-depilacao-a-laser"><span class="servico__nome">Depilação a laser</span><span class="servico__preco">a partir de R$ 100</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="estetica-depilacao-a-laser"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Fiber Evo, laser diodo de 2ª geração. Sessão a sessão, sem pressa.</p><ul class="servico__tags" aria-label="Variações"><li>Fiber Evo (laser de diodo 2ª geração, mais rápido e potente)</li><li>Light Sheer</li></ul><p class="servico__meta">15 a 60 min por região · Protocolo geralmente de 8 a 10 sessões, a cada 30 a 45 dias</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Depila%C3%A7%C3%A3o%20a%20laser." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><h4 class="servicos__grupo">Depilação com cera</h4><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="estetica-buco"><span class="servico__nome">Buço</span><span class="servico__preco">a partir de R$ 12</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="estetica-buco"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Remoção dos pelos pela raiz com cera quente ou fria.</p><ul class="servico__tags" aria-label="Variações"><li>Buço</li><li>Axilas</li><li>Meia perna</li><li>Perna inteira</li><li>Virilha simples</li><li>Virilha completa</li><li>Braços</li><li>Rosto</li><li>Combos (perna + virilha + axila)</li><li>Versão masculina</li></ul><p class="servico__meta">10 a 60 min conforme a região</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Bu%C3%A7o." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="estetica-axilas"><span class="servico__nome">Axilas</span><span class="servico__preco">a partir de R$ 18</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="estetica-axilas"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Remoção dos pelos pela raiz com cera quente ou fria.</p><ul class="servico__tags" aria-label="Variações"><li>Buço</li><li>Axilas</li><li>Meia perna</li><li>Perna inteira</li><li>Virilha simples</li><li>Virilha completa</li><li>Braços</li><li>Rosto</li><li>Combos (perna + virilha + axila)</li><li>Versão masculina</li></ul><p class="servico__meta">10 a 60 min conforme a região</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Axilas." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="estetica-meia-perna"><span class="servico__nome">Meia perna</span><span class="servico__preco">a partir de R$ 24</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="estetica-meia-perna"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Remoção dos pelos pela raiz com cera quente ou fria.</p><ul class="servico__tags" aria-label="Variações"><li>Buço</li><li>Axilas</li><li>Meia perna</li><li>Perna inteira</li><li>Virilha simples</li><li>Virilha completa</li><li>Braços</li><li>Rosto</li><li>Combos (perna + virilha + axila)</li><li>Versão masculina</li></ul><p class="servico__meta">10 a 60 min conforme a região</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Meia%20perna." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="estetica-perna-inteira"><span class="servico__nome">Perna inteira</span><span class="servico__preco">a partir de R$ 44</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="estetica-perna-inteira"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Remoção dos pelos pela raiz com cera quente ou fria.</p><ul class="servico__tags" aria-label="Variações"><li>Buço</li><li>Axilas</li><li>Meia perna</li><li>Perna inteira</li><li>Virilha simples</li><li>Virilha completa</li><li>Braços</li><li>Rosto</li><li>Combos (perna + virilha + axila)</li><li>Versão masculina</li></ul><p class="servico__meta">10 a 60 min conforme a região</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Perna%20inteira." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="estetica-virilha-simples"><span class="servico__nome">Virilha simples</span><span class="servico__preco">a partir de R$ 35</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="estetica-virilha-simples"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Remoção dos pelos pela raiz com cera quente ou fria.</p><ul class="servico__tags" aria-label="Variações"><li>Buço</li><li>Axilas</li><li>Meia perna</li><li>Perna inteira</li><li>Virilha simples</li><li>Virilha completa</li><li>Braços</li><li>Rosto</li><li>Combos (perna + virilha + axila)</li><li>Versão masculina</li></ul><p class="servico__meta">10 a 60 min conforme a região</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Virilha%20simples." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="estetica-virilha-completa"><span class="servico__nome">Virilha completa</span><span class="servico__preco">a partir de R$ 49</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="estetica-virilha-completa"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Remoção dos pelos pela raiz com cera quente ou fria.</p><ul class="servico__tags" aria-label="Variações"><li>Buço</li><li>Axilas</li><li>Meia perna</li><li>Perna inteira</li><li>Virilha simples</li><li>Virilha completa</li><li>Braços</li><li>Rosto</li><li>Combos (perna + virilha + axila)</li><li>Versão masculina</li></ul><p class="servico__meta">10 a 60 min conforme a região</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Virilha%20completa." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><h4 class="servicos__grupo">Massagem e estética</h4><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="estetica-massagem-relaxante"><span class="servico__nome">Massagem relaxante</span><span class="servico__preco">a partir de R$ 130</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="estetica-massagem-relaxante"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Massagens corporais com finalidade relaxante ou de estímulo à circulação linfática.</p><ul class="servico__tags" aria-label="Variações"><li>Relaxante</li><li>Drenagem linfática (manual/local)</li><li>Modeladora</li><li>Pós-operatório</li><li>Com pedras/velas/cristais</li><li>Day Spa</li></ul><p class="servico__meta">60 min</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Massagem%20relaxante." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div><div class="servico" data-expande-caixa><button class="servico__linha" type="button" data-expande aria-expanded="true" aria-controls="estetica-day-spa-massagem-relaxante"><span class="servico__nome">Day spa - massagem relaxante</span><span class="servico__preco">a partir de R$ 110</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="estetica-day-spa-massagem-relaxante"><div class="expande__conteudo"><div class="servico__detalhes"><p class="servico__texto">Massagens corporais com finalidade relaxante ou de estímulo à circulação linfática.</p><ul class="servico__tags" aria-label="Variações"><li>Relaxante</li><li>Drenagem linfática (manual/local)</li><li>Modeladora</li><li>Pós-operatório</li><li>Com pedras/velas/cristais</li><li>Day Spa</li></ul><p class="servico__meta">60 min</p><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Day%20spa%20-%20massagem%20relaxante." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div></div></div></div></div>
+          
+<!-- DETALHES:estetica:FIM -->
         </div>
       </article>
 
@@ -1553,97 +1805,139 @@
       Prefere um serviço só? Aqui estão os valores avulsos mais procurados.
     </p>
 
+    <!-- AVULSOS:INICIO -->
     <div class="rituais__list">
-      <article class="ritual">
+      <article class="ritual" id="servico-corte-feminino" data-expande-caixa>
         <h3 class="ritual__name">Corte feminino</h3>
         <p class="ritual__desc">Uma hora com tesoura, espelho e conversa. Você sai outra.</p>
         <div class="ritual__price">a partir de R$ 150</div>
+        <button class="expande__botao ritual__expande" type="button" data-expande aria-expanded="true" aria-controls="servico-corte-feminino-detalhes" data-abrir="Ver detalhes" data-fechar="Fechar"><span class="expande__rotulo">Fechar</span><span class="expande__icone" aria-hidden="true"></span></button>
+        <div class="expande__painel ritual__painel" id="servico-corte-feminino-detalhes"><div class="expande__conteudo"><div class="ritual__detalhes"><div class="ritual__bloco"><h4>O que é</h4><p>Corte de cabelo feminino com higienização (lavagem) e secagem inclusas.</p></div><div class="ritual__bloco"><h4>Para quem</h4><p>Renovar o visual, remover pontas danificadas, dar forma e movimento, valorizar o formato do rosto e facilitar a manutenção diária.</p></div><div class="ritual__bloco ritual__bloco--largo"><h4>Possibilidades</h4><ul class="servico__tags" aria-label="Variações"><li>Corte reto</li><li>Repicado</li><li>Em camadas (long/short layers)</li><li>Chanel</li><li>Long bob</li><li>Undercut feminino</li><li>Franja (reta, cortina, lateral)</li></ul></div><div class="ritual__bloco"><h4>Tempo e manutenção</h4><p>60 min · Recomenda-se manutenção a cada 2 a 3 meses</p></div><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Corte%20feminino." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div>
       </article>
 
-      <article class="ritual">
+      <article class="ritual" id="servico-escova" data-expande-caixa>
         <h3 class="ritual__name">Escova</h3>
         <p class="ritual__desc">Lava e escova, com o silêncio que você escolher.</p>
         <div class="ritual__price">a partir de R$ 80</div>
+        <button class="expande__botao ritual__expande" type="button" data-expande aria-expanded="true" aria-controls="servico-escova-detalhes" data-abrir="Ver detalhes" data-fechar="Fechar"><span class="expande__rotulo">Fechar</span><span class="expande__icone" aria-hidden="true"></span></button>
+        <div class="expande__painel ritual__painel" id="servico-escova-detalhes"><div class="expande__conteudo"><div class="ritual__detalhes"><div class="ritual__bloco"><h4>O que é</h4><p>Lavagem seguida de escovação para modelar e alinhar os fios.</p></div><div class="ritual__bloco"><h4>Para quem</h4><p>Deixar o cabelo alinhado, com brilho e movimento para o dia a dia ou eventos.</p></div><div class="ritual__bloco ritual__bloco--largo"><h4>Possibilidades</h4><ul class="servico__tags" aria-label="Variações"><li>Escova simples (lava e escova)</li><li>Escova com prancha</li><li>Escova modelada com ondas</li><li>Baby liss/cachos</li></ul></div><div class="ritual__bloco"><h4>Tempo e manutenção</h4><p>30 a 60 min</p></div><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Escova." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div>
       </article>
 
-      <article class="ritual">
-        <h3 class="ritual__name">Coloração e tonalização</h3>
+      <article class="ritual" id="servico-coloracao-tonalizacao" data-expande-caixa>
+        <h3 class="ritual__name">Coloração / tonalização</h3>
         <p class="ritual__desc">Mudar o tom sem perder o seu. Conversa antes, técnica depois.</p>
         <div class="ritual__price">a partir de R$ 200</div>
+        <button class="expande__botao ritual__expande" type="button" data-expande aria-expanded="true" aria-controls="servico-coloracao-tonalizacao-detalhes" data-abrir="Ver detalhes" data-fechar="Fechar"><span class="expande__rotulo">Fechar</span><span class="expande__icone" aria-hidden="true"></span></button>
+        <div class="expande__painel ritual__painel" id="servico-coloracao-tonalizacao-detalhes"><div class="expande__conteudo"><div class="ritual__detalhes"><div class="ritual__bloco"><h4>O que é</h4><p>Alteração ou realce da cor dos fios com tintura permanente ou tonalizante.</p></div><div class="ritual__bloco"><h4>Para quem</h4><p>Cobrir fios brancos, mudar de cor, realçar o tom natural ou neutralizar reflexos indesejados.</p></div><div class="ritual__bloco ritual__bloco--largo"><h4>Possibilidades</h4><ul class="servico__tags" aria-label="Variações"><li>Coloração permanente</li><li>Tonalização (sem amônia, mais suave)</li><li>Coloração Inoa (sem amônia e sem odor)</li><li>Davines (natural)</li><li>Keune</li><li>Camuflagem (foco em brancos)</li><li>Aplicação de coloração (cliente traz o produto)</li></ul></div><div class="ritual__bloco"><h4>Tempo e manutenção</h4><p>60 min a 2h</p></div><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Colora%C3%A7%C3%A3o%20%2F%20tonaliza%C3%A7%C3%A3o." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div>
       </article>
 
-      <article class="ritual">
-        <h3 class="ritual__name">Clube da Cor</h3>
-        <p class="ritual__desc">Pacote com 5 colorações para manter a cor sempre em dia.</p>
-        <div class="ritual__price">R$ 100 <small>por coloração</small></div>
-      </article>
-
-      <article class="ritual">
-        <h3 class="ritual__name">Luzes e mechas</h3>
-        <p class="ritual__desc">Clarear sem apagar. Trabalho em camadas, leitura do fio real.</p>
-        <div class="ritual__price">a partir de R$ 550</div>
-      </article>
-
-      <article class="ritual">
-        <h3 class="ritual__name">Escova progressiva sem formol</h3>
-        <p class="ritual__desc">Alisamento que respeita o fio. O valor acompanha o comprimento.</p>
-        <div class="ritual__price">a partir de R$ 260</div>
-      </article>
-
-      <article class="ritual">
+      <article class="ritual" id="servico-hidratacao" data-expande-caixa>
         <h3 class="ritual__name">Hidratação</h3>
         <p class="ritual__desc">Tratamento profundo para fio cansado.</p>
         <div class="ritual__price">a partir de R$ 150</div>
+        <button class="expande__botao ritual__expande" type="button" data-expande aria-expanded="true" aria-controls="servico-hidratacao-detalhes" data-abrir="Ver detalhes" data-fechar="Fechar"><span class="expande__rotulo">Fechar</span><span class="expande__icone" aria-hidden="true"></span></button>
+        <div class="expande__painel ritual__painel" id="servico-hidratacao-detalhes"><div class="expande__conteudo"><div class="ritual__detalhes"><div class="ritual__bloco"><h4>O que é</h4><p>Reposição de água e nutrientes nos fios para devolver maciez e brilho.</p></div><div class="ritual__bloco"><h4>Para quem</h4><p>Repor a hidratação de fios ressecados, opacos e sem elasticidade, devolvendo brilho e suavidade.</p></div><div class="ritual__bloco ritual__bloco--largo"><h4>Possibilidades</h4><ul class="servico__tags" aria-label="Variações"><li>Hidratação simples</li><li>Com ampolas</li><li>Hidratação Penetraitt (para fios muito danificados)</li><li>Potencializada com ozônio</li></ul></div><div class="ritual__bloco"><h4>Tempo e manutenção</h4><p>60 a 90 min</p></div><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Hidrata%C3%A7%C3%A3o." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div>
       </article>
 
-      <article class="ritual">
-        <h3 class="ritual__name">Reconstrução</h3>
-        <p class="ritual__desc">Devolve a força ao fio que passou por química.</p>
-        <div class="ritual__price">a partir de R$ 180</div>
+      <article class="ritual" id="servico-escova-progressiva-sem-formol" data-expande-caixa>
+        <h3 class="ritual__name">Escova progressiva sem formol</h3>
+        <p class="ritual__desc">Alisamento que respeita o fio. O valor acompanha o comprimento.</p>
+        <div class="ritual__price">a partir de R$ 260</div>
+        <button class="expande__botao ritual__expande" type="button" data-expande aria-expanded="true" aria-controls="servico-escova-progressiva-sem-formol-detalhes" data-abrir="Ver detalhes" data-fechar="Fechar"><span class="expande__rotulo">Fechar</span><span class="expande__icone" aria-hidden="true"></span></button>
+        <div class="expande__painel ritual__painel" id="servico-escova-progressiva-sem-formol-detalhes"><div class="expande__conteudo"><div class="ritual__detalhes"><div class="ritual__bloco"><h4>O que é</h4><p>Alisamento/redução de volume que alisa até 100% dos fios sem formol.</p></div><div class="ritual__bloco"><h4>Para quem</h4><p>Reduzir volume e frizz, alinhar e facilitar a finalização diária do cabelo.</p></div><div class="ritual__bloco ritual__bloco--largo"><h4>Possibilidades</h4><ul class="servico__tags" aria-label="Variações"><li>Progressiva sem formol</li><li>Realinhamento térmico (Escova Portier)</li><li>Relaxamento capilar (para cabelos crespos)</li></ul></div><div class="ritual__bloco"><h4>Tempo e manutenção</h4><p>2h30</p></div><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Escova%20progressiva%20sem%20formol." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div>
       </article>
 
-      <article class="ritual">
+      <article class="ritual" id="servico-luzes" data-expande-caixa>
+        <h3 class="ritual__name">Luzes</h3>
+        <p class="ritual__desc">Clarear sem apagar. Trabalho em camadas, leitura do fio real.</p>
+        <div class="ritual__price">a partir de R$ 550</div>
+        <button class="expande__botao ritual__expande" type="button" data-expande aria-expanded="true" aria-controls="servico-luzes-detalhes" data-abrir="Ver detalhes" data-fechar="Fechar"><span class="expande__rotulo">Fechar</span><span class="expande__icone" aria-hidden="true"></span></button>
+        <div class="expande__painel ritual__painel" id="servico-luzes-detalhes"><div class="expande__conteudo"><div class="ritual__detalhes"><div class="ritual__bloco"><h4>O que é</h4><p>Técnicas de clareamento parcial dos fios para criar contraste, luminosidade e dimensão.</p></div><div class="ritual__bloco"><h4>Para quem</h4><p>Iluminar, criar naturalidade, disfarçar brancos ou transformar completamente a base de cor.</p></div><div class="ritual__bloco ritual__bloco--largo"><h4>Possibilidades</h4><ul class="servico__tags" aria-label="Variações"><li>Luzes (mechas bem finas com papel)</li><li>Mechas (mais largas e contrastantes)</li><li>Mechas Californianas</li><li>Invertidas</li><li>Reflexo</li><li>Strong</li></ul></div><div class="ritual__bloco"><h4>Tempo e manutenção</h4><p>1h30 a 4h</p></div><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Luzes." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div>
+      </article>
+
+      <article class="ritual" id="servico-clube-da-cor" data-expande-caixa>
+        <h3 class="ritual__name">Clube da Cor</h3>
+        <p class="ritual__desc">Pacote com 5 colorações para manter a cor sempre em dia.</p>
+        <div class="ritual__price">R$ 100</div>
+        <button class="expande__botao ritual__expande" type="button" data-expande aria-expanded="true" aria-controls="servico-clube-da-cor-detalhes" data-abrir="Ver detalhes" data-fechar="Fechar"><span class="expande__rotulo">Fechar</span><span class="expande__icone" aria-hidden="true"></span></button>
+        <div class="expande__painel ritual__painel" id="servico-clube-da-cor-detalhes"><div class="expande__conteudo"><div class="ritual__detalhes"><div class="ritual__bloco"><h4>O que é</h4><p>Pacote de 5 colorações</p></div><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Clube%20da%20Cor." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div>
+      </article>
+
+      <article class="ritual" id="servico-penteado" data-expande-caixa>
         <h3 class="ritual__name">Penteado</h3>
         <p class="ritual__desc">Para festas, formaturas e o cortejo da noiva.</p>
         <div class="ritual__price">a partir de R$ 180</div>
+        <button class="expande__botao ritual__expande" type="button" data-expande aria-expanded="true" aria-controls="servico-penteado-detalhes" data-abrir="Ver detalhes" data-fechar="Fechar"><span class="expande__rotulo">Fechar</span><span class="expande__icone" aria-hidden="true"></span></button>
+        <div class="expande__painel ritual__painel" id="servico-penteado-detalhes"><div class="expande__conteudo"><div class="ritual__detalhes"><div class="ritual__bloco"><h4>O que é</h4><p>Penteado</p></div><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Penteado." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div>
       </article>
 
-      <article class="ritual">
-        <h3 class="ritual__name">Maquiagem</h3>
-        <p class="ritual__desc">Pele real, traço editorial. Para o dia ou para a noite.</p>
-        <div class="ritual__price">a partir de R$ 150</div>
+      <article class="ritual" id="servico-mechas" data-expande-caixa>
+        <h3 class="ritual__name">Mechas</h3>
+        <p class="ritual__desc">Mechas mais largas, para um claro que aparece.</p>
+        <div class="ritual__price">a partir de R$ 550</div>
+        <button class="expande__botao ritual__expande" type="button" data-expande aria-expanded="true" aria-controls="servico-mechas-detalhes" data-abrir="Ver detalhes" data-fechar="Fechar"><span class="expande__rotulo">Fechar</span><span class="expande__icone" aria-hidden="true"></span></button>
+        <div class="expande__painel ritual__painel" id="servico-mechas-detalhes"><div class="expande__conteudo"><div class="ritual__detalhes"><div class="ritual__bloco"><h4>O que é</h4><p>Técnicas de clareamento parcial dos fios para criar contraste, luminosidade e dimensão.</p></div><div class="ritual__bloco"><h4>Para quem</h4><p>Iluminar, criar naturalidade, disfarçar brancos ou transformar completamente a base de cor.</p></div><div class="ritual__bloco ritual__bloco--largo"><h4>Possibilidades</h4><ul class="servico__tags" aria-label="Variações"><li>Luzes (mechas bem finas com papel)</li><li>Mechas (mais largas e contrastantes)</li><li>Mechas Californianas</li><li>Invertidas</li><li>Reflexo</li><li>Strong</li></ul></div><div class="ritual__bloco"><h4>Tempo e manutenção</h4><p>1h30 a 4h</p></div><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Mechas." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div>
       </article>
 
-      <article class="ritual">
-        <h3 class="ritual__name">Design de sobrancelha</h3>
-        <p class="ritual__desc">Design e mapeamento facial. O traço certo para o seu rosto.</p>
-        <div class="ritual__price">a partir de R$ 30</div>
+      <article class="ritual" id="servico-reconstrucao" data-expande-caixa>
+        <h3 class="ritual__name">Reconstrução</h3>
+        <p class="ritual__desc">Devolve a força ao fio que passou por química.</p>
+        <div class="ritual__price">a partir de R$ 180</div>
+        <button class="expande__botao ritual__expande" type="button" data-expande aria-expanded="true" aria-controls="servico-reconstrucao-detalhes" data-abrir="Ver detalhes" data-fechar="Fechar"><span class="expande__rotulo">Fechar</span><span class="expande__icone" aria-hidden="true"></span></button>
+        <div class="expande__painel ritual__painel" id="servico-reconstrucao-detalhes"><div class="expande__conteudo"><div class="ritual__detalhes"><div class="ritual__bloco"><h4>O que é</h4><p>Reposição de massa e proteína (queratina, aminoácidos) na fibra capilar.</p></div><div class="ritual__bloco"><h4>Para quem</h4><p>Recuperar fios muito danificados, elásticos, que esticam e quebram (sinal de falta de massa/proteína).</p></div><div class="ritual__bloco ritual__bloco--largo"><h4>Possibilidades</h4><ul class="servico__tags" aria-label="Variações"><li>Reconstrução simples</li><li>Cauterização Capilar</li><li>Protocolo Prévia (tratamento profissional intensivo)</li></ul></div><div class="ritual__bloco"><h4>Tempo e manutenção</h4><p>60 a 90 min</p></div><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Reconstru%C3%A7%C3%A3o." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div>
       </article>
 
-      <article class="ritual">
+      <article class="ritual" id="servico-manicure" data-expande-caixa>
         <h3 class="ritual__name">Manicure</h3>
         <p class="ritual__desc">Cutilagem e esmaltação. Mãos prontas.</p>
         <div class="ritual__price">R$ 35</div>
+        <button class="expande__botao ritual__expande" type="button" data-expande aria-expanded="true" aria-controls="servico-manicure-detalhes" data-abrir="Ver detalhes" data-fechar="Fechar"><span class="expande__rotulo">Fechar</span><span class="expande__icone" aria-hidden="true"></span></button>
+        <div class="expande__painel ritual__painel" id="servico-manicure-detalhes"><div class="expande__conteudo"><div class="ritual__detalhes"><div class="ritual__bloco"><h4>O que é</h4><p>Cuidado, cutilação e esmaltação das unhas das mãos e/ou dos pés.</p></div><div class="ritual__bloco"><h4>Para quem</h4><p>Manter unhas saudáveis, bem cuidadas e com aparência agradável, prevenindo unhas encravadas e ressecamento.</p></div><div class="ritual__bloco ritual__bloco--largo"><h4>Possibilidades</h4><ul class="servico__tags" aria-label="Variações"><li>Manicure</li><li>Pedicure</li><li>Combo Manicure e Pedicure</li><li>Francesinha</li><li>Esmaltação em gel (maior durabilidade)</li><li>Spa das mãos/pés</li><li>Versão masculina</li><li>Apenas esmaltação</li></ul></div><div class="ritual__bloco"><h4>Tempo e manutenção</h4><p>30 min a 2h (combo)</p></div><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Manicure." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div>
       </article>
 
-      <article class="ritual">
-        <h3 class="ritual__name">Pedicure</h3>
-        <p class="ritual__desc">Cutilagem e esmaltação. Pés leves.</p>
-        <div class="ritual__price">a partir de R$ 37</div>
-      </article>
-
-      <article class="ritual">
+      <article class="ritual" id="servico-manicure-e-pedicure" data-expande-caixa>
         <h3 class="ritual__name">Manicure e pedicure</h3>
         <p class="ritual__desc">Mãos e pés no mesmo horário.</p>
         <div class="ritual__price">a partir de R$ 68</div>
+        <button class="expande__botao ritual__expande" type="button" data-expande aria-expanded="true" aria-controls="servico-manicure-e-pedicure-detalhes" data-abrir="Ver detalhes" data-fechar="Fechar"><span class="expande__rotulo">Fechar</span><span class="expande__icone" aria-hidden="true"></span></button>
+        <div class="expande__painel ritual__painel" id="servico-manicure-e-pedicure-detalhes"><div class="expande__conteudo"><div class="ritual__detalhes"><div class="ritual__bloco"><h4>O que é</h4><p>Cuidado, cutilação e esmaltação das unhas das mãos e/ou dos pés.</p></div><div class="ritual__bloco"><h4>Para quem</h4><p>Manter unhas saudáveis, bem cuidadas e com aparência agradável, prevenindo unhas encravadas e ressecamento.</p></div><div class="ritual__bloco ritual__bloco--largo"><h4>Possibilidades</h4><ul class="servico__tags" aria-label="Variações"><li>Manicure</li><li>Pedicure</li><li>Combo Manicure e Pedicure</li><li>Francesinha</li><li>Esmaltação em gel (maior durabilidade)</li><li>Spa das mãos/pés</li><li>Versão masculina</li><li>Apenas esmaltação</li></ul></div><div class="ritual__bloco"><h4>Tempo e manutenção</h4><p>30 min a 2h (combo)</p></div><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Manicure%20e%20pedicure." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div>
       </article>
 
-      <article class="ritual">
+      <article class="ritual" id="servico-pedicure" data-expande-caixa>
+        <h3 class="ritual__name">Pedicure</h3>
+        <p class="ritual__desc">Cutilagem e esmaltação. Pés leves.</p>
+        <div class="ritual__price">a partir de R$ 37</div>
+        <button class="expande__botao ritual__expande" type="button" data-expande aria-expanded="true" aria-controls="servico-pedicure-detalhes" data-abrir="Ver detalhes" data-fechar="Fechar"><span class="expande__rotulo">Fechar</span><span class="expande__icone" aria-hidden="true"></span></button>
+        <div class="expande__painel ritual__painel" id="servico-pedicure-detalhes"><div class="expande__conteudo"><div class="ritual__detalhes"><div class="ritual__bloco"><h4>O que é</h4><p>Cuidado, cutilação e esmaltação das unhas das mãos e/ou dos pés.</p></div><div class="ritual__bloco"><h4>Para quem</h4><p>Manter unhas saudáveis, bem cuidadas e com aparência agradável, prevenindo unhas encravadas e ressecamento.</p></div><div class="ritual__bloco ritual__bloco--largo"><h4>Possibilidades</h4><ul class="servico__tags" aria-label="Variações"><li>Manicure</li><li>Pedicure</li><li>Combo Manicure e Pedicure</li><li>Francesinha</li><li>Esmaltação em gel (maior durabilidade)</li><li>Spa das mãos/pés</li><li>Versão masculina</li><li>Apenas esmaltação</li></ul></div><div class="ritual__bloco"><h4>Tempo e manutenção</h4><p>30 min a 2h (combo)</p></div><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Pedicure." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div>
+      </article>
+
+      <article class="ritual" id="servico-design-de-sobrancelha" data-expande-caixa>
+        <h3 class="ritual__name">Design de sobrancelha</h3>
+        <p class="ritual__desc">Design e mapeamento facial. O traço certo para o seu rosto.</p>
+        <div class="ritual__price">a partir de R$ 30</div>
+        <button class="expande__botao ritual__expande" type="button" data-expande aria-expanded="true" aria-controls="servico-design-de-sobrancelha-detalhes" data-abrir="Ver detalhes" data-fechar="Fechar"><span class="expande__rotulo">Fechar</span><span class="expande__icone" aria-hidden="true"></span></button>
+        <div class="expande__painel ritual__painel" id="servico-design-de-sobrancelha-detalhes"><div class="expande__conteudo"><div class="ritual__detalhes"><div class="ritual__bloco"><h4>O que é</h4><p>Modelagem das sobrancelhas para harmonizar com o rosto (visagismo).</p></div><div class="ritual__bloco"><h4>Para quem</h4><p>Valorizar o olhar, corrigir assimetrias e emoldurar o rosto.</p></div><div class="ritual__bloco ritual__bloco--largo"><h4>Possibilidades</h4><ul class="servico__tags" aria-label="Variações"><li>Design com pinça</li><li>Cera</li><li>Linha (mais preciso e sem dor)</li><li>Com henna (preenche e define)</li><li>Com tintura</li></ul></div><div class="ritual__bloco"><h4>Tempo e manutenção</h4><p>30 min · Manutenção a cada 15 a 30 dias</p></div><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Design%20de%20sobrancelha." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div>
+      </article>
+
+      <article class="ritual" id="servico-maquiagem" data-expande-caixa>
+        <h3 class="ritual__name">Maquiagem</h3>
+        <p class="ritual__desc">Pele real, traço editorial. Para o dia ou para a noite.</p>
+        <div class="ritual__price">a partir de R$ 150</div>
+        <button class="expande__botao ritual__expande" type="button" data-expande aria-expanded="true" aria-controls="servico-maquiagem-detalhes" data-abrir="Ver detalhes" data-fechar="Fechar"><span class="expande__rotulo">Fechar</span><span class="expande__icone" aria-hidden="true"></span></button>
+        <div class="expande__painel ritual__painel" id="servico-maquiagem-detalhes"><div class="expande__conteudo"><div class="ritual__detalhes"><div class="ritual__bloco"><h4>O que é</h4><p>Maquiagem profissional para eventos, ensaios e ocasiões especiais.</p></div><div class="ritual__bloco"><h4>Para quem</h4><p>Valorizar os traços, harmonizar o visual com a ocasião e garantir durabilidade da make.</p></div><div class="ritual__bloco ritual__bloco--largo"><h4>Possibilidades</h4><ul class="servico__tags" aria-label="Variações"><li>Social</li><li>Noiva</li><li>Madrinha</li><li>Debutante</li><li>Com ou sem cílios postiços</li></ul></div><div class="ritual__bloco"><h4>Tempo e manutenção</h4><p>60 a 90 min</p></div><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Maquiagem." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div>
+      </article>
+
+      <article class="ritual" id="servico-depilacao-a-laser" data-expande-caixa>
         <h3 class="ritual__name">Depilação a laser</h3>
         <p class="ritual__desc">Fiber Evo, laser diodo de 2ª geração. Sessão a sessão, sem pressa.</p>
         <div class="ritual__price">a partir de R$ 100</div>
+        <button class="expande__botao ritual__expande" type="button" data-expande aria-expanded="true" aria-controls="servico-depilacao-a-laser-detalhes" data-abrir="Ver detalhes" data-fechar="Fechar"><span class="expande__rotulo">Fechar</span><span class="expande__icone" aria-hidden="true"></span></button>
+        <div class="expande__painel ritual__painel" id="servico-depilacao-a-laser-detalhes"><div class="expande__conteudo"><div class="ritual__detalhes"><div class="ritual__bloco"><h4>O que é</h4><p>Redução progressiva e duradoura dos pelos com laser de diodo.</p></div><div class="ritual__bloco"><h4>Para quem</h4><p>Reduzir de forma duradoura o crescimento dos pelos, com menos encravamento e irritação que a cera.</p></div><div class="ritual__bloco ritual__bloco--largo"><h4>Possibilidades</h4><ul class="servico__tags" aria-label="Variações"><li>Fiber Evo (laser de diodo 2ª geração, mais rápido e potente)</li><li>Light Sheer</li></ul></div><div class="ritual__bloco"><h4>Tempo e manutenção</h4><p>15 a 60 min por região · Protocolo geralmente de 8 a 10 sessões, a cada 30 a 45 dias</p></div><a class="servico__agendar" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%3A%20Depila%C3%A7%C3%A3o%20a%20laser." target="_blank" rel="noopener">Agendar pelo WhatsApp →</a></div></div></div>
       </article>
+
     </div>
+    
+<!-- AVULSOS:FIM -->
 
     <p class="planos__note">
       Alguns serviços (balaiagem, unhas em gel, fibra ou acrigel, extensão de cílios, micropigmentação de sobrancelha,
@@ -1679,23 +1973,35 @@
 
     <!-- Pacotes reais de noiva -->
     <div class="ocasiao__pacotes">
-      <article class="pacote-noiva">
+      <article class="pacote-noiva" id="pacote-tulipa" data-expande-caixa>
         <h3 class="pacote-noiva__name">Tulipa</h3>
         <p>Prévias, penteado, maquiagem, mãos e pés</p>
         <span class="pacote-noiva__price">A partir de R$ 1.497</span>
         <a href="https://wa.me/5512996556111?text=Oi.%20Quero%20saber%20mais%20sobre%20o%20Pacote%20Tulipa." class="pacote-noiva__link">Saiba mais →</a>
+        <!-- PACOTE-HOME:tulipa:INICIO -->
+        <button class="expande__botao pacote-noiva__expande" type="button" data-expande aria-expanded="true" aria-controls="pacote-tulipa-detalhes" data-abrir="O que inclui" data-fechar="Fechar"><span class="expande__rotulo">Fechar</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="pacote-tulipa-detalhes"><div class="expande__conteudo"><ul class="pacote-noiva__itens"><li>Prévia de penteado</li><li>Prévia de maquiagem</li><li>Penteado</li><li>Maquiagem</li><li>Pedicure e manicure</li><li>Banho de ducha</li><li>Assessoria para vestir</li></ul><a class="pacote-noiva__pagina" href="noivas/#pacotes">Ver o Dia da Noiva completo →</a></div></div>
+        
+<!-- PACOTE-HOME:tulipa:FIM -->
       </article>
-      <article class="pacote-noiva">
+      <article class="pacote-noiva" id="pacote-jasmin" data-expande-caixa>
         <h3 class="pacote-noiva__name">Jasmin</h3>
         <p>Tulipa + sobrancelha, hidromassagem e coffee</p>
         <span class="pacote-noiva__price">A partir de R$ 1.797</span>
         <a href="https://wa.me/5512996556111?text=Oi.%20Quero%20saber%20mais%20sobre%20o%20Pacote%20Jasmin." class="pacote-noiva__link">Saiba mais →</a>
+        <!-- PACOTE-HOME:jasmin:INICIO -->
+        <button class="expande__botao pacote-noiva__expande" type="button" data-expande aria-expanded="true" aria-controls="pacote-jasmin-detalhes" data-abrir="O que inclui" data-fechar="Fechar"><span class="expande__rotulo">Fechar</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="pacote-jasmin-detalhes"><div class="expande__conteudo"><ul class="pacote-noiva__itens"><li>Prévia de penteado</li><li>Prévia de maquiagem</li><li>Penteado</li><li>Maquiagem</li><li>Pedicure e manicure</li><li>Design de sobrancelhas</li><li>Banho de ducha</li><li>Hidromassagem</li><li>Assessoria para vestir</li><li>Coffee moment</li></ul><a class="pacote-noiva__pagina" href="noivas/#pacotes">Ver o Dia da Noiva completo →</a></div></div>
+        
+<!-- PACOTE-HOME:jasmin:FIM -->
       </article>
-      <article class="pacote-noiva pacote-noiva--featured">
+      <article class="pacote-noiva pacote-noiva--featured" id="pacote-lotus" data-expande-caixa>
         <h3 class="pacote-noiva__name">Lótus</h3>
         <p>A experiência completa de SPA, com espumante</p>
         <span class="pacote-noiva__price">A partir de R$ 1.997</span>
         <a href="https://wa.me/5512996556111?text=Oi.%20Quero%20saber%20mais%20sobre%20o%20Pacote%20L%C3%B3tus." class="pacote-noiva__link">Saiba mais →</a>
+        <!-- PACOTE-HOME:lotus:INICIO -->
+        <button class="expande__botao pacote-noiva__expande" type="button" data-expande aria-expanded="true" aria-controls="pacote-lotus-detalhes" data-abrir="O que inclui" data-fechar="Fechar"><span class="expande__rotulo">Fechar</span><span class="expande__icone" aria-hidden="true"></span></button><div class="expande__painel" id="pacote-lotus-detalhes"><div class="expande__conteudo"><ul class="pacote-noiva__itens"><li>Prévia de penteado</li><li>Prévia de maquiagem</li><li>Penteado</li><li>Maquiagem</li><li>Unha decorada</li><li>SPA dos pés</li><li>Sobrancelha de henna</li><li>Banho de ducha</li><li>Hidromassagem</li><li>Massagem relaxante</li><li>Limpeza de pele</li><li>Assessoria para vestir</li><li>Coffee moment</li><li>Espumante</li></ul><a class="pacote-noiva__pagina" href="noivas/#pacotes">Ver o Dia da Noiva completo →</a></div></div>
+        
+<!-- PACOTE-HOME:lotus:FIM -->
       </article>
     </div>
   </section>
@@ -1826,6 +2132,39 @@
     }, { threshold: 0.12 });
 
     revealEls.forEach(el => io.observe(el));
+
+    /* ============================================
+       EXPANSÍVEIS — cards que abrem com detalhes
+       ============================================ */
+    const menosMovimento = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.querySelectorAll('[data-expande]').forEach(botao => {
+      const painel = document.getElementById(botao.getAttribute('aria-controls'));
+      const caixa = botao.closest('[data-expande-caixa]');
+      const rotulo = botao.querySelector('.expande__rotulo');
+      const marcar = (aberto, rolar) => {
+        botao.setAttribute('aria-expanded', String(aberto));
+        caixa.classList.toggle('expande--aberto', aberto);
+        painel.classList.toggle('expande__painel--aberto', aberto);
+        painel.inert = !aberto;
+        if (rotulo) rotulo.textContent = aberto ? botao.dataset.fechar : botao.dataset.abrir;
+        if (aberto && rolar && caixa.getBoundingClientRect().top < 80) {
+          caixa.scrollIntoView({ behavior: menosMovimento ? 'auto' : 'smooth', block: 'start' });
+        }
+      };
+      marcar(false);
+      botao.addEventListener('click', () => marcar(botao.getAttribute('aria-expanded') !== 'true', true));
+      caixa.abrirDetalhes = () => marcar(true);
+    });
+    /* Link direto (#cabelo, #servico-escova...) já abre o card certo */
+    const abrirPeloEndereco = () => {
+      const alvo = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      if (alvo && alvo.abrirDetalhes) {
+        alvo.abrirDetalhes();
+        setTimeout(() => alvo.scrollIntoView({ block: 'start' }), 60);
+      }
+    };
+    abrirPeloEndereco();
+    window.addEventListener('hashchange', abrirPeloEndereco);
 
     /* ============================================
        VÍDEO DO LUGAR — garante mudo + autoplay
