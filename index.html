@@ -429,22 +429,19 @@
       color: var(--tinta);
       line-height: 1.55;
     }
-    .card-loja__mapa {
+    /* Status "Aberto agora · fecha às 20h" (calculado no fuso de São Paulo; sem JS não aparece) */
+    .onde-status {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      min-height: 44px;
-      margin-top: 2px;
       font-size: 15px;
-      font-weight: 500;
+      font-weight: 600;
       color: var(--petroleo-esc);
-      text-decoration: underline;
-      text-decoration-thickness: 1px;
-      text-underline-offset: 4px;
     }
-    .card-loja__mapa:hover { text-decoration-thickness: 2px; }
+    .onde-status::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+    .onde-status--fechado { color: var(--nevoa-texto); }
+    .onde-acoes { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 4px; }
     .card-loja__rotulo .icone { width: 16px; height: 16px; color: var(--petroleo-esc); }
-    .card-loja__mapa .icone { width: 18px; height: 18px; }
     .card-loja__group p.muted {
       color: var(--nevoa-texto);
       font-size: 15px;
@@ -490,13 +487,38 @@
       color: var(--tinta);
       margin-top: 16px;
     }
+    .onde-midia {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
     .lugar__video {
       position: relative;
       overflow: hidden;
       width: 100%;
-      height: 480px;
+      height: 400px;
       background: var(--areia);
     }
+    /* Mapa: capa leve; o iframe do Google (com cookies de terceiros) só entra quando a cliente pede */
+    .mapa { height: 400px; background: var(--branco-cru); border: 1px solid rgba(42, 37, 32, 0.1); }
+    .mapa__capa {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 24px;
+      text-align: center;
+    }
+    .mapa__capa > .icone { width: 32px; height: 32px; color: var(--petroleo-esc); }
+    .mapa__texto { font-size: 16px; line-height: 1.5; }
+    .mapa__nota { font-size: var(--t-apoio); color: var(--nevoa-texto); max-width: 260px; }
+    .mapa__iframe { display: block; width: 100%; height: 100%; border: 0; }
+    html:not(.js) .mapa__botao,
+    html.js .mapa__link { display: none; }
     .lugar__video video {
       width: 100%;
       height: 100%;
@@ -653,6 +675,18 @@
     }
     .quem__photo:hover img { transform: scale(1.03); }
     .quem__photos:focus-visible { outline-offset: 6px; }
+    /* Pontos do carrossel (só no celular) */
+    .quem__pontos { display: none; justify-content: center; margin-top: 8px; }
+    .quem__ponto { width: 44px; height: 44px; display: grid; place-items: center; }
+    .quem__ponto::before {
+      content: '';
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 1.5px solid var(--petroleo-esc);
+      transition: background-color 0.2s ease;
+    }
+    .quem__ponto[aria-current="true"]::before { background: var(--petroleo-esc); }
     .quem__line {
       font-family: var(--font-serif);
       font-style: italic;
@@ -700,7 +734,14 @@
       .hero__acoes .btn--texto { align-self: flex-start; }
 
       .lugar__header { grid-template-columns: 1fr; gap: 32px; }
-      .lugar__video { height: 220px; }
+      .onde-midia { grid-template-columns: 1fr; gap: 12px; }
+      .lugar__video { height: 200px; }
+      .mapa { height: auto; }
+      .mapa__capa { flex-direction: row; flex-wrap: wrap; justify-content: flex-start; text-align: left; gap: 8px 14px; padding: 18px; }
+      .mapa__texto { display: none; } /* no celular o endereço já está no cartão logo acima */
+      .mapa__nota { max-width: none; flex-basis: 100%; }
+      .mapa:has(iframe) { height: 280px; }
+      .onde-acoes .btn { flex: 1 1 100%; }
       .lugar__title-block { margin-bottom: 32px; }
       .card-loja__footer { display: none; }
 
@@ -753,7 +794,8 @@
         scrollbar-width: none;
       }
       .quem__photo { scroll-snap-align: start; }
-      .quem__line { margin-top: 40px; }
+      html.js .quem__pontos { display: flex; }
+      .quem__line { margin-top: 24px; }
 
     }
   </style>
@@ -914,6 +956,12 @@
       </div>
     </div>
 
+    <div class="quem__pontos" role="group" aria-label="Escolher foto da equipe">
+      <button class="quem__ponto" type="button" aria-label="Foto 1 de 3" aria-current="true"></button>
+      <button class="quem__ponto" type="button" aria-label="Foto 2 de 3" aria-current="false"></button>
+      <button class="quem__ponto" type="button" aria-label="Foto 3 de 3" aria-current="false"></button>
+    </div>
+
     <p class="quem__line">A gente se lembra de você.</p>
   </section>
 
@@ -937,10 +985,11 @@
         </div>
 
         <div class="card-loja__body">
+          <p class="onde-status" data-status hidden></p>
+
           <div class="card-loja__group">
             <p class="card-loja__rotulo"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg>Endereço</p>
             <p>R. Conselheiro Antônio Prado, 290<br>Parque Itamarati, Jacareí · SP</p>
-            <a class="card-loja__mapa" href="https://www.google.com/maps/search/?api=1&amp;query=R.%20Conselheiro%20Ant%C3%B4nio%20Prado%2C%20290%2C%20Parque%20Itamarati%2C%20Jacare%C3%AD%20-%20SP" target="_blank" rel="noopener">Ver no mapa<span class="so-leitor"> (abre o Google Maps)</span></a>
           </div>
 
           <div class="card-loja__divider"></div>
@@ -952,27 +1001,36 @@
             <p class="muted">Atendemos com hora marcada.</p>
           </div>
 
-          <div class="card-loja__divider"></div>
-
-          <div class="card-loja__group">
-            <p class="card-loja__rotulo"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg>Conversar</p>
-            <a class="card-loja__mapa" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%20um%20hor%C3%A1rio." target="_blank" rel="noopener">WhatsApp (12) 99655-6111</a>
-          </div>
-
           <!-- ONDE-EXTRAS:INICIO -->
 
 <!-- ONDE-EXTRAS:FIM -->
+
+          <div class="onde-acoes">
+            <a class="btn btn--primario" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%20um%20hor%C3%A1rio." target="_blank" rel="noopener"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg>Chamar no WhatsApp</a>
+            <a class="btn btn--secundario" href="https://www.google.com/maps/dir/?api=1&amp;destination=R.%20Conselheiro%20Ant%C3%B4nio%20Prado%2C%20290%2C%20Parque%20Itamarati%2C%20Jacare%C3%AD%20-%20SP" target="_blank" rel="noopener"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg>Como chegar<span class="so-leitor"> (abre o Google Maps)</span></a>
+          </div>
 
           <span class="card-loja__footer">Espaço de Beleza · SPA de Noivas</span>
         </div>
       </article>
     </div>
 
+    <div class="onde-midia">
+    <div class="mapa" data-mapa>
+      <div class="mapa__capa">
+        <svg class="icone" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg>
+        <p class="mapa__texto">R. Conselheiro Antônio Prado, 290<br>Parque Itamarati, Jacareí · SP</p>
+        <button class="btn btn--secundario mapa__botao" type="button">Mostrar o mapa</button>
+        <a class="btn btn--secundario mapa__link" href="https://www.google.com/maps/search/?api=1&amp;query=R.%20Conselheiro%20Ant%C3%B4nio%20Prado%2C%20290%2C%20Parque%20Itamarati%2C%20Jacare%C3%AD%20-%20SP" target="_blank" rel="noopener">Abrir no Google Maps</a>
+        <p class="mapa__nota">O mapa é do Google e só carrega quando você pedir.</p>
+      </div>
+    </div>
     <div class="lugar__video">
       <!-- Vídeo real do espaço — mudo, em loop, recortado para preencher o quadro -->
       <video muted loop playsinline webkit-playsinline="true" preload="none" poster="assets/img/lugar-capa.webp" aria-label="Vídeo do espaço Nuovi Capelli">
         <source src="assets/video/lugar.mp4" type="video/mp4">
       </video>
+    </div>
     </div>
   </section>
 
@@ -1037,6 +1095,66 @@
     revealEls.forEach(el => io.observe(el));
 
     const menosMovimento = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ============================================
+       ONDE ESTAMOS — status de aberto/fechado (fuso de São Paulo)
+       Terça a sexta 9h–20h · sábado 9h–18h (domingo e segunda fechado)
+       ============================================ */
+    const HORARIO = { 2: [9, 20], 3: [9, 20], 4: [9, 20], 5: [9, 20], 6: [9, 18] };
+    const DIAS = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+    const estadoDoSalao = (dia, minutos) => {
+      const h = HORARIO[dia];
+      if (h && minutos >= h[0] * 60 && minutos < h[1] * 60) return { aberto: true, texto: `Aberto agora · fecha às ${h[1]}h` };
+      for (let i = 0; i < 7; i++) {
+        const d = (dia + i) % 7, hh = HORARIO[d];
+        if (!hh || (i === 0 && minutos >= hh[0] * 60)) continue;
+        return { aberto: false, texto: `Fechado · abre ${i === 0 ? 'hoje' : i === 1 ? 'amanhã' : DIAS[d]} às ${hh[0]}h` };
+      }
+    };
+    const status = document.querySelector('[data-status]');
+    if (status) {
+      const atualizarStatus = () => {
+        const p = Object.fromEntries(new Intl.DateTimeFormat('en-US', { timeZone: 'America/Sao_Paulo', weekday: 'short', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' })
+          .formatToParts(new Date()).map(x => [x.type, x.value]));
+        const e = estadoDoSalao({ Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 }[p.weekday], Number(p.hour) * 60 + Number(p.minute));
+        status.textContent = e.texto;
+        status.classList.toggle('onde-status--fechado', !e.aberto);
+        status.hidden = false;
+      };
+      atualizarStatus();
+      setInterval(atualizarStatus, 60000);
+      status.estadoDoSalao = estadoDoSalao; /* para testes */
+    }
+
+    /* Mapa do Google: só carrega quando a cliente toca em "Mostrar o mapa" */
+    const mapa = document.querySelector('[data-mapa]');
+    mapa?.querySelector('.mapa__botao').addEventListener('click', () => {
+      const quadro = document.createElement('iframe');
+      quadro.className = 'mapa__iframe';
+      quadro.title = 'Mapa: Nuovi Capelli, R. Conselheiro Antônio Prado, 290, Parque Itamarati, Jacareí';
+      quadro.src = 'https://maps.google.com/maps?q=' + encodeURIComponent('R. Conselheiro Antônio Prado, 290, Parque Itamarati, Jacareí - SP') + '&z=16&output=embed';
+      quadro.referrerPolicy = 'no-referrer-when-downgrade';
+      mapa.replaceChildren(quadro);
+      quadro.focus();
+    });
+
+    /* ============================================
+       QUEM CUIDA — pontos do carrossel no celular
+       ============================================ */
+    const carrossel = document.querySelector('.quem__photos');
+    const pontos = [...document.querySelectorAll('.quem__ponto')];
+    if (carrossel && pontos.length) {
+      const fotos = [...carrossel.children];
+      const passo = () => fotos[1].getBoundingClientRect().left - fotos[0].getBoundingClientRect().left;
+      const marcarPonto = () => {
+        const i = Math.min(fotos.length - 1, Math.round(carrossel.scrollLeft / passo()));
+        pontos.forEach((p, j) => p.setAttribute('aria-current', String(j === i)));
+      };
+      carrossel.addEventListener('scroll', () => requestAnimationFrame(marcarPonto), { passive: true });
+      pontos.forEach((p, i) => p.addEventListener('click', () => {
+        carrossel.scrollTo({ left: i * passo(), behavior: menosMovimento ? 'auto' : 'smooth' });
+      }));
+    }
 
     /* ============================================
        VÍDEO DO LUGAR — mudo, em loop; só carrega e toca
