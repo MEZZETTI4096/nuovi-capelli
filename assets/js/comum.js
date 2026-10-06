@@ -13,7 +13,7 @@
   const ajustarTom = () => {
     const claro = !topoEscuro || topoEscuro.getBoundingClientRect().bottom <= cab.offsetHeight;
     cab.classList.toggle('cab--claro', claro);
-    /* No computador, o botão fixo de agendar só aparece depois do topo (lá o cabeçalho já tem "Agendar") */
+    /* O botão (computador) e a barra (celular) de agendar só aparecem depois do topo, que já tem o botão de agendar */
     if (agendar) agendar.classList.toggle('agendar-fixo--no-topo', !claro);
   };
   ajustarTom();

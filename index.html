@@ -218,59 +218,23 @@
     }
     .hero__bottom {
       display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
       opacity: 0;
-      animation: fadeUp 1s ease 1s forwards;
+      animation: fadeUp 1s ease 0.8s forwards;
     }
-    .hero__scroll {
-      font-size: var(--t-rotulo);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--branco-cru);
+    .hero__acoes {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
-      gap: 16px;
+      gap: 12px 28px;
     }
-    .hero__scroll::before {
-      content: '';
-      display: inline-block;
-      width: 32px;
-      height: 1px;
-      background: rgba(232, 221, 203, 0.7);
-    }
-    .hero .btn-primary {
-      background: var(--linho);
-      color: var(--petroleo-esc);
-    }
-    .hero .btn-primary:hover { background: var(--branco-cru); }
-
-    .btn-primary {
-      display: inline-block;
-      padding: 18px 36px;
-      background: var(--tinta);
-      color: var(--linho);
-      font-size: 13px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      border-radius: var(--radius);
-      transition: transform 0.25s ease, opacity 0.25s ease;
-    }
-    .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
-
-    .btn-ghost {
-      display: inline-block;
-      padding: 18px 36px;
-      background: transparent;
+    .hero__confianca {
+      font-size: var(--t-apoio);
       color: var(--branco-cru);
-      border: 1px solid var(--branco-cru);
-      font-size: 13px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      border-radius: var(--radius);
-      transition: background 0.25s ease, color 0.25s ease;
     }
-    .btn-ghost:hover { background: var(--branco-cru); color: var(--petroleo-esc); }
+    /* Botões: .btn, .btn--primario (terracota), .btn--secundario e .btn--texto em assets/css/comum.css */
 
     /* =========================================
        SEÇÃO GENÉRICA
@@ -281,6 +245,7 @@
     .eyebrow {
       font-family: var(--font-sans);
       font-size: var(--t-rotulo);
+      font-weight: 600;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--nevoa-texto);
@@ -320,10 +285,10 @@
     .visao__text {
       font-family: var(--font-sans);
       font-weight: 300;
-      font-size: clamp(15px, 1.1vw, 16px);
+      font-size: 16px;
       line-height: 1.65;
       color: var(--tinta);
-      max-width: 620px;
+      max-width: 60ch; /* cerca de 60 caracteres por linha */
       margin: 0 auto 16px;
     }
     .visao__signature {
@@ -585,11 +550,11 @@
     .bloco-servico:hover { border-color: var(--petroleo-esc); transform: translateY(-3px); }
     .bloco-servico > .icone { width: 28px; height: 28px; color: var(--petroleo-esc); margin-bottom: 10px; }
     .bloco-servico__nome { font-family: var(--font-logo); font-weight: 500; font-size: 22px; line-height: 1.2; }
-    .bloco-servico__desc { font-size: 15px; line-height: 1.5; flex: 1; }
+    .bloco-servico__desc { font-size: 16px; line-height: 1.5; flex: 1; }
     .bloco-servico__preco {
       margin-top: 10px;
-      font-size: var(--t-apoio);
-      font-weight: 500;
+      font-size: 15px;
+      font-weight: 600;
       color: var(--petroleo-esc);
       font-variant-numeric: tabular-nums;
     }
@@ -603,20 +568,7 @@
       transition: transform 0.25s var(--ease-saida);
     }
     .bloco-servico:hover .bloco-servico__seta { transform: translateX(4px); }
-    .link-seta {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      min-height: 44px;
-      margin-top: 28px;
-      font-size: 16px;
-      font-weight: 500;
-      color: var(--petroleo-esc);
-      text-decoration: underline;
-      text-decoration-thickness: 1px;
-      text-underline-offset: 5px;
-    }
-    .link-seta .icone { width: 18px; height: 18px; }
+    .servicos-home__todos { margin-top: 28px; }
 
     /* =========================================
            /* =========================================
@@ -662,10 +614,6 @@
       flex-wrap: wrap;
       gap: 16px;
       align-items: center;
-    }
-    .ocasiao__cta {
-      background: var(--areia);
-      color: var(--tinta);
     }
 
     .ocasiao__photo {
@@ -745,10 +693,11 @@
         --margin-x: 24px;
         --section-y: 64px;
       }
-      .hero { min-height: calc(100svh - var(--barra-h)); } /* a barra de agendar não cobre o fim do hero */
+      .hero { min-height: 85svh; } /* o primeiro bloco de serviços já aparece na dobra; a barra fixa só vem depois do hero */
       .hero__top { display: none; } /* repete o subtítulo; no celular quebrava em duas linhas */
       .hero__logo { width: clamp(220px, 70vw, 360px); }
-      .hero__bottom { flex-direction: column; align-items: flex-start; gap: 28px; }
+      .hero__acoes { flex-direction: column; align-items: stretch; width: 100%; gap: 8px; }
+      .hero__acoes .btn--texto { align-self: flex-start; }
 
       .lugar__header { grid-template-columns: 1fr; gap: 32px; }
       .lugar__video { height: 220px; }
@@ -783,6 +732,8 @@
       .card-loja__face { gap: 20px; }
       .card-loja__monogram { position: static; }
       .visao { padding: 56px 24px; }
+      .visao__inner { text-align: left; } /* texto centralizado em muitas linhas cansa no celular */
+      .visao__text { margin-left: 0; }
       .visao__signature::before,
       .visao__signature::after { display: none; }
 
@@ -877,8 +828,11 @@
     </div>
 
     <div class="hero__bottom">
-      <span class="hero__scroll">Role para conhecer</span>
-      <a href="https://wa.me/5512996556111?text=Oi.%20Quero%20reservar%20um%20hor%C3%A1rio." class="btn-primary" target="_blank" rel="noopener">Reservar seu tempo</a>
+      <div class="hero__acoes">
+        <a class="btn btn--primario" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pelo%20site%20e%20quero%20agendar%20um%20hor%C3%A1rio." target="_blank" rel="noopener"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg>Agendar pelo WhatsApp</a>
+        <a class="btn btn--texto" href="servicos/">Ver serviços e preços</a>
+      </div>
+      <p class="hero__confianca">Atendimento com hora marcada · Jacareí, SP</p>
     </div>
   </header>
 
@@ -920,7 +874,7 @@
 <li><a class="bloco-servico" href="noivas/"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-flower-2"/></svg><span class="bloco-servico__nome">Noivas</span><span class="bloco-servico__desc">O Dia da Noiva, com prévias, madrinhas e cortejo.</span><span class="bloco-servico__preco">Pacotes Tulipa, Jasmin e Lótus</span><svg class="icone bloco-servico__seta" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li>
 </ul>
 <!-- SERVICOS-RESUMO:FIM -->
-    <a class="link-seta" href="servicos/">Ver todos os serviços e preços<svg class="icone" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+    <a class="btn btn--secundario servicos-home__todos" href="servicos/">Ver todos os serviços e preços<svg class="icone" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
   </section>
 
   <!-- ============ A OCASIÃO — destaque Noivas ============ -->
@@ -933,7 +887,7 @@
           A Nuovi cuida da semana antes, da noite antes e da manhã que importa.
         </p>
         <div class="ocasiao__actions">
-          <a href="noivas/" class="btn-primary ocasiao__cta">Conhecer o Dia da Noiva</a>
+          <a href="noivas/" class="btn btn--primario">Conhecer o Dia da Noiva</a>
         </div>
       </div>
 
