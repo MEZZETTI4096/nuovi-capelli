@@ -698,6 +698,69 @@
     }
 
     /* =========================================
+       SEÇÃO: DEPOIMENTOS, PERGUNTAS E NOMES DA EQUIPE
+       (gerados da planilha; sem dado, não aparecem)
+       ========================================= */
+    .quem__nomes {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 32px;
+      margin-top: 32px;
+    }
+    .quem__nome { display: block; font-family: var(--font-logo); font-weight: 500; font-size: 18px; }
+    .quem__funcao { display: block; font-size: var(--t-apoio); color: var(--nevoa-texto); }
+    .depoimentos { background: var(--branco-cru); }
+    .depoimentos__lista {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .depoimento {
+      margin: 0;
+      padding: 28px 24px;
+      background: var(--linho);
+      border-radius: var(--radius);
+    }
+    .depoimento blockquote p {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 19px;
+      line-height: 1.45;
+    }
+    .depoimento figcaption { margin-top: 16px; font-size: var(--t-apoio); font-weight: 600; color: var(--nevoa-texto); }
+    .faq-home { background: var(--branco-cru); }
+    .faq__lista { max-width: 760px; }
+    .faq__item { border-bottom: 1px solid rgba(42, 37, 32, 0.14); }
+    .faq__item summary {
+      list-style: none;
+      cursor: pointer;
+      position: relative;
+      min-height: 44px;
+      padding: 18px 40px 18px 0;
+      font-family: var(--font-logo);
+      font-weight: 500;
+      font-size: 18px;
+    }
+    .faq__item summary::-webkit-details-marker { display: none; }
+    .faq__item summary::after {
+      content: '';
+      position: absolute;
+      right: 8px;
+      top: 24px;
+      width: 8px;
+      height: 8px;
+      border-right: 1.5px solid var(--petroleo-esc);
+      border-bottom: 1.5px solid var(--petroleo-esc);
+      transform: rotate(45deg);
+      transition: transform 0.3s var(--ease-saida);
+    }
+    .faq__item[open] summary::after { transform: rotate(225deg); }
+    .faq__item p { padding: 0 0 20px; max-width: 62ch; font-size: 16px; line-height: 1.65; }
+
+    /* =========================================
        ANIMAÇÕES
        ========================================= */
     @keyframes fadeUp {
@@ -962,8 +1025,17 @@
       <button class="quem__ponto" type="button" aria-label="Foto 3 de 3" aria-current="false"></button>
     </div>
 
+    <!-- EQUIPE:INICIO -->
+
+<!-- EQUIPE:FIM -->
+
     <p class="quem__line">A gente se lembra de você.</p>
   </section>
+
+  <!-- ============ DEPOIMENTOS — da aba "Depoimentos" da planilha (só autorizados) ============ -->
+  <!-- DEPOIMENTOS:INICIO -->
+
+<!-- DEPOIMENTOS:FIM -->
 
   <!-- ============ ONDE ESTAMOS — endereço, horário, contato e o vídeo do espaço ============ -->
   <section class="lugar reveal" id="onde">
@@ -1033,6 +1105,11 @@
     </div>
     </div>
   </section>
+
+  <!-- ============ PERGUNTAS FREQUENTES — da planilha (só as respondidas) ============ -->
+  <!-- HOME-FAQ:INICIO -->
+<section class="faq-home reveal" id="perguntas" aria-labelledby="perguntas-titulo"><p class="eyebrow">Perguntas frequentes</p><h2 class="section-title" id="perguntas-titulo">Antes de vir.</h2><div class="faq__lista"><details class="faq__item"><summary>Precisa agendar?</summary><p>Sim. Atendemos com hora marcada, para que o seu tempo seja só seu. Agende pelo WhatsApp (12) 99655-6111.</p></details><details class="faq__item"><summary>Como funciona o Clube da Cor?</summary><p>Pacote com 5 colorações para manter a cor sempre em dia.</p></details></div></section>
+<!-- HOME-FAQ:FIM -->
 
   </main>
 
