@@ -246,12 +246,14 @@ main:focus { outline: none; }
 .cab__insta a { gap: 8px; }
 .cab__insta .icone { width: 18px; height: 18px; }
 .cab__insta-longo { display: none; }
-.cab__agendar {
+/* "Meu horário" (o carrinho, com contador) e o WhatsApp por ícone */
+.cab__horario {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   min-height: 44px;
-  padding: 0 20px;
+  padding: 0 18px;
   border-radius: 2px;
   background: var(--terracota);
   color: #FFFFFF;
@@ -259,12 +261,62 @@ main:focus { outline: none; }
   font-weight: 500;
   text-decoration: none;
 }
-.cab--claro .cab__agendar { --foco: var(--petroleo-esc); }
-.cab__agendar .icone { width: 18px; height: 18px; }
+.cab--claro .cab__horario { --foco: var(--petroleo-esc); }
+.cab__horario .icone { width: 18px; height: 18px; }
+.cab__conta {
+  display: inline-grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: #FFFFFF;
+  color: var(--terracota);         /* 4,73:1 */
+  font-size: var(--t-rotulo);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.cab__conta[hidden] { display: none; }
+.cab__whats {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-left: -12px;
+  border-radius: 50%;
+  color: inherit;
+  transition: background-color 0.2s ease;
+}
+.cab__whats:hover { background: rgba(245, 239, 228, 0.14); }
+.cab--claro .cab__whats:hover { background: rgba(42, 37, 32, 0.06); }
+.cab__whats .icone { width: 22px; height: 22px; }
 .cab__menu { display: none; }
 
 @media (max-width: 900px) {
-  .cab__agendar { display: none; }
+  /* No celular: logo, "Meu horário" só com ícone e contador, ícone do WhatsApp e Menu, tudo fora do menu */
+  .cab__dentro { gap: 4px; }
+  .cab__logo { font-size: 15px; letter-spacing: 0.06em; }
+  .cab__horario {
+    width: 44px;
+    padding: 0;
+    justify-content: center;
+    background: none;
+    color: inherit;
+  }
+  .cab__horario .icone { width: 22px; height: 22px; }
+  .cab__horario-texto { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .cab__conta {
+    position: absolute;
+    top: 2px;
+    right: 0;
+    min-width: 19px;
+    height: 19px;
+    padding: 0 4px;
+    background: var(--terracota);
+    color: #FFFFFF;
+    font-size: var(--t-rotulo);      /* número no selo: 4,73:1 sobre terracota */
+  }
+  .cab__whats { margin-left: 0; }
   .cab__menu {
     display: inline-flex;
     align-items: center;

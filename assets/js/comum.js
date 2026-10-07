@@ -1,7 +1,45 @@
 /* =========================================================================
-   comum.js — comportamento da casca compartilhada (cabeçalho e menu).
-   Carregado com defer em todas as páginas.
+   comum.js — comportamento da casca compartilhada (cabeçalho, menu e a
+   lista do "Meu horário"). Carregado com defer em todas as páginas:
+   roda depois dos scripts embutidos no fim de cada página.
    ========================================================================= */
+
+/* "Meu horário": a lista de serviços escolhidos, guardada no aparelho e
+   compartilhada entre o cardápio, a página Meu horário e o contador do
+   cabeçalho. Formato: { s: [ids], dia, periodo, obs } — o nome nunca é guardado.
+   Quem grava avisa as outras partes com o evento "nuovi-horario". */
+window.nuoviHorario = (() => {
+  const CHAVE = 'nuovi-horario';
+  const ler = () => {
+    try { return JSON.parse(localStorage.getItem(CHAVE) || '{}') || {}; } catch (e) { return {}; }
+  };
+  const gravar = (dados) => {
+    try { localStorage.setItem(CHAVE, JSON.stringify(dados)); } catch (e) { /* sem armazenamento: segue só com a URL */ }
+    dispatchEvent(new Event('nuovi-horario'));
+  };
+  const ids = () => (Array.isArray(ler().s) ? ler().s : []);
+  return { CHAVE, ler, gravar, ids, contar: () => ids().length };
+})();
+
+/* Contador do "Meu horário" no cabeçalho e o botão fixo ("Montar meu horário" ou "Meu horário (N)") */
+(() => {
+  const atualizar = () => {
+    const n = window.nuoviHorario.contar();
+    document.querySelectorAll('[data-horario-conta]').forEach(el => {
+      el.hidden = !n;
+      el.innerHTML = `${n}<span class="so-leitor"> ${n === 1 ? 'serviço' : 'serviços'}</span>`;
+    });
+    const link = document.querySelector('[data-agendar-link]');
+    if (link) {
+      link.href = n ? link.dataset.hrefHorario : link.dataset.hrefServicos;
+      link.querySelector('[data-agendar-texto]').textContent = n ? `Meu horário (${n})` : 'Montar meu horário';
+    }
+  };
+  atualizar();
+  addEventListener('nuovi-horario', atualizar);
+  addEventListener('storage', (ev) => { if (ev.key === window.nuoviHorario.CHAVE) atualizar(); });
+})();
+
 (() => {
   const cab = document.querySelector('[data-cab]');
   if (!cab) return;
