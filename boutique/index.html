@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boutique Nuovi · Cosmética profissional em Jacareí</title>
+  <meta name="description" content="Boutique Nuovi: Previa e pH Laboratories, cosmética profissional italiana para levar o cuidado do salão para casa. Pedido pelo WhatsApp, em Jacareí, SP.">
+  <link rel="canonical" href="https://mezzetti4096.github.io/nuovi-capelli/boutique/">
+  <meta name="theme-color" content="#3A5757">
+
+  <!-- Open Graph (WhatsApp, Facebook, Instagram) -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Nuovi Capelli">
+  <meta property="og:url" content="https://mezzetti4096.github.io/nuovi-capelli/boutique/">
+  <meta property="og:title" content="Boutique Nuovi · Cosmética profissional italiana">
+  <meta property="og:description" content="Previa e pH Laboratories para levar o cuidado do salão para casa. Pedido pelo WhatsApp.">
+  <meta property="og:image" content="https://mezzetti4096.github.io/nuovi-capelli/og-nuovi.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Nuovi Capelli, espaço de beleza e SPA em Jacareí (SP)">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Boutique Nuovi · Cosmética profissional italiana">
+  <meta name="twitter:description" content="Previa e pH Laboratories para levar o cuidado do salão para casa. Pedido pelo WhatsApp.">
+  <meta name="twitter:image" content="https://mezzetti4096.github.io/nuovi-capelli/og-nuovi.jpg">
+
+  <!-- HEAD-COMUM:INICIO -->
+<link rel="icon" type="image/svg+xml" href="../assets/logo.svg">
+<link rel="icon" type="image/png" href="../assets/logo.png">
+<link rel="apple-touch-icon" href="../assets/logo.png">
+<link rel="preload" href="../assets/fontes/quicksand.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fontes/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fontes/fraunces-italico.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/comum.css">
+<script src="../assets/js/comum.js" defer></script>
+<!-- HEAD-COMUM:FIM -->
+
+  <style>
+    /* =========================================
+       BOUTIQUE NUOVI — vitrine + sacola → pedido pelo WhatsApp
+       Tokens, cabeçalho, rodapé, botões e ícones: assets/css/comum.css
+       Produtos e kits: assets/js/boutique-dados.js
+       ========================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    [hidden] { display: none !important; }
+
+    /* Zoom padrão de 90% no computador, igual às outras páginas */
+    @media (min-width: 901px) { html { zoom: 0.9; } }
+
+    body {
+      font-family: var(--fonte-texto);
+      font-size: var(--t-corpo);
+      line-height: 1.55;
+      color: var(--tinta);
+      background: var(--linho);
+      -webkit-font-smoothing: antialiased;
+    }
+    body.tem-sacola { --barra-h: 88px; } /* o rodapé não fica sob o botão da sacola */
+    a { color: inherit; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+    .faixa { max-width: 1180px; margin: 0 auto; padding: 0 var(--gutter); }
+
+    /* ===== SEÇÃO: TOPO E MARCAS ===== */
+    .topo { padding: calc(var(--cab-h) + 56px) 0 8px; }
+    .topo__rotulo { font-size: var(--t-rotulo); font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--nevoa-texto); }
+    .topo__titulo { margin-top: 10px; font-family: var(--fonte-logo); font-weight: 500; font-size: clamp(36px, 5.5vw, 56px); line-height: 1.08; }
+    .topo__frase {
+      margin-top: 12px;
+      max-width: 34ch;
+      font-family: var(--fonte-serifa);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(20px, 2.4vw, 25px);
+      line-height: 1.35;
+    }
+    .marcas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 28px; max-width: 760px; }
+    .marca {
+      padding: 18px 20px;
+      background: var(--branco-cru);
+      border: 1px solid rgba(42, 37, 32, 0.08);
+      border-radius: 2px;
+    }
+    .marca__nome { font-family: var(--fonte-logo); font-weight: 600; font-size: 19px; }
+    .marca__sub { font-size: var(--t-rotulo); font-weight: 600; color: var(--nevoa-texto); }
+    .marca__texto { margin-top: 6px; font-size: 15px; }
+
+    /* ===== SEÇÃO: FILTROS ===== */
+    .filtros { margin-top: 36px; padding: 20px 0; border-top: 1px solid rgba(42, 37, 32, 0.12); border-bottom: 1px solid rgba(42, 37, 32, 0.12); }
+    .busca { max-width: 440px; }
+    .busca label { display: block; margin-bottom: 6px; font-size: 15px; font-weight: 500; }
+    .busca__campo { position: relative; }
+    .busca__campo .icone { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; color: var(--nevoa-texto); pointer-events: none; }
+    .busca input {
+      width: 100%;
+      min-height: 48px;
+      padding: 0 16px 0 46px;
+      border: 1px solid rgba(42, 37, 32, 0.28);
+      border-radius: 2px;
+      background: var(--branco-cru);
+      color: var(--tinta);
+      font: 400 16px/1.2 var(--fonte-texto);
+    }
+    .grupo-chips { display: flex; align-items: center; gap: 8px 12px; margin-top: 16px; }
+    .grupo-chips__rotulo { flex-shrink: 0; min-width: 96px; font-size: 15px; font-weight: 500; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 40px;
+      padding: 0 14px;
+      border: 1px solid rgba(58, 87, 87, 0.45);
+      border-radius: 999px;
+      background: var(--branco-cru);
+      color: var(--petroleo-esc);
+      font-size: 15px;
+      white-space: nowrap;
+    }
+    .chip:hover { border-color: var(--petroleo-esc); }
+    .chip[aria-pressed="true"] { background: var(--petroleo-esc); border-color: var(--petroleo-esc); color: var(--branco-cru); }
+    .resultado { margin-top: 14px; font-size: 15px; color: var(--nevoa-texto); }
+
+    /* ===== SEÇÃO: KITS ===== */
+    .bloco-titulo { font-family: var(--fonte-logo); font-weight: 500; font-size: clamp(26px, 3.4vw, 34px); line-height: 1.15; }
+    .bloco-lead { margin-top: 6px; font-size: 16px; color: var(--nevoa-texto); }
+    .kits { margin-top: 44px; }
+    .kits__lista {
+      position: relative; /* prende os textos de leitor de tela (position: absolute) dentro da rolagem horizontal */
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .kit {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: 22px;
+      background: var(--branco-cru);
+      border: 1px solid rgba(42, 37, 32, 0.08);
+      border-radius: 2px;
+      box-shadow: 0 18px 40px -26px rgba(42, 37, 32, 0.4);
+    }
+    .selo {
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: var(--petroleo-esc);
+      color: var(--branco-cru);
+      font-size: var(--t-rotulo);
+      font-weight: 600;
+    }
+    .kit__nome { margin-top: 12px; font-family: var(--fonte-logo); font-weight: 500; font-size: 21px; line-height: 1.2; }
+    .kit__chamada { margin-top: 4px; font-family: var(--fonte-serifa); font-style: italic; font-weight: 300; font-size: 18px; }
+    .kit__itens { list-style: none; margin: 14px 0; display: grid; gap: 4px; font-size: 15px; }
+    .kit__itens li { display: flex; gap: 8px; }
+    .kit__itens li::before { content: ''; flex-shrink: 0; width: 6px; height: 6px; margin-top: 9px; border-radius: 50%; background: var(--petroleo); }
+    .kit__para { font-size: var(--t-apoio); color: var(--nevoa-texto); }
+    .kit__rodape { margin-top: auto; padding-top: 16px; }
+
+    /* ===== SEÇÃO: COLEÇÕES E PRODUTOS ===== */
+    .loja-marca { margin-top: 56px; }
+    .loja-marca__sub { margin-top: 2px; font-size: 16px; color: var(--nevoa-texto); }
+    .colecao { margin-top: 32px; }
+    .colecao__titulo { font-family: var(--fonte-logo); font-weight: 600; font-size: 20px; color: var(--petroleo-esc); }
+    .colecao__tema { font-weight: 500; color: var(--tinta); }
+    .colecao__para { margin-top: 2px; font-size: 15px; color: var(--nevoa-texto); }
+    .produtos {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 14px;
+    }
+    .produto {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: var(--branco-cru);
+      border: 1px solid rgba(42, 37, 32, 0.08);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .foto { aspect-ratio: 1 / 1; background: var(--branco-cru); }
+    .foto img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    /* Quadro provisório: marfim com a marca, até a foto real chegar */
+    .foto--quadro {
+      display: grid;
+      place-content: center;
+      gap: 4px;
+      padding: 16px;
+      text-align: center;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.7), transparent 60%),
+        var(--linho);
+      border-bottom: 1px solid rgba(42, 37, 32, 0.06);
+    }
+    .foto__marca { font-family: var(--fonte-logo); font-weight: 600; font-size: 20px; color: var(--petroleo-esc); }
+    .foto__colecao { font-size: var(--t-rotulo); color: var(--nevoa-texto); }
+    .produto__corpo { display: flex; flex-direction: column; flex: 1; padding: 16px 18px 18px; }
+    .produto__marca { font-size: var(--t-rotulo); font-weight: 600; color: var(--nevoa-texto); }
+    .produto__nome { font-family: var(--fonte-logo); font-weight: 500; font-size: 18px; line-height: 1.25; }
+    .produto__tamanho { font-size: var(--t-apoio); color: var(--nevoa-texto); }
+    .produto__legenda { margin-top: 8px; font-size: 15px; line-height: 1.5; }
+    .preco { margin-top: 12px; font-weight: 600; color: var(--petroleo-esc); font-variant-numeric: tabular-nums; }
+    .preco--consulte { font-weight: 500; }
+    .produto__acoes { margin-top: auto; padding-top: 14px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px; }
+    .produto__acoes .btn--primario,
+    .kit__rodape .btn--primario { flex: 1 1 auto; min-height: 44px; padding: 0 16px; font-size: 15px; }
+    .btn-detalhes { min-height: 44px; padding: 0 2px; font-size: 15px; font-weight: 500; color: var(--petroleo-esc); text-decoration: underline; text-underline-offset: 4px; }
+    .vazio { margin-top: 40px; padding: 32px; background: var(--branco-cru); text-align: center; }
+    .vazio p { font-size: 16px; }
+    .vazio .btn { margin-top: 14px; }
+    .loja { padding-bottom: 72px; }
+
+    /* ===== BOTÃO DA SACOLA (fixo) ===== */
+    .sacola-botao {
+      position: fixed;
+      right: 20px;
+      bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+      z-index: 150;
+      display: grid;
+      place-items: center;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--terracota);
+      color: #FFFFFF;
+      box-shadow: 0 10px 28px rgba(42, 37, 32, 0.28);
+      --foco: var(--petroleo-esc);
+    }
+    .sacola-botao .icone { width: 26px; height: 26px; }
+    .sacola-botao__conta {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      min-width: 24px;
+      height: 24px;
+      padding: 0 6px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      background: var(--petroleo-esc);
+      color: var(--branco-cru);
+      font-size: var(--t-rotulo);
+      font-weight: 700;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .pulsa { animation: pulsa 360ms var(--ease-saida); }
+      @keyframes pulsa { 40% { transform: scale(1.14); } }
+    }
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: calc(96px + env(safe-area-inset-bottom, 0px));
+      z-index: 170;
+      transform: translateX(-50%);
+      max-width: calc(100% - 32px);
+      padding: 12px 18px;
+      border-radius: 2px;
+      background: var(--tinta);
+      color: var(--branco-cru);
+      font-size: 15px;
+      box-shadow: 0 10px 28px rgba(42, 37, 32, 0.26);
+    }
+
+    /* ===== JANELAS (detalhe do produto e sacola) — <dialog> nativo ===== */
+    dialog { border: 0; padding: 0; max-width: 100%; color: var(--tinta); background: var(--branco-cru); } /* o navegador limita a largura do <dialog> por padrão */
+    dialog::backdrop { background: rgba(42, 37, 32, 0.5); }
+    .janela__topo { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .janela__fechar { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 4px; font-size: 15px; }
+    .janela__fechar .icone { width: 20px; height: 20px; }
+
+    .detalhe { width: min(880px, calc(100% - 32px)); max-height: calc(100dvh - 48px); margin: auto; border-radius: 4px; overflow-y: auto; }
+    .detalhe__grade { display: grid; grid-template-columns: 1fr 1.1fr; }
+    .detalhe__foto { position: relative; }
+    .detalhe__foto .foto { height: 100%; min-height: 320px; aspect-ratio: auto; }
+    .detalhe__foto .foto__marca { font-size: 28px; }
+    .detalhe__texto { padding: 22px 26px 26px; }
+    .detalhe__nome { margin-top: 4px; font-family: var(--fonte-logo); font-weight: 500; font-size: 26px; line-height: 1.2; }
+    .detalhe__legenda { margin-top: 8px; font-family: var(--fonte-serifa); font-style: italic; font-weight: 300; font-size: 19px; }
+    .detalhe__bloco { margin-top: 16px; }
+    .detalhe__bloco h3 { font-size: var(--t-rotulo); font-weight: 600; color: var(--nevoa-texto); }
+    .detalhe__bloco p, .detalhe__bloco li { font-size: 15px; line-height: 1.6; }
+    .detalhe__bloco ul { list-style: none; display: grid; gap: 2px; }
+    .etiquetas { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+    .etiqueta { padding: 4px 10px; border: 1px solid rgba(58, 87, 87, 0.3); border-radius: 999px; background: var(--linho); color: var(--petroleo-esc); font-size: var(--t-rotulo); }
+    .detalhe__compra { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 20px; }
+    .detalhe__compra .btn--primario { flex: 1 1 200px; }
+    .detalhe__duvida { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 8px; font-size: 15px; font-weight: 500; color: var(--petroleo-esc); }
+    .detalhe__duvida .icone { width: 20px; height: 20px; }
+    .combina { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+    .combina button { min-height: 40px; padding: 0 12px; border: 1px solid rgba(58, 87, 87, 0.45); border-radius: 999px; font-size: 14px; color: var(--petroleo-esc); background: var(--linho); }
+
+    .quantidade { display: inline-flex; align-items: center; border: 1px solid rgba(42, 37, 32, 0.28); border-radius: 999px; }
+    .quantidade button { width: 44px; height: 44px; display: grid; place-items: center; color: var(--petroleo-esc); }
+    .quantidade button:disabled { opacity: 0.35; cursor: default; }
+    .quantidade .icone { width: 18px; height: 18px; }
+    .quantidade output { min-width: 28px; text-align: center; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+    .sacola {
+      width: min(440px, 100%);
+      height: 100dvh;
+      max-height: 100dvh;
+      margin: 0 0 0 auto;
+      overflow-y: auto;
+      padding: 18px 22px calc(22px + env(safe-area-inset-bottom, 0px));
+    }
+    .sacola__titulo { font-family: var(--fonte-logo); font-weight: 500; font-size: 24px; }
+    .sacola__lista { list-style: none; margin-top: 8px; }
+    .sacola__item { display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; padding: 14px 0; border-bottom: 1px solid rgba(42, 37, 32, 0.1); }
+    .sacola__nome { font-family: var(--fonte-logo); font-weight: 500; font-size: 17px; line-height: 1.3; }
+    .sacola__sub { font-size: var(--t-apoio); color: var(--nevoa-texto); }
+    .sacola__preco { font-weight: 600; color: var(--petroleo-esc); text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .sacola__controles { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; }
+    .sacola__remover { min-height: 44px; padding: 0 4px; font-size: 15px; text-decoration: underline; text-underline-offset: 3px; }
+    .sacola__subtotal { display: flex; justify-content: space-between; gap: 12px; margin-top: 16px; font-weight: 600; }
+    .sacola__subtotal dd { color: var(--petroleo-esc); text-align: right; }
+    .sacola__aviso-preco { font-size: var(--t-apoio); color: var(--nevoa-texto); }
+    .sacola__form { display: grid; gap: 14px; margin-top: 20px; }
+    .sacola__form fieldset { border: 0; }
+    .sacola__form label[for],
+    .sacola__form legend { display: block; margin-bottom: 6px; font-size: 15px; font-weight: 500; }
+    .sacola__form label span, .sacola__form legend span { font-weight: 400; color: var(--nevoa-texto); }
+    .sacola__form input[type="text"] {
+      width: 100%;
+      min-height: 48px;
+      padding: 0 14px;
+      border: 1px solid rgba(42, 37, 32, 0.28);
+      border-radius: 2px;
+      background: var(--linho);
+      color: var(--tinta);
+      font: 400 16px/1.2 var(--fonte-texto);
+    }
+    .opcoes { display: flex; flex-wrap: wrap; gap: 8px; }
+    .opcao { position: relative; }
+    .opcao input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+    .opcao span { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border: 1px solid var(--petroleo-esc); border-radius: 999px; color: var(--petroleo-esc); font-size: 15px; cursor: pointer; }
+    .opcao input:checked + span { background: var(--petroleo-esc); color: var(--branco-cru); }
+    .opcao input:focus-visible + span { outline: 2px solid var(--petroleo-esc); outline-offset: 2px; }
+    .sacola__enviar { width: 100%; margin-top: 20px; }
+    .sacola__nota { margin-top: 10px; font-size: var(--t-apoio); color: var(--nevoa-texto); }
+    .sacola__lgpd { margin-top: 6px; font-size: var(--t-rotulo); color: var(--nevoa-texto); }
+    .sacola__enviado { margin-top: 20px; padding: 16px; background: var(--linho); border-radius: 2px; }
+    .sacola__enviado p { font-weight: 500; }
+    .sacola__enviado div { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 10px; }
+    .sacola__vazia { margin-top: 24px; font-size: 16px; }
+    .sacola__vazia .btn { margin-top: 14px; }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .sacola[open] { animation: sacola-entra 280ms var(--ease-saida); }
+      @keyframes sacola-entra { from { transform: translateX(100%); } }
+    }
+
+    /* ===== RESPONSIVO ===== */
+    @media (max-width: 900px) {
+      .topo { padding-top: calc(var(--cab-h) + 36px); }
+      .marcas { grid-template-columns: 1fr; }
+      .grupo-chips { flex-direction: column; align-items: flex-start; }
+      .grupo-chips .chips { flex-wrap: nowrap; overflow-x: auto; max-width: 100%; padding-bottom: 4px; scrollbar-width: none; }
+      .grupo-chips .chips::-webkit-scrollbar { display: none; }
+      .kits__lista { grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: 82%; overflow-x: auto; scroll-snap-type: x mandatory; margin-left: calc(-1 * var(--gutter)); margin-right: calc(-1 * var(--gutter)); padding: 0 var(--gutter) 6px; scroll-padding: 0 var(--gutter); }
+      .kits__lista > li { scroll-snap-align: start; }
+      /* Produto no celular: foto pequena ao lado do texto */
+      .produtos { grid-template-columns: 1fr; gap: 12px; }
+      .produto { display: grid; grid-template-columns: 104px 1fr; }
+      .produto .foto { aspect-ratio: auto; min-height: 100%; border-bottom: 0; border-right: 1px solid rgba(42, 37, 32, 0.06); }
+      .produto .foto__marca { font-size: 15px; }
+      .produto .foto__colecao { display: none; }
+      .produto__corpo { padding: 14px 16px 16px; }
+      .produto .btn-extra { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+      .produto__corpo { position: relative; }
+      .detalhe { width: 100%; max-height: 92dvh; margin: auto 0 0; border-radius: 12px 12px 0 0; }
+      .detalhe__grade { grid-template-columns: 1fr; }
+      .detalhe__foto .foto { min-height: 0; aspect-ratio: 16 / 9; }
+      .sacola { height: auto; max-height: 92dvh; margin: auto 0 0; border-radius: 12px 12px 0 0; }
+      @media (prefers-reduced-motion: no-preference) {
+        .sacola[open] { animation-name: sacola-sobe; }
+        @keyframes sacola-sobe { from { transform: translateY(100%); } }
+      }
+    }
+  </style>
+  <script>document.documentElement.classList.add('js')</script>
+  <!-- dados antes da primeira pintura: a vitrine se monta sem a página "pular" -->
+  <script src="../assets/js/boutique-dados.js"></script>
+</head>
+<body>
+
+  <!-- ICONES:INICIO -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+<!-- Ícones: Lucide 1.52.0 (lucide.dev, licença ISC) · WhatsApp e Instagram: marcas dos donos · logo: Nuovi Capelli -->
+<symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+<symbol id="i-calendar-clock" viewBox="0 0 24 24"><path d="M16 14v2.2l1.6 1"/><path d="M16 2v3"/><path d="M21 7.338V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h2.338"/><path d="M3 9h5.859"/><path d="M8 2v3"/><circle cx="16" cy="16" r="6"/></symbol>
+<symbol id="i-car" viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+<symbol id="i-credit-card" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/><path d="M6 14h2"/></symbol>
+<symbol id="i-droplets" viewBox="0 0 24 24"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-flower-2" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1"/><circle cx="12" cy="8" r="2"/><path d="M12 10v12"/><path d="M12 22c4.2 0 7-1.667 7-5-4.2 0-7 1.667-7 5Z"/><path d="M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z"/></symbol>
+<symbol id="i-hand" viewBox="0 0 24 24"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+<symbol id="i-shopping-bag" viewBox="0 0 24 24"><path d="M16 10a4 4 0 0 1-8 0"/><path d="M3.103 6.034h17.794"/><path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"/></symbol>
+<symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+<symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></symbol>
+<symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z"/><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
+<symbol id="i-repeat" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></symbol>
+<symbol id="i-scissors" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></symbol>
+<symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/><path d="M20 2v4"/><path d="M22 4h-4"/><circle cx="4" cy="20" r="2"/></symbol>
+<symbol id="i-tag" viewBox="0 0 24 24"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></symbol>
+<symbol id="i-wind" viewBox="0 0 24 24"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+<symbol id="i-whatsapp" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.464 3.488"/></symbol>
+<symbol id="i-instagram" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></symbol>
+<symbol id="i-logo" viewBox="0 0 967.11 497.12"><path fill="none" stroke="currentColor" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" d="M326.13,299.17c27.63,0,100.74-14.94,100.74,44.84,0,65.57-64.44,51.62-100.74,51.62M326.13,343.51v142.31M955.7,298.75v182.85M955.81,11.3v235.56M800.22,298.75v182.85h112.9M640.55,298.75v182.85h112.9M585.45,396.11h-116.43M585.45,298.75h-116.43v182.85h116.43M174.95,416.61h74.87M154.41,481.6l20.54-64.99,36.9-117.86,37.97,116.93,21.63,65.92M736.16,11.3l72.85,235.56L883.06,11.3M99.74,481.6c-48.84,0-88.44-39.6-88.44-88.44s39.6-94.4,88.44-94.4M685.07,129.08c0,65.05-52.73,117.78-117.78,117.78s-117.78-52.73-117.78-117.78,52.73-117.78,117.78-117.78,117.78,52.73,117.78,117.78ZM239.24,11.3v165.09c0,38.74,33.45,70.47,74.71,70.47s74.71-31.73,74.71-70.47V11.3M18.06,246.86V11.3l149.39,235.56V11.3"/></symbol>
+</svg>
+<!-- ICONES:FIM -->
+
+  <!-- ============ CABEÇALHO, RODAPÉ E AGENDAR — carimbados pelo casca.py ============ -->
+  <!-- CABECALHO:INICIO -->
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+<header class="cab" data-cab>
+  <div class="cab__dentro">
+    <a class="cab__logo" href="../">Nuovi Capelli</a>
+    <nav class="cab__nav" id="cab-menu" aria-label="Principal"><ul class="cab__links"><li><a href="../servicos/">Serviços</a></li><li><a href="../noivas/">Noivas</a></li><li><a href="./" aria-current="page">Boutique</a></li><li><a href="../#quem">Quem cuida</a></li><li><a href="../#onde">Onde estamos</a></li><li class="cab__insta"><a href="https://www.instagram.com/espaconuovicapelli/" target="_blank" rel="noopener"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-instagram"/></svg><span class="cab__insta-curto">Instagram</span><span class="cab__insta-longo">@espaconuovicapelli</span></a></li></ul></nav>
+    <a class="cab__horario" href="../meu-horario/"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-calendar-clock"/></svg><span class="cab__horario-texto">Meu horário</span><span class="cab__conta" data-horario-conta hidden></span></a>
+    <a class="cab__whats" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pela%20Boutique%20do%20site." target="_blank" rel="noopener" aria-label="Conversar no WhatsApp" title="Conversar no WhatsApp"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg></a>
+    <button class="cab__menu" type="button" aria-expanded="false" aria-controls="cab-menu"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-menu"/></svg><span>Menu</span></button>
+  </div>
+</header>
+<!-- CABECALHO:FIM -->
+
+  <main id="conteudo" tabindex="-1">
+    <div class="faixa loja">
+
+      <!-- ============ TOPO E MARCAS ============ -->
+      <section class="topo" aria-labelledby="titulo">
+        <p class="topo__rotulo">Boutique</p>
+        <h1 class="topo__titulo" id="titulo">Boutique Nuovi</h1>
+        <p class="topo__frase">Cosmética profissional italiana para levar o cuidado do salão para casa.</p>
+        <div class="marcas" id="marcas"></div>
+      </section>
+
+      <noscript>
+        <p class="vazio">Para ver os produtos e montar sua sacola, ative o JavaScript do navegador.</p>
+      </noscript>
+
+      <!-- ============ FILTROS ============ -->
+      <section class="filtros" aria-label="Filtrar produtos">
+        <div class="busca" role="search">
+          <label for="busca">Buscar produto</label>
+          <div class="busca__campo">
+            <svg class="icone" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
+            <input type="search" id="busca" autocomplete="off" placeholder="Ex.: shampoo, máscara, leave-in">
+          </div>
+        </div>
+        <div class="grupo-chips">
+          <span class="grupo-chips__rotulo" id="rotulo-marca">Marca</span>
+          <div class="chips" role="group" aria-labelledby="rotulo-marca" id="chips-marca"></div>
+        </div>
+        <div class="grupo-chips">
+          <span class="grupo-chips__rotulo" id="rotulo-necessidade">Necessidade</span>
+          <div class="chips" role="group" aria-labelledby="rotulo-necessidade" id="chips-necessidade"></div>
+        </div>
+        <p class="resultado" id="resultado" aria-live="polite"></p>
+      </section>
+
+      <!-- ============ KITS ============ -->
+      <section class="kits" id="kits" aria-labelledby="kits-titulo">
+        <h2 class="bloco-titulo" id="kits-titulo">Kits</h2>
+        <p class="bloco-lead">Os produtos que funcionam juntos, num pacote só.</p>
+        <ul class="kits__lista" id="kits-lista"></ul>
+      </section>
+
+      <!-- ============ COLEÇÕES ============ -->
+      <div id="colecoes"></div>
+
+      <div class="vazio" id="vazio" hidden>
+        <p>Nenhum produto encontrado com esses filtros.</p>
+        <button class="btn btn--secundario" type="button" id="limpar-filtros">Limpar filtros</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- ============ SACOLA — botão fixo, janela da sacola e janela de detalhe ============ -->
+  <button class="sacola-botao" type="button" id="sacola-botao" aria-haspopup="dialog" aria-controls="sacola" hidden>
+    <svg class="icone" aria-hidden="true" focusable="false"><use href="#i-shopping-bag"/></svg>
+    <span class="so-leitor">Abrir a sacola,</span>
+    <span class="sacola-botao__conta" id="sacola-conta">0</span><span class="so-leitor"> itens</span>
+  </button>
+
+  <dialog class="sacola" id="sacola" aria-labelledby="sacola-titulo">
+    <div class="janela__topo">
+      <h2 class="sacola__titulo" id="sacola-titulo">Sua sacola</h2>
+      <button class="janela__fechar" type="button" data-fechar><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-x"/></svg>Fechar</button>
+    </div>
+    <div id="sacola-cheia">
+      <ul class="sacola__lista" id="sacola-lista"></ul>
+      <dl class="sacola__subtotal"><dt>Subtotal estimado</dt><dd id="sacola-subtotal"></dd></dl>
+      <p class="sacola__aviso-preco" id="sacola-aviso-preco" hidden>Itens sem preço: valores a confirmar.</p>
+      <div class="sacola__form">
+        <div>
+          <label for="sacola-nome">Seu nome <span>(opcional)</span></label>
+          <input type="text" id="sacola-nome" autocomplete="given-name">
+        </div>
+        <fieldset>
+          <legend>Como receber <span>(opcional)</span></legend>
+          <div class="opcoes">
+            <label class="opcao"><input type="radio" name="recebimento" value="retirada" checked><span>Retirada no salão</span></label>
+            <label class="opcao"><input type="radio" name="recebimento" value="entrega"><span>Entrega</span></label>
+          </div>
+        </fieldset>
+        <div id="campo-bairro" hidden>
+          <label for="sacola-bairro">Bairro para entrega</label>
+          <input type="text" id="sacola-bairro" autocomplete="address-level3">
+        </div>
+      </div>
+      <a class="btn btn--primario sacola__enviar" id="sacola-enviar" href="https://wa.me/5512996556111" target="_blank" rel="noopener"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg>Enviar pedido pelo WhatsApp</a>
+      <p class="sacola__nota">Não há pagamento pelo site. Valores, disponibilidade e entrega são confirmados pelo WhatsApp.</p>
+      <p class="sacola__lgpd">Seu nome e bairro não são enviados a nenhum servidor: vão só na mensagem do WhatsApp.</p>
+      <div class="sacola__enviado" id="sacola-enviado" hidden>
+        <p>Seu pedido foi para o WhatsApp. Nossa equipe vai te responder por lá.</p>
+        <div>
+          <button class="btn btn--secundario" type="button" id="sacola-limpar">Limpar a sacola</button>
+          <button class="btn btn--texto" type="button" data-fechar>Manter e continuar</button>
+        </div>
+      </div>
+    </div>
+    <div class="sacola__vazia" id="sacola-vazia" hidden>
+      <p>Sua sacola está vazia.</p>
+      <button class="btn btn--secundario" type="button" data-fechar>Ver os produtos</button>
+    </div>
+  </dialog>
+
+  <dialog class="detalhe" id="detalhe" aria-labelledby="detalhe-nome"></dialog>
+
+  <div class="toast" id="toast" aria-hidden="true" hidden>Adicionado à sacola</div>
+  <p class="so-leitor" id="aviso" aria-live="polite"></p>
+
+  <!-- RODAPE:INICIO -->
+<footer class="rod">
+  <div class="rod__dentro">
+    <div class="rod__marca">
+      <svg class="rod__logo" viewBox="0 0 967.11 497.12" role="img" aria-label="Nuovi Capelli"><use href="#i-logo"/></svg>
+      <p class="rod__frase">A beleza não tem pressa.</p>
+    </div>
+    <div class="rod__col">
+      <h2 class="rod__titulo">Onde estamos</h2>
+      <ul class="rod__lista">
+        <li><a class="rod__item" href="https://www.google.com/maps/search/?api=1&amp;query=R.%20Conselheiro%20Ant%C3%B4nio%20Prado%2C%20290%2C%20Parque%20Itamarati%2C%20Jacare%C3%AD%20-%20SP" target="_blank" rel="noopener"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg><span>R. Conselheiro Antônio Prado, 290<br>Parque Itamarati, Jacareí · SP</span></a></li>
+        <li><p class="rod__item"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-calendar-clock"/></svg><span>Terça a sexta, 9h às 20h<br>Sábado, 9h às 18h<br>Com hora marcada</span></p></li>
+      </ul>
+    </div>
+    <div class="rod__col">
+      <h2 class="rod__titulo">Conversar</h2>
+      <ul class="rod__lista">
+        <li><a class="rod__item" href="https://wa.me/5512996556111?text=Oi.%20Vim%20pela%20Boutique%20do%20site." target="_blank" rel="noopener"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span>WhatsApp (12) 99655-6111</span></a></li>
+        <li><a class="rod__item" href="https://www.instagram.com/espaconuovicapelli/" target="_blank" rel="noopener"><svg class="icone" aria-hidden="true" focusable="false"><use href="#i-instagram"/></svg><span>@espaconuovicapelli</span></a></li>
+      </ul>
+    </div>
+    <nav class="rod__col" aria-label="Rodapé">
+      <h2 class="rod__titulo">Navegar</h2>
+      <ul class="rod__lista"><li><a class="rod__item" href="../servicos/"><span>Serviços</span></a></li><li><a class="rod__item" href="../noivas/"><span>Noivas</span></a></li><li><a class="rod__item" href="./"><span>Boutique</span></a></li><li><a class="rod__item" href="../#quem"><span>Quem cuida</span></a></li><li><a class="rod__item" href="../#onde"><span>Onde estamos</span></a></li><li><a class="rod__item" href="../meu-horario/"><span>Meu horário</span></a></li></ul>
+    </nav>
+  </div>
+  <div class="rod__base">
+    <p>© 2026 Nuovi Capelli · Espaço de Beleza e SPA de Noivas · Jacareí, SP</p>
+    <p>Site por <a class="rod__estudio" href="https://mezzetti4096-studio.netlify.app/" target="_blank" rel="noopener">mezzetti<span class="rod__4096">4096</span> studio</a></p>
+  </div>
+</footer>
+<!-- RODAPE:FIM -->
+
+  <!-- AGENDAR:INICIO -->
+<!-- a Boutique tem o botão da sacola no mesmo canto -->
+<!-- AGENDAR:FIM -->
+
+  <script>
+    /* =========================================================================
+       BOUTIQUE — monta a vitrine a partir de PRODUTOS e KITS (boutique-dados.js),
+       filtra, controla a sacola (localStorage, com try/catch) e monta o pedido
+       para o WhatsApp. Não há pagamento nem cadastro: o pedido é combinado lá.
+       ========================================================================= */
+    const porProduto = new Map(PRODUTOS.map(p => [p.id, p]));
+    const porKit = new Map(KITS.map(k => [k.id, k]));
+    const porColecao = new Map(COLECOES.map(c => [c.id, c]));
+
+    /* ---------- utilidades ---------- */
+    const ic = (nome) => `<svg class="icone" aria-hidden="true" focusable="false"><use href="#i-${nome}"/></svg>`;
+    const el = (tag, classe, texto) => { const e = document.createElement(tag); if (classe) e.className = classe; if (texto != null) e.textContent = texto; return e; };
+    const reais = (v) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    const semAcento = (t) => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+    const aviso = document.getElementById('aviso');
+    const avisar = (t) => { aviso.textContent = ''; setTimeout(() => { aviso.textContent = t; }, 60); };
+    const whats = (msg) => `https://wa.me/${WHATSAPP}?text=` + encodeURIComponent(msg);
+
+    const itemDe = (tipo, id) => (tipo === 'kit' ? porKit.get(id) : porProduto.get(id));
+    const nomeCompleto = (p) => `${MARCAS[p.marca].nome} ${p.nome}${p.tamanho ? ' ' + p.tamanho : ''}`;
+    const necessidadesDoKit = (k) => [...new Set(k.itens.flatMap(id => porProduto.get(id).necessidades))];
+    const marcasDoKit = (k) => [...new Set(k.itens.map(id => porProduto.get(id).marca))];
+
+    const foto = (p) => {
+      const f = el('div', 'foto');
+      if (p.foto) {
+        const img = document.createElement('img');
+        img.src = '../assets/img/produtos/' + p.foto; img.alt = nomeCompleto(p); img.loading = 'lazy'; img.width = 800; img.height = 800;
+        f.append(img);
+      } else {
+        /* quadro provisório: decorativo (o nome do produto já está no texto ao lado) */
+        f.classList.add('foto--quadro');
+        f.setAttribute('aria-hidden', 'true');
+        f.append(el('span', 'foto__marca', MARCAS[p.marca].nome), el('span', 'foto__colecao', porColecao.get(p.colecao).nome));
+      }
+      return f;
+    };
+    const quadroKit = (k) => {
+      const f = el('div', 'foto foto--quadro'); f.setAttribute('aria-hidden', 'true');
+      f.append(el('span', 'foto__marca', 'Kit'), el('span', 'foto__colecao', marcasDoKit(k).map(m => MARCAS[m].nome).join(' + ')));
+      return f;
+    };
+    const precoEl = (preco) => (preco == null ? el('p', 'preco preco--consulte', 'Consulte') : el('p', 'preco', reais(preco)));
+
+    /* =========================================================================
+       FILTROS — marca + necessidade + busca, combinados
+       ========================================================================= */
+    const filtro = { marca: '', necessidade: '', busca: '' };
+    const campoBusca = document.getElementById('busca');
+    /* Um chip ativo por grupo; tocar no ativo de novo volta para "Todas" */
+    const marcarChips = (grupo) => document.querySelectorAll(`.chip[data-grupo="${grupo}"]`)
+      .forEach(c => c.setAttribute('aria-pressed', String(c.dataset.valor === filtro[grupo])));
+    const chip = (rotulo, valor, grupo) => {
+      const b = el('button', 'chip', rotulo); b.type = 'button';
+      b.dataset.grupo = grupo; b.dataset.valor = valor;
+      b.setAttribute('aria-pressed', String(valor === ''));
+      b.addEventListener('click', () => {
+        filtro[grupo] = filtro[grupo] === valor ? '' : valor;
+        marcarChips(grupo);
+        aplicar();
+      });
+      return b;
+    };
+    document.getElementById('chips-marca').append(chip('Todas', '', 'marca'), ...Object.entries(MARCAS).map(([k, m]) => chip(m.nome, k, 'marca')));
+    document.getElementById('chips-necessidade').append(chip('Todas', '', 'necessidade'), ...Object.entries(NECESSIDADES).map(([k, n]) => chip(n, k, 'necessidade')));
+
+    const casaBusca = (texto) => {
+      const termos = semAcento(filtro.busca).replace(/[^a-z0-9]+/g, ' ').split(' ').filter(Boolean); /* "leave-in" = "leave in" */
+      const alvo = ' ' + semAcento(texto).replace(/[^a-z0-9]+/g, ' ');
+      return termos.every(t => alvo.includes(' ' + t));
+    };
+    const produtoPassa = (p) => (!filtro.marca || p.marca === filtro.marca)
+      && (!filtro.necessidade || p.necessidades.includes(filtro.necessidade))
+      /* nomes estão em inglês; a legenda, a descrição e as necessidades trazem os termos em português ("máscara", "leave-in"…) */
+      && casaBusca(`${p.nome} ${MARCAS[p.marca].nome} ${porColecao.get(p.colecao).nome} ${porColecao.get(p.colecao).tema} ${p.legenda} ${p.descricao} ${p.necessidades.map(n => NECESSIDADES[n]).join(' ')}`);
+    const kitPassa = (k) => (!filtro.marca || marcasDoKit(k).includes(filtro.marca))
+      && (!filtro.necessidade || necessidadesDoKit(k).includes(filtro.necessidade))
+      && casaBusca(`${k.nome} ${k.chamada} ${k.itens.map(id => { const p = porProduto.get(id); return `${p.nome} ${p.descricao}`; }).join(' ')}`);
+
+    /* =========================================================================
+       VITRINE — marcas, kits e coleções
+       ========================================================================= */
+    document.getElementById('marcas').append(...Object.values(MARCAS).map(m => {
+      const d = el('div', 'marca');
+      d.append(el('p', 'marca__nome', m.nome), el('p', 'marca__sub', m.subtitulo), el('p', 'marca__texto', m.texto));
+      return d;
+    }));
+
+    const botaoAdicionar = (tipo, id, nome) => {
+      const b = el('button', 'btn btn--primario'); b.type = 'button';
+      /* no celular, só "Adicionar" aparece (o ícone é a sacola); o leitor de tela ouve "Adicionar à sacola: nome" */
+      const texto = el('span', '', 'Adicionar'); texto.append(el('span', 'btn-extra', ' à sacola'));
+      b.innerHTML = ic('shopping-bag'); b.append(texto, el('span', 'so-leitor', `: ${nome}`));
+      b.addEventListener('click', () => adicionar(tipo, id, 1));
+      return b;
+    };
+    const botaoDetalhes = (tipo, id, nome, opener) => {
+      const b = el('button', 'btn-detalhes'); b.type = 'button';
+      b.append('Ver detalhes', el('span', 'so-leitor', ` de ${nome}`));
+      b.addEventListener('click', () => abrirDetalhe(tipo, id));
+      return b;
+    };
+
+    const cartaoKit = (k) => {
+      const li = el('li'); li.dataset.kit = k.id;
+      const art = el('article', 'kit');
+      const selo = el('span', 'selo'); selo.innerHTML = ic('sparkles'); selo.append('Kit');
+      const itens = el('ul', 'kit__itens');
+      k.itens.forEach(id => { const p = porProduto.get(id); itens.append(el('li', '', `${MARCAS[p.marca].nome} ${p.nome}`)); });
+      const para = el('p', 'kit__para', 'Indicado para: ' + necessidadesDoKit(k).map(n => NECESSIDADES[n].toLowerCase()).join(', ') + '.');
+      const rodape = el('div', 'kit__rodape');
+      const acoes = el('div', 'produto__acoes'); acoes.append(botaoAdicionar('kit', k.id, k.nome), botaoDetalhes('kit', k.id, k.nome));
+      rodape.append(precoEl(k.preco), acoes);
+      art.append(selo, el('h3', 'kit__nome', k.nome), el('p', 'kit__chamada', k.chamada), itens, para, rodape);
+      li.append(art);
+      return li;
+    };
+    document.getElementById('kits-lista').append(...KITS.map(cartaoKit));
+
+    const cartaoProduto = (p) => {
+      const li = el('li'); li.dataset.produto = p.id;
+      const art = el('article', 'produto');
+      const corpo = el('div', 'produto__corpo');
+      corpo.append(el('p', 'produto__marca', MARCAS[p.marca].nome), el('h4', 'produto__nome', p.nome));
+      if (p.tamanho) corpo.append(el('p', 'produto__tamanho', p.tamanho));
+      corpo.append(el('p', 'produto__legenda', p.legenda), precoEl(p.preco));
+      const acoes = el('div', 'produto__acoes'); acoes.append(botaoAdicionar('produto', p.id, nomeCompleto(p)), botaoDetalhes('produto', p.id, p.nome));
+      corpo.append(acoes);
+      art.append(foto(p), corpo);
+      li.append(art);
+      return li;
+    };
+    const colecoes = document.getElementById('colecoes');
+    Object.entries(MARCAS).forEach(([chave, m]) => {
+      const sec = el('section', 'loja-marca'); sec.dataset.marca = chave; sec.id = 'marca-' + chave;
+      sec.setAttribute('aria-labelledby', 'marca-' + chave + '-titulo');
+      const h2 = el('h2', 'bloco-titulo', m.nome); h2.id = 'marca-' + chave + '-titulo';
+      sec.append(h2, el('p', 'loja-marca__sub', `${m.subtitulo} · ${m.texto}`));
+      COLECOES.filter(c => c.marca === chave).forEach(c => {
+        const bloco = el('div', 'colecao'); bloco.dataset.colecao = c.id;
+        const h3 = el('h3', 'colecao__titulo', c.nome + ' '); h3.append(el('span', 'colecao__tema', `· ${c.tema}`));
+        bloco.append(h3);
+        if (c.paraQuem) bloco.append(el('p', 'colecao__para', 'Para quem: ' + c.paraQuem));
+        const ul = el('ul', 'produtos');
+        ul.append(...PRODUTOS.filter(p => p.colecao === c.id).map(cartaoProduto));
+        bloco.append(ul);
+        sec.append(bloco);
+      });
+      colecoes.append(sec);
+    });
+
+    const resultado = document.getElementById('resultado');
+    const vazio = document.getElementById('vazio');
+    let esperaAviso;
+    function aplicar() {
+      filtro.busca = campoBusca.value.trim();
+      let nProdutos = 0, nKits = 0;
+      document.querySelectorAll('[data-kit]').forEach(li => { const ok = kitPassa(porKit.get(li.dataset.kit)); li.hidden = !ok; if (ok) nKits++; });
+      document.getElementById('kits').hidden = nKits === 0;
+      document.querySelectorAll('[data-produto]').forEach(li => { const ok = produtoPassa(porProduto.get(li.dataset.produto)); li.hidden = !ok; if (ok) nProdutos++; });
+      document.querySelectorAll('[data-colecao]').forEach(b => { b.hidden = !b.querySelector('[data-produto]:not([hidden])'); });
+      document.querySelectorAll('[data-marca]').forEach(s => { s.hidden = !s.querySelector('[data-colecao]:not([hidden])'); });
+      const filtrando = filtro.marca || filtro.necessidade || filtro.busca;
+      vazio.hidden = nProdutos + nKits > 0;
+      clearTimeout(esperaAviso);
+      esperaAviso = setTimeout(() => {
+        resultado.textContent = filtrando
+          ? `${nProdutos} ${nProdutos === 1 ? 'produto' : 'produtos'} e ${nKits} ${nKits === 1 ? 'kit' : 'kits'}`
+          : `${PRODUTOS.length} produtos e ${KITS.length} kits`;
+      }, filtrando ? 350 : 0);
+    }
+    campoBusca.addEventListener('input', aplicar);
+    document.getElementById('limpar-filtros').addEventListener('click', () => {
+      filtro.marca = filtro.necessidade = ''; campoBusca.value = '';
+      marcarChips('marca'); marcarChips('necessidade');
+      aplicar(); campoBusca.focus();
+    });
+
+    /* =========================================================================
+       SACOLA — [{ tipo: 'produto' | 'kit', id, qtd }] no localStorage
+       (com try/catch; se falhar, fica só na memória). Nome e bairro não são guardados.
+       ========================================================================= */
+    const CHAVE = 'nuovi-sacola';
+    let memoria = null;
+    const lerSacola = () => {
+      try { const s = JSON.parse(localStorage.getItem(CHAVE) || 'null'); if (s) return s; } catch (e) {}
+      return memoria || { itens: [], recebimento: 'retirada' };
+    };
+    let sacola = lerSacola();
+    sacola.itens = (sacola.itens || []).filter(i => itemDe(i.tipo, i.id) && i.qtd > 0);
+    const guardar = () => {
+      memoria = sacola;
+      try { localStorage.setItem(CHAVE, JSON.stringify(sacola)); } catch (e) { /* segue na memória */ }
+    };
+
+    const botaoSacola = document.getElementById('sacola-botao');
+    const conta = document.getElementById('sacola-conta');
+    const toast = document.getElementById('toast');
+    const totalItens = () => sacola.itens.reduce((s, i) => s + i.qtd, 0);
+
+    function adicionar(tipo, id, qtd) {
+      const atual = sacola.itens.find(i => i.tipo === tipo && i.id === id);
+      if (atual) atual.qtd = Math.min(20, atual.qtd + qtd); else sacola.itens.push({ tipo, id, qtd });
+      guardar();
+      atualizarSacola();
+      const nome = tipo === 'kit' ? porKit.get(id).nome : nomeCompleto(porProduto.get(id));
+      avisar(`Adicionado à sacola: ${nome}.`);
+      botaoSacola.classList.remove('pulsa'); void botaoSacola.offsetWidth; botaoSacola.classList.add('pulsa');
+      toast.hidden = false; clearTimeout(toast._t); toast._t = setTimeout(() => { toast.hidden = true; }, 2200);
+    }
+
+    /* ---------- janela da sacola ---------- */
+    const janelaSacola = document.getElementById('sacola');
+    const lista = document.getElementById('sacola-lista');
+    const campoNome = document.getElementById('sacola-nome');
+    const campoBairro = document.getElementById('sacola-bairro');
+    const enviar = document.getElementById('sacola-enviar');
+    const enviado = document.getElementById('sacola-enviado');
+    const recebimento = () => document.querySelector('input[name="recebimento"]:checked').value;
+    document.querySelector(`input[name="recebimento"][value="${sacola.recebimento || 'retirada'}"]`).checked = true;
+
+    const controleQuantidade = (valor, rotulo, aoMudar) => {
+      const box = el('div', 'quantidade'); box.setAttribute('role', 'group'); box.setAttribute('aria-label', `Quantidade de ${rotulo}`);
+      const menos = el('button'); menos.type = 'button'; menos.innerHTML = ic('minus'); menos.setAttribute('aria-label', `Diminuir ${rotulo}`);
+      const saida = el('output', '', String(valor)); saida.setAttribute('aria-live', 'polite');
+      const mais = el('button'); mais.type = 'button'; mais.innerHTML = ic('plus'); mais.setAttribute('aria-label', `Aumentar ${rotulo}`);
+      const pintar = (v) => { saida.textContent = String(v); menos.disabled = v <= 1; mais.disabled = v >= 20; };
+      menos.addEventListener('click', () => { const v = Math.max(1, Number(saida.textContent) - 1); pintar(v); aoMudar(v); });
+      mais.addEventListener('click', () => { const v = Math.min(20, Number(saida.textContent) + 1); pintar(v); aoMudar(v); });
+      pintar(valor);
+      box.append(menos, saida, mais);
+      return box;
+    };
+
+    const mensagem = () => {
+      const linhas = sacola.itens.map(i => {
+        if (i.tipo === 'kit') { const k = porKit.get(i.id); return `• ${i.qtd}x ${k.nome} (${k.itens.map(id => porProduto.get(id).nome).join(' + ')})`; }
+        return `• ${i.qtd}x ${nomeCompleto(porProduto.get(i.id))}`;
+      });
+      const { subtotal, semPreco } = somar();
+      const total = subtotal > 0
+        ? `Subtotal estimado: ${reais(subtotal)}${semPreco ? ' (itens sem preço: a confirmar)' : ''}`
+        : 'Valores: a confirmar.';
+      const nome = campoNome.value.trim();
+      const bairro = campoBairro.value.trim();
+      const pref = recebimento() === 'entrega' ? `entrega${bairro ? ' no bairro ' + bairro : ''}` : 'retirada no salão';
+      return ['Oi. Vim pela Boutique do site e quero fazer um pedido:', ...linhas, total]
+        .concat(nome ? [`Nome: ${nome}`] : [], [`Preferência: ${pref}`], ['Pode me confirmar a disponibilidade e os valores?']).join('\n');
+    };
+    const somar = () => {
+      let subtotal = 0, semPreco = false;
+      sacola.itens.forEach(i => { const p = itemDe(i.tipo, i.id).preco; if (p == null) semPreco = true; else subtotal += p * i.qtd; });
+      return { subtotal, semPreco };
+    };
+
+    function atualizarSacola() {
+      const n = totalItens();
+      conta.textContent = String(n);
+      botaoSacola.hidden = n === 0;
+      document.body.classList.toggle('tem-sacola', n > 0);
+      document.getElementById('sacola-cheia').hidden = n === 0;
+      document.getElementById('sacola-vazia').hidden = n > 0;
+
+      lista.replaceChildren(...sacola.itens.map(i => {
+        const it = itemDe(i.tipo, i.id);
+        const nome = i.tipo === 'kit' ? it.nome : `${MARCAS[it.marca].nome} ${it.nome}`;
+        const li = el('li', 'sacola__item');
+        const info = el('div');
+        info.append(el('p', 'sacola__nome', nome));
+        info.append(el('p', 'sacola__sub', i.tipo === 'kit' ? it.itens.map(id => porProduto.get(id).nome).join(' + ') : (it.tamanho || porColecao.get(it.colecao).nome)));
+        const preco = el('p', 'sacola__preco', it.preco == null ? 'Consulte' : reais(it.preco * i.qtd));
+        const controles = el('div', 'sacola__controles');
+        const remover = el('button', 'sacola__remover'); remover.type = 'button'; remover.append('Remover', el('span', 'so-leitor', ` ${nome}`));
+        remover.addEventListener('click', () => {
+          sacola.itens = sacola.itens.filter(x => x !== i); guardar(); atualizarSacola(); avisar(`Removido da sacola: ${nome}.`);
+          (lista.querySelector('.sacola__remover') || janelaSacola.querySelector('[data-fechar]')).focus();
+        });
+        controles.append(controleQuantidade(i.qtd, nome, (v) => { i.qtd = v; guardar(); atualizarTotais(); preco.textContent = it.preco == null ? 'Consulte' : reais(it.preco * v); }), remover);
+        li.append(info, preco, controles);
+        return li;
+      }));
+      atualizarTotais();
+    }
+    function atualizarTotais() {
+      const { subtotal, semPreco } = somar();
+      document.getElementById('sacola-subtotal').textContent = subtotal > 0 ? reais(subtotal) : 'a confirmar';
+      document.getElementById('sacola-aviso-preco').hidden = !semPreco;
+      conta.textContent = String(totalItens());
+      enviar.href = whats(mensagem());
+    }
+
+    botaoSacola.addEventListener('click', () => { enviado.hidden = true; janelaSacola.showModal(); });
+    campoNome.addEventListener('input', atualizarTotais);
+    campoBairro.addEventListener('input', atualizarTotais);
+    document.querySelectorAll('input[name="recebimento"]').forEach(r => r.addEventListener('change', () => {
+      document.getElementById('campo-bairro').hidden = recebimento() !== 'entrega';
+      sacola.recebimento = recebimento(); guardar(); atualizarTotais();
+    }));
+    document.getElementById('campo-bairro').hidden = recebimento() !== 'entrega';
+    enviar.addEventListener('click', () => { enviado.hidden = false; setTimeout(() => enviado.querySelector('button').focus(), 100); });
+    document.getElementById('sacola-limpar').addEventListener('click', () => {
+      sacola.itens = []; guardar(); atualizarSacola(); avisar('A sacola foi limpa.'); janelaSacola.close();
+    });
+
+    /* Fechar janelas: botões "Fechar", clique fora (no fundo) e Esc (nativo do <dialog>) */
+    document.addEventListener('click', (ev) => {
+      if (ev.target.closest('[data-fechar]')) ev.target.closest('dialog')?.close();
+      if (ev.target instanceof HTMLDialogElement) ev.target.close();
+    });
+
+    /* =========================================================================
+       DETALHE — foto grande, descrição, como usar, indicado para, quantidade,
+       adicionar, tirar dúvida (WhatsApp) e "Combina com" (mesma coleção)
+       ========================================================================= */
+    const janelaDetalhe = document.getElementById('detalhe');
+    function abrirDetalhe(tipo, id) {
+      const it = itemDe(tipo, id);
+      const ehKit = tipo === 'kit';
+      const nome = ehKit ? it.nome : it.nome;
+      const nomeMsg = ehKit ? it.nome : nomeCompleto(it);
+      let qtd = 1;
+
+      const topo = el('div', 'janela__topo');
+      const fechar = el('button', 'janela__fechar'); fechar.type = 'button'; fechar.dataset.fechar = ''; fechar.innerHTML = ic('x'); fechar.append('Fechar');
+
+      const grade = el('div', 'detalhe__grade');
+      const colFoto = el('div', 'detalhe__foto');
+      colFoto.append(ehKit ? quadroKit(it) : foto(it));
+      const texto = el('div', 'detalhe__texto');
+      topo.append(el('p', 'produto__marca', ehKit ? 'Kit' : `${MARCAS[it.marca].nome} · ${porColecao.get(it.colecao).nome}`), fechar);
+      const h2 = el('h2', 'detalhe__nome', nome); h2.id = 'detalhe-nome';
+      texto.append(topo, h2);
+      if (!ehKit && it.tamanho) texto.append(el('p', 'produto__tamanho', it.tamanho));
+      texto.append(el('p', 'detalhe__legenda', ehKit ? it.chamada : it.legenda));
+
+      const bloco = (titulo, conteudo) => { const b = el('div', 'detalhe__bloco'); b.append(el('h3', '', titulo), conteudo); return b; };
+      if (ehKit) {
+        const ul = el('ul');
+        it.itens.forEach(pid => { const p = porProduto.get(pid); const li = el('li'); li.append(el('strong', '', `${MARCAS[p.marca].nome} ${p.nome}`), ` — ${p.legenda}`); ul.append(li); });
+        texto.append(bloco('O que vem no kit', ul));
+      } else {
+        texto.append(bloco('Descrição', el('p', '', it.descricao)));
+        if (it.uso) texto.append(bloco('Como usar', el('p', '', it.uso)));
+      }
+      const necessidades = ehKit ? necessidadesDoKit(it) : it.necessidades;
+      const etiquetas = el('div', 'etiquetas');
+      necessidades.forEach(n => etiquetas.append(el('span', 'etiqueta', NECESSIDADES[n])));
+      const indicado = bloco('Indicado para', etiquetas);
+      if (!ehKit && porColecao.get(it.colecao).paraQuem) indicado.append(el('p', '', 'Coleção para ' + porColecao.get(it.colecao).paraQuem));
+      texto.append(indicado);
+      texto.append(precoEl(it.preco));
+
+      const compra = el('div', 'detalhe__compra');
+      const add = el('button', 'btn btn--primario'); add.type = 'button'; add.innerHTML = ic('shopping-bag'); add.append('Adicionar à sacola');
+      add.addEventListener('click', () => { adicionar(tipo, id, qtd); janelaDetalhe.close(); });
+      compra.append(controleQuantidade(1, nome, (v) => { qtd = v; }), add);
+      texto.append(compra);
+      const duvida = el('a', 'detalhe__duvida'); duvida.href = whats(`Oi. Tenho uma dúvida sobre o produto ${nomeMsg} da Boutique do site.`);
+      duvida.target = '_blank'; duvida.rel = 'noopener'; duvida.innerHTML = ic('whatsapp'); duvida.append('Tirar dúvida pelo WhatsApp');
+      texto.append(duvida);
+
+      if (!ehKit) {
+        const outros = PRODUTOS.filter(p => p.colecao === it.colecao && p.id !== it.id).slice(0, 4);
+        if (outros.length) {
+          const ul = el('ul', 'combina');
+          outros.forEach(p => { const li = el('li'); const b = el('button', '', p.nome); b.type = 'button'; b.addEventListener('click', () => abrirDetalhe('produto', p.id)); li.append(b); ul.append(li); });
+          texto.append(bloco('Combina com', ul));
+        }
+      }
+      grade.append(colFoto, texto);
+      janelaDetalhe.replaceChildren(grade);
+      if (!janelaDetalhe.open) janelaDetalhe.showModal();
+      janelaDetalhe.scrollTop = 0;
+      fechar.focus();
+    }
+
+    /* ---------- início ---------- */
+    aplicar();
+    atualizarSacola();
+  </script>
+
+</body>
+</html>
