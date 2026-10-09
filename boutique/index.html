@@ -127,11 +127,13 @@
       position: relative; /* prende os textos de leitor de tela (position: absolute) dentro da rolagem horizontal */
       list-style: none;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
       margin-top: 20px;
     }
     .kit {
+      position: relative;
+      transition: box-shadow 300ms var(--ease-saida), transform 160ms ease-out;
       display: flex;
       flex-direction: column;
       height: 100%;
@@ -153,7 +155,10 @@
       font-size: var(--t-rotulo);
       font-weight: 600;
     }
-    .kit__nome { margin-top: 12px; font-family: var(--fonte-logo); font-weight: 500; font-size: 21px; line-height: 1.2; }
+    .kit .palco { margin: -22px -22px 16px; aspect-ratio: 4 / 3; border-radius: 2px 2px 0 0; }
+    .kit .selo { position: absolute; top: 12px; left: 12px; z-index: 2; }
+    .kit__nome { font-family: var(--fonte-logo); font-weight: 500; font-size: 21px; line-height: 1.2; }
+    .kit__nome .produto__abrir { -webkit-line-clamp: 3; }
     .kit__chamada { margin-top: 4px; font-family: var(--fonte-serifa); font-style: italic; font-weight: 300; font-size: 18px; }
     .kit__itens { list-style: none; margin: 14px 0; display: grid; gap: 4px; font-size: 15px; }
     .kit__itens li { display: flex; gap: 8px; }
@@ -161,56 +166,152 @@
     .kit__para { font-size: var(--t-apoio); color: var(--nevoa-texto); }
     .kit__rodape { margin-top: auto; padding-top: 16px; }
 
+    /* ===== SEÇÃO: PALCO DA FOTO — a foto do produto é a protagonista =====
+       Fotos oficiais com fundo transparente (WebP), com a sombra diagonal de
+       cada marca; o "palco" marfim com luz de estúdio no centro faz o produto
+       parecer fotografado aqui. JPG de reserva já vem sobre o marfim. */
+    .palco {
+      --luz: rgba(255, 255, 255, 0.72);
+      position: relative;
+      display: block;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      border-radius: 2px;
+      background: radial-gradient(ellipse 62% 58% at 50% 44%, var(--luz), transparent 72%), var(--branco-cru);
+      isolation: isolate;
+    }
+    .palco--ph { --luz: rgba(255, 255, 255, 0.95); } /* frascos pretos da pH: um marfim mais claro */
+    .palco picture { display: contents; }
+    .palco img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* nunca corta a embalagem; o respiro já vem na imagem */
+      transition: opacity 250ms ease-out, transform 300ms var(--ease-saida);
+    }
+    /* carregando: skeleton com brilho suave e a foto entra em fade */
+    .palco--carregando img { opacity: 0; }
+    .palco--carregando::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, 0.55) 50%, transparent 70%);
+      transform: translateX(-100%);
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      /* só transform: roda no compositor, sem repintar a página */
+      .palco--carregando::before { animation: brilho 1.4s linear infinite; }
+      @keyframes brilho { to { transform: translateX(100%); } }
+    }
+    /* selo da marca, discreto, no canto superior esquerdo */
+    .palco__selo {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 1;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--nevoa-texto);
+    }
+    .palco--ph .palco__selo { text-transform: none; letter-spacing: 0.06em; font-size: 12px; } /* a marca se escreve "pH" */
+    .palco__colecao {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      z-index: 1;
+      padding: 3px 9px;
+      border: 1px solid rgba(58, 87, 87, 0.3);
+      border-radius: 999px;
+      background: var(--branco-cru);
+      color: var(--petroleo-esc);
+      font-size: 12px;
+    }
+    /* sem foto (ou foto que falhou): parece intencional, não erro */
+    .palco--vazio { display: grid; place-content: center; justify-items: center; gap: 6px; padding: 14%; text-align: center; }
+    .palco__frasco { width: 36px; height: auto; color: var(--petroleo); }
+    .detalhe__foto .palco__frasco { width: 64px; }
+    .combina .palco__frasco { width: 22px; }
+    .palco__marca { font-family: var(--fonte-serifa); font-style: italic; font-weight: 300; font-size: clamp(17px, 2vw, 21px); line-height: 1.2; color: var(--petroleo-esc); }
+    .palco__breve { font-size: 12px; color: var(--nevoa-texto); }
+
+    /* kits: as fotos dos itens em leque — o do meio à frente e maior */
+    .palco--kit img { inset: 6% 18%; width: 64%; height: 88%; transform-origin: 50% 88%; }
+    .palco--kit img.leque--esq { transform: translateX(-30%) rotate(-6deg) scale(0.84); z-index: 0; }
+    .palco--kit img.leque--dir { transform: translateX(30%) rotate(6deg) scale(0.84); z-index: 0; }
+    .palco--kit img.leque--meio { z-index: 1; }
+    .palco--kit.palco--dois img.leque--esq { transform: translateX(-20%) rotate(-5deg) scale(0.92); }
+    .palco--kit.palco--dois img.leque--dir { transform: translateX(20%) rotate(5deg) scale(0.92); }
+    .palco--kit.palco--dois img.leque--esq { z-index: 1; }
+    .palco--kit.palco--carregando img { opacity: 0; }
+
     /* ===== SEÇÃO: COLEÇÕES E PRODUTOS ===== */
-    .loja-marca { margin-top: 56px; }
+    .loja-marca { margin-top: clamp(64px, 9vw, 96px); }
     .loja-marca__sub { margin-top: 2px; font-size: 16px; color: var(--nevoa-texto); }
-    .colecao { margin-top: 32px; }
-    .colecao__titulo { font-family: var(--fonte-logo); font-weight: 600; font-size: 20px; color: var(--petroleo-esc); }
+    .colecao { margin-top: clamp(48px, 7vw, 72px); }
+    .colecao__titulo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-family: var(--fonte-logo);
+      font-weight: 600;
+      font-size: 20px;
+      color: var(--petroleo-esc);
+    }
+    .colecao__titulo::after { content: ''; flex: 1 0 32px; height: 1px; background: var(--nevoa); opacity: 0.6; } /* linha fina de vitrine */
     .colecao__tema { font-weight: 500; color: var(--tinta); }
-    .colecao__para { margin-top: 2px; font-size: 15px; color: var(--nevoa-texto); }
+    .colecao__para { margin-top: 4px; font-family: var(--fonte-serifa); font-style: italic; font-weight: 300; font-size: 17px; }
     .produtos {
       list-style: none;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 16px;
-      margin-top: 14px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 20px;
+      margin-top: 18px;
     }
     .produto {
+      position: relative;
       display: flex;
       flex-direction: column;
       height: 100%;
       background: var(--branco-cru);
       border: 1px solid rgba(42, 37, 32, 0.08);
       border-radius: 2px;
-      overflow: hidden;
+      transition: box-shadow 300ms var(--ease-saida), transform 160ms ease-out;
     }
-    .foto { aspect-ratio: 1 / 1; background: var(--branco-cru); }
-    .foto img { display: block; width: 100%; height: 100%; object-fit: cover; }
-    /* Quadro provisório: marfim com a marca, até a foto real chegar */
-    .foto--quadro {
-      display: grid;
-      place-content: center;
-      gap: 4px;
-      padding: 16px;
-      text-align: center;
-      background:
-        radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.7), transparent 60%),
-        var(--linho);
-      border-bottom: 1px solid rgba(42, 37, 32, 0.06);
-    }
-    .foto__marca { font-family: var(--fonte-logo); font-weight: 600; font-size: 20px; color: var(--petroleo-esc); }
-    .foto__colecao { font-size: var(--t-rotulo); color: var(--nevoa-texto); }
-    .produto__corpo { display: flex; flex-direction: column; flex: 1; padding: 16px 18px 18px; }
+    .produto__corpo { display: flex; flex-direction: column; flex: 1; padding: 14px 16px 16px; }
     .produto__marca { font-size: var(--t-rotulo); font-weight: 600; color: var(--nevoa-texto); }
-    .produto__nome { font-family: var(--fonte-logo); font-weight: 500; font-size: 18px; line-height: 1.25; }
+    .produto__nome { font-family: var(--fonte-logo); font-weight: 500; font-size: 17px; line-height: 1.25; }
+    /* o nome abre o detalhe; a área clicável cobre o card inteiro */
+    .produto__abrir { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; padding: 0; text-align: left; font: inherit; color: inherit; }
+    .produto__abrir::after { content: ''; position: absolute; inset: 0; z-index: 1; }
+    .produto__abrir:focus-visible { outline: none; }
+    .produto:has(.produto__abrir:focus-visible) { outline: 2px solid var(--foco); outline-offset: 3px; }
     .produto__tamanho { font-size: var(--t-apoio); color: var(--nevoa-texto); }
-    .produto__legenda { margin-top: 8px; font-size: 15px; line-height: 1.5; }
-    .preco { margin-top: 12px; font-weight: 600; color: var(--petroleo-esc); font-variant-numeric: tabular-nums; }
+    .produto__legenda { margin-top: 6px; font-size: 15px; line-height: 1.5; }
+    .preco { margin-top: 10px; font-weight: 600; color: var(--petroleo-esc); font-variant-numeric: tabular-nums; }
     .preco--consulte { font-weight: 500; }
-    .produto__acoes { margin-top: auto; padding-top: 14px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px; }
+    .produto__acoes { position: relative; z-index: 2; margin-top: auto; padding-top: 12px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px; }
     .produto__acoes .btn--primario,
     .kit__rodape .btn--primario { flex: 1 1 auto; min-height: 44px; padding: 0 16px; font-size: 15px; }
+    .produto__linha { display: flex; align-items: flex-end; justify-content: space-between; gap: 8px; margin-top: auto; }
+    .produto__linha .preco { margin-top: 10px; }
+    /* "+" do celular: quadrado terracota (a marca é quase reta) */
+    .btn-mais { position: relative; z-index: 2; flex-shrink: 0; display: none; place-items: center; width: 44px; height: 44px; border-radius: 2px; background: var(--terracota); color: #FFFFFF; }
+    .btn-mais .icone { width: 22px; height: 22px; }
     .btn-detalhes { min-height: 44px; padding: 0 2px; font-size: 15px; font-weight: 500; color: var(--petroleo-esc); text-decoration: underline; text-underline-offset: 4px; }
+    /* hover (só onde existe mouse): a foto sobe e cresce, a sombra abre */
+    @media (hover: hover) and (pointer: fine) {
+      .produto:hover { box-shadow: 0 22px 44px -30px rgba(42, 37, 32, 0.45); }
+      .produto:hover .palco img { transform: translateY(-4px) scale(1.04); }
+      .produto:hover .btn--primario { box-shadow: 0 10px 22px -12px rgba(168, 96, 74, 0.9); }
+      .kit:hover .palco--kit img.leque--esq { transform: translateX(-38%) rotate(-9deg) scale(0.84); }
+      .kit:hover .palco--kit img.leque--dir { transform: translateX(38%) rotate(9deg) scale(0.84); }
+      .kit:hover .palco--kit img.leque--meio { transform: translateY(-3px); }
+    }
+    .produto:active, .kit:active { transform: scale(0.98); }
+    .produto:has(.produto__acoes:active), .kit:has(.produto__acoes:active) { transform: none; }
     .vazio { margin-top: 40px; padding: 32px; background: var(--branco-cru); text-align: center; }
     .vazio p { font-size: 16px; }
     .vazio .btn { margin-top: 14px; }
@@ -233,6 +334,8 @@
       --foco: var(--petroleo-esc);
     }
     .sacola-botao .icone { width: 26px; height: 26px; }
+    .sacola-botao__dentro { display: contents; }
+    .sacola-botao__texto { display: none; }
     .sacola-botao__conta {
       position: absolute;
       top: -2px;
@@ -265,7 +368,9 @@
       color: var(--branco-cru);
       font-size: 15px;
       box-shadow: 0 10px 28px rgba(42, 37, 32, 0.26);
+      animation: toast-entra 200ms ease-out; /* só um fade: vale também com movimento reduzido */
     }
+    @keyframes toast-entra { from { opacity: 0; } }
 
     /* ===== JANELAS (detalhe do produto e sacola) — <dialog> nativo ===== */
     dialog { border: 0; padding: 0; max-width: 100%; color: var(--tinta); background: var(--branco-cru); } /* o navegador limita a largura do <dialog> por padrão */
@@ -276,9 +381,46 @@
 
     .detalhe { width: min(880px, calc(100% - 32px)); max-height: calc(100dvh - 48px); margin: auto; border-radius: 4px; overflow-y: auto; }
     .detalhe__grade { display: grid; grid-template-columns: 1fr 1.1fr; }
-    .detalhe__foto { position: relative; }
-    .detalhe__foto .foto { height: 100%; min-height: 320px; aspect-ratio: auto; }
-    .detalhe__foto .foto__marca { font-size: 28px; }
+    .detalhe__foto { position: relative; padding: 16px; background: var(--branco-cru); }
+    .detalhe__foto .palco { position: sticky; top: 0; border: 1px solid rgba(42, 37, 32, 0.06); }
+    .detalhe__foto .palco--vazio .palco__marca { font-size: 26px; }
+    /* zoom 2×: no computador segue o mouse; no celular, toque duplo e arraste; no teclado, o botão "Ampliar" e as setas */
+    .palco--zoom { cursor: zoom-in; touch-action: manipulation; }
+    .palco--zoom.ampliado { cursor: zoom-out; touch-action: none; }
+    .palco--zoom img { transition: transform 200ms ease-out; }
+    .palco--zoom.ampliado img { transform: scale(2); transition: none; }
+    .zoom-botao {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 40px;
+      padding: 0 12px;
+      border: 1px solid rgba(58, 87, 87, 0.35);
+      border-radius: 2px;
+      background: var(--branco-cru);
+      color: var(--petroleo-esc);
+      font-size: 14px;
+    }
+    .zoom-botao .icone { width: 18px; height: 18px; }
+    .detalhe__dica { margin-top: 8px; font-size: var(--t-rotulo); color: var(--nevoa-texto); text-align: center; }
+    /* "Combina com": miniaturas clicáveis da mesma coleção */
+    .combina { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 8px; }
+    .combina button { display: grid; gap: 6px; width: 100%; padding: 0; text-align: left; font-size: 13px; line-height: 1.3; color: var(--petroleo-esc); }
+    .combina .palco { border: 1px solid rgba(42, 37, 32, 0.08); }
+    .combina .palco__selo, .combina .palco__breve { display: none; }
+    .combina .palco--vazio .palco__marca { font-size: 13px; }
+    .combina button:hover span { text-decoration: underline; text-underline-offset: 3px; }
+    @media (prefers-reduced-motion: no-preference) {
+      .detalhe[open] { animation: detalhe-entra 260ms var(--ease-saida); }
+      @keyframes detalhe-entra { from { opacity: 0; transform: scale(0.97); } }
+      ::view-transition-group(foto-produto) { animation-duration: 340ms; animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1); }
+    }
+    /* foto que "voa" do card até a sacola */
+    .voando { position: fixed; z-index: 160; pointer-events: none; object-fit: contain; border-radius: 2px; }
     .detalhe__texto { padding: 22px 26px 26px; }
     .detalhe__nome { margin-top: 4px; font-family: var(--fonte-logo); font-weight: 500; font-size: 26px; line-height: 1.2; }
     .detalhe__legenda { margin-top: 8px; font-family: var(--fonte-serifa); font-style: italic; font-weight: 300; font-size: 19px; }
@@ -292,8 +434,6 @@
     .detalhe__compra .btn--primario { flex: 1 1 200px; }
     .detalhe__duvida { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 8px; font-size: 15px; font-weight: 500; color: var(--petroleo-esc); }
     .detalhe__duvida .icone { width: 20px; height: 20px; }
-    .combina { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
-    .combina button { min-height: 40px; padding: 0 12px; border: 1px solid rgba(58, 87, 87, 0.45); border-radius: 999px; font-size: 14px; color: var(--petroleo-esc); background: var(--linho); }
 
     .quantidade { display: inline-flex; align-items: center; border: 1px solid rgba(42, 37, 32, 0.28); border-radius: 999px; }
     .quantidade button { width: 44px; height: 44px; display: grid; place-items: center; color: var(--petroleo-esc); }
@@ -356,6 +496,9 @@
     }
 
     /* ===== RESPONSIVO ===== */
+    @media (max-width: 1000px) {
+      .produtos { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    }
     @media (max-width: 900px) {
       .topo { padding-top: calc(var(--cab-h) + 36px); }
       .marcas { grid-template-columns: 1fr; }
@@ -364,23 +507,61 @@
       .grupo-chips .chips::-webkit-scrollbar { display: none; }
       .kits__lista { grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: 82%; overflow-x: auto; scroll-snap-type: x mandatory; margin-left: calc(-1 * var(--gutter)); margin-right: calc(-1 * var(--gutter)); padding: 0 var(--gutter) 6px; scroll-padding: 0 var(--gutter); }
       .kits__lista > li { scroll-snap-align: start; }
-      /* Produto no celular: foto pequena ao lado do texto */
-      .produtos { grid-template-columns: 1fr; gap: 12px; }
-      .produto { display: grid; grid-template-columns: 104px 1fr; }
-      .produto .foto { aspect-ratio: auto; min-height: 100%; border-bottom: 0; border-right: 1px solid rgba(42, 37, 32, 0.06); }
-      .produto .foto__marca { font-size: 15px; }
-      .produto .foto__colecao { display: none; }
-      .produto__corpo { padding: 14px 16px 16px; }
-      .produto .btn-extra { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-      .produto__corpo { position: relative; }
       .detalhe { width: 100%; max-height: 92dvh; margin: auto 0 0; border-radius: 12px 12px 0 0; }
       .detalhe__grade { grid-template-columns: 1fr; }
-      .detalhe__foto .foto { min-height: 0; aspect-ratio: 16 / 9; }
+      .detalhe__foto { padding: 12px 12px 0; }
+      .detalhe__foto .palco { position: relative; width: min(100%, 52dvh); margin: 0 auto; }
       .sacola { height: auto; max-height: 92dvh; margin: auto 0 0; border-radius: 12px 12px 0 0; }
       @media (prefers-reduced-motion: no-preference) {
         .sacola[open] { animation-name: sacola-sobe; }
         @keyframes sacola-sobe { from { transform: translateY(100%); } }
       }
+    }
+    /* Celular: 2 colunas, card compacto (foto, nome em até 2 linhas, preço e "+") */
+    @media (max-width: 599px) {
+      .produtos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+      .produto__corpo { padding: 10px 12px 12px; }
+      .produto__nome { font-size: 15px; }
+      .produto__tamanho { font-size: var(--t-rotulo); }
+      .produto__marca, .produto__legenda, .produto__acoes { display: none; }
+      .produto__linha .preco { margin-top: 6px; font-size: 15px; }
+      .btn-mais { display: grid; }
+      /* a sacola vira barra embaixo (como o "Ver meu horário" do cardápio): não cobre o "+" dos cards */
+      body.tem-sacola { --barra-h: calc(72px + env(safe-area-inset-bottom, 0px)); }
+      body.tem-sacola .loja { padding-bottom: calc(72px + var(--barra-h)); }
+      .sacola-botao {
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: block;
+        width: auto;
+        height: auto;
+        padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+        border-radius: 0;
+        border-top: 1px solid rgba(42, 37, 32, 0.1);
+        background: var(--branco-cru);
+        box-shadow: 0 -8px 24px -18px rgba(42, 37, 32, 0.4);
+      }
+      .sacola-botao__dentro {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        min-height: 48px;
+        border-radius: 2px;
+        background: var(--terracota);
+        color: #FFFFFF;
+        font: 500 16px/1 var(--fonte-texto);
+      }
+      .sacola-botao .icone { width: 22px; height: 22px; }
+      .sacola-botao__texto { display: inline; }
+      .sacola-botao__conta { position: static; }
+      .sacola-botao.pulsa { animation: none; }
+      .sacola-botao.pulsa .sacola-botao__conta { animation: pulsa 360ms var(--ease-saida); }
+      .toast { bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
+      .palco__selo { top: 8px; left: 8px; font-size: 10px; }
+      .combina { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
   </style>
   <script>document.documentElement.classList.add('js')</script>
@@ -490,9 +671,12 @@
 
   <!-- ============ SACOLA — botão fixo, janela da sacola e janela de detalhe ============ -->
   <button class="sacola-botao" type="button" id="sacola-botao" aria-haspopup="dialog" aria-controls="sacola" hidden>
-    <svg class="icone" aria-hidden="true" focusable="false"><use href="#i-shopping-bag"/></svg>
-    <span class="so-leitor">Abrir a sacola,</span>
-    <span class="sacola-botao__conta" id="sacola-conta">0</span><span class="so-leitor"> itens</span>
+    <span class="sacola-botao__dentro">
+      <svg class="icone" aria-hidden="true" focusable="false"><use href="#i-shopping-bag"/></svg>
+      <span class="so-leitor">Abrir a sacola,</span>
+      <span class="sacola-botao__texto" aria-hidden="true">Ver sacola</span>
+      <span class="sacola-botao__conta" id="sacola-conta">0</span><span class="so-leitor"> itens</span>
+    </span>
   </button>
 
   <dialog class="sacola" id="sacola" aria-labelledby="sacola-titulo">
@@ -604,24 +788,80 @@
     const necessidadesDoKit = (k) => [...new Set(k.itens.flatMap(id => porProduto.get(id).necessidades))];
     const marcasDoKit = (k) => [...new Set(k.itens.map(id => porProduto.get(id).marca))];
 
-    const foto = (p) => {
-      const f = el('div', 'foto');
-      if (p.foto) {
-        const img = document.createElement('img');
-        img.src = '../assets/img/produtos/' + p.foto; img.alt = nomeCompleto(p); img.loading = 'lazy'; img.width = 800; img.height = 800;
-        f.append(img);
-      } else {
-        /* quadro provisório: decorativo (o nome do produto já está no texto ao lado) */
-        f.classList.add('foto--quadro');
-        f.setAttribute('aria-hidden', 'true');
-        f.append(el('span', 'foto__marca', MARCAS[p.marca].nome), el('span', 'foto__colecao', porColecao.get(p.colecao).nome));
-      }
-      return f;
+    /* =========================================================================
+       PALCO DA FOTO — <picture> com WebP 400/800/1200 (fundo transparente) e
+       JPG 800 de reserva; skeleton até carregar; se não houver foto ou ela
+       falhar, o placeholder "Foto a caminho".
+       ========================================================================= */
+    const PASTA_FOTOS = '../assets/img/produtos/';
+    const TAMANHOS = { card: '(max-width: 599px) 50vw, (max-width: 1000px) 33vw, 290px', kit: '(max-width: 900px) 82vw, 380px', mini: '120px', grande: '1200px' };
+    const SELO = { previa: 'Previa', ph: 'pH' };
+    const altFoto = (p) => `${nomeCompleto(p)}, ${p.marca === 'ph' ? 'frasco escuro' : 'embalagem clara'}`;
+    let fotosPrioritarias = 4; /* as primeiras fotos (kits em destaque) carregam primeiro */
+
+    const svgFrasco = '<svg class="palco__frasco" viewBox="0 0 48 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 4h10v7H19z"/><path d="M17 11h14"/><path d="M18 11c0 4-6 6-6 12v32a5 5 0 0 0 5 5h14a5 5 0 0 0 5-5V23c0-6-6-8-6-12"/><path d="M16 32h16"/><path d="M16 44h16"/></svg>';
+    const placeholder = (palco, marca) => {
+      palco.className = palco.className.replace(/\bpalco--(carregando|kit|dois)\b/g, '').trim() + ' palco--vazio';
+      palco.replaceChildren();
+      palco.insertAdjacentHTML('beforeend', svgFrasco);
+      palco.append(el('span', 'palco__marca', MARCAS[marca] ? MARCAS[marca].nome : marca), el('span', 'palco__breve', 'Foto a caminho'));
     };
-    const quadroKit = (k) => {
-      const f = el('div', 'foto foto--quadro'); f.setAttribute('aria-hidden', 'true');
-      f.append(el('span', 'foto__marca', 'Kit'), el('span', 'foto__colecao', marcasDoKit(k).map(m => MARCAS[m].nome).join(' + ')));
-      return f;
+    const imagem = (p, tamanho, classe) => {
+      const pic = document.createElement('picture');
+      const src = document.createElement('source');
+      src.type = 'image/webp';
+      src.srcset = [400, 800, 1200].map(w => `${PASTA_FOTOS}${p.foto}-${w}.webp ${w}w`).join(', ');
+      src.sizes = TAMANHOS[tamanho];
+      const img = document.createElement('img');
+      img.src = `${PASTA_FOTOS}${p.foto}-800.jpg`; img.width = 1200; img.height = 1200; img.decoding = 'async';
+      img.alt = classe ? '' : altFoto(p); /* no leque, os nomes já estão na lista do kit */
+      if (classe) img.className = classe;
+      if (fotosPrioritarias > 0) { img.fetchPriority = 'high'; fotosPrioritarias--; } else img.loading = 'lazy';
+      pic.append(src, img);
+      return { pic, img };
+    };
+    /* espera a(s) foto(s) para tirar o skeleton; erro → placeholder */
+    const vigiar = (palco, imgs, marca) => {
+      let faltam = imgs.length;
+      imgs.forEach(img => {
+        const pronto = () => { if (--faltam <= 0) palco.classList.remove('palco--carregando'); };
+        if (img.complete && img.naturalWidth) pronto();
+        else {
+          img.addEventListener('load', pronto, { once: true });
+          img.addEventListener('error', () => placeholder(palco, marca), { once: true });
+        }
+      });
+    };
+
+    const palcoProduto = (p, tamanho = 'card') => {
+      const palco = el('div', 'palco' + (p.marca === 'ph' ? ' palco--ph' : ''));
+      if (!p.foto) {
+        placeholder(palco, p.marca);
+        palco.setAttribute('aria-hidden', 'true'); /* o nome do produto já está no texto */
+        return palco;
+      }
+      palco.classList.add('palco--carregando');
+      palco.append(el('span', 'palco__selo', SELO[p.marca]));
+      const { pic, img } = imagem(p, tamanho);
+      palco.append(pic);
+      vigiar(palco, [img], p.marca);
+      return palco;
+    };
+    /* kit: até 3 fotos em leque (o primeiro item no centro, à frente) */
+    const palcoKit = (k) => {
+      const comFoto = k.itens.map(id => porProduto.get(id)).filter(p => p.foto).slice(0, 3);
+      const palco = el('div', 'palco palco--kit');
+      palco.setAttribute('aria-hidden', 'true');
+      if (!comFoto.length) { placeholder(palco, marcasDoKit(k)[0]); palco.querySelector('.palco__marca').textContent = 'Kit ' + marcasDoKit(k).map(m => MARCAS[m].nome).join(' + '); return palco; }
+      if (comFoto.length === 1) { palco.classList.remove('palco--kit'); palco.classList.add('palco--carregando'); const { pic, img } = imagem(comFoto[0], 'kit'); img.alt = ''; palco.append(pic); vigiar(palco, [img], comFoto[0].marca); return palco; }
+      palco.classList.add('palco--carregando');
+      if (comFoto.length === 2) palco.classList.add('palco--dois');
+      if (comFoto.every(p => p.marca === 'ph')) palco.classList.add('palco--ph');
+      const ordem = comFoto.length === 2 ? [[comFoto[1], 'leque--dir'], [comFoto[0], 'leque--esq']]
+        : [[comFoto[1], 'leque--esq'], [comFoto[2], 'leque--dir'], [comFoto[0], 'leque--meio']];
+      const imgs = ordem.map(([p, classe]) => { const { pic, img } = imagem(p, 'kit', classe); palco.append(pic); return img; });
+      vigiar(palco, imgs, comFoto[0].marca);
+      return palco;
     };
     const precoEl = (preco) => (preco == null ? el('p', 'preco preco--consulte', 'Consulte') : el('p', 'preco', reais(preco)));
 
@@ -674,13 +914,19 @@
       /* no celular, só "Adicionar" aparece (o ícone é a sacola); o leitor de tela ouve "Adicionar à sacola: nome" */
       const texto = el('span', '', 'Adicionar'); texto.append(el('span', 'btn-extra', ' à sacola'));
       b.innerHTML = ic('shopping-bag'); b.append(texto, el('span', 'so-leitor', `: ${nome}`));
-      b.addEventListener('click', () => adicionar(tipo, id, 1));
+      b.addEventListener('click', () => adicionar(tipo, id, 1, b));
       return b;
     };
-    const botaoDetalhes = (tipo, id, nome, opener) => {
-      const b = el('button', 'btn-detalhes'); b.type = 'button';
-      b.append('Ver detalhes', el('span', 'so-leitor', ` de ${nome}`));
-      b.addEventListener('click', () => abrirDetalhe(tipo, id));
+    /* o nome é um botão que abre o detalhe; o ::after dele cobre o card inteiro */
+    const botaoAbrir = (tipo, id, nome) => {
+      const b = el('button', 'produto__abrir', nome); b.type = 'button';
+      b.addEventListener('click', () => abrirDetalhe(tipo, id, b));
+      return b;
+    };
+    const botaoMais = (tipo, id, nome) => {
+      const b = el('button', 'btn-mais'); b.type = 'button';
+      b.innerHTML = ic('plus'); b.setAttribute('aria-label', `Adicionar à sacola: ${nome}`);
+      b.addEventListener('click', () => adicionar(tipo, id, 1, b));
       return b;
     };
 
@@ -692,9 +938,10 @@
       k.itens.forEach(id => { const p = porProduto.get(id); itens.append(el('li', '', `${MARCAS[p.marca].nome} ${p.nome}`)); });
       const para = el('p', 'kit__para', 'Indicado para: ' + necessidadesDoKit(k).map(n => NECESSIDADES[n].toLowerCase()).join(', ') + '.');
       const rodape = el('div', 'kit__rodape');
-      const acoes = el('div', 'produto__acoes'); acoes.append(botaoAdicionar('kit', k.id, k.nome), botaoDetalhes('kit', k.id, k.nome));
+      const acoes = el('div', 'produto__acoes'); acoes.append(botaoAdicionar('kit', k.id, k.nome));
       rodape.append(precoEl(k.preco), acoes);
-      art.append(selo, el('h3', 'kit__nome', k.nome), el('p', 'kit__chamada', k.chamada), itens, para, rodape);
+      const h3 = el('h3', 'kit__nome'); h3.append(botaoAbrir('kit', k.id, k.nome));
+      art.append(palcoKit(k), selo, h3, el('p', 'kit__chamada', k.chamada), itens, para, rodape);
       li.append(art);
       return li;
     };
@@ -704,12 +951,14 @@
       const li = el('li'); li.dataset.produto = p.id;
       const art = el('article', 'produto');
       const corpo = el('div', 'produto__corpo');
-      corpo.append(el('p', 'produto__marca', MARCAS[p.marca].nome), el('h4', 'produto__nome', p.nome));
+      const h4 = el('h4', 'produto__nome'); h4.append(botaoAbrir('produto', p.id, p.nome));
+      corpo.append(h4); /* a marca já está no selo do palco */
       if (p.tamanho) corpo.append(el('p', 'produto__tamanho', p.tamanho));
-      corpo.append(el('p', 'produto__legenda', p.legenda), precoEl(p.preco));
-      const acoes = el('div', 'produto__acoes'); acoes.append(botaoAdicionar('produto', p.id, nomeCompleto(p)), botaoDetalhes('produto', p.id, p.nome));
-      corpo.append(acoes);
-      art.append(foto(p), corpo);
+      corpo.append(el('p', 'produto__legenda', p.legenda));
+      const linha = el('div', 'produto__linha'); linha.append(precoEl(p.preco), botaoMais('produto', p.id, nomeCompleto(p)));
+      const acoes = el('div', 'produto__acoes'); acoes.append(botaoAdicionar('produto', p.id, nomeCompleto(p)));
+      corpo.append(linha, acoes);
+      art.append(palcoProduto(p), corpo);
       li.append(art);
       return li;
     };
@@ -721,7 +970,7 @@
       sec.append(h2, el('p', 'loja-marca__sub', `${m.subtitulo} · ${m.texto}`));
       COLECOES.filter(c => c.marca === chave).forEach(c => {
         const bloco = el('div', 'colecao'); bloco.dataset.colecao = c.id;
-        const h3 = el('h3', 'colecao__titulo', c.nome + ' '); h3.append(el('span', 'colecao__tema', `· ${c.tema}`));
+        const h3 = el('h3', 'colecao__titulo'); const t = el('span', '', c.nome + ' '); t.append(el('span', 'colecao__tema', `· ${c.tema}`)); h3.append(t);
         bloco.append(h3);
         if (c.paraQuem) bloco.append(el('p', 'colecao__para', 'Para quem: ' + c.paraQuem));
         const ul = el('ul', 'produtos');
@@ -781,14 +1030,35 @@
     const toast = document.getElementById('toast');
     const totalItens = () => sacola.itens.reduce((s, i) => s + i.qtd, 0);
 
-    function adicionar(tipo, id, qtd) {
+    const semMovimento = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const pulsar = () => { botaoSacola.classList.remove('pulsa'); void botaoSacola.offsetWidth; botaoSacola.classList.add('pulsa'); };
+    /* uma miniatura da foto voa do card (ou da janela) até a sacola; o contador pulsa quando ela chega */
+    function voar(origem) {
+      const caixa = origem && origem.closest('.produto, .kit, .detalhe');
+      const fonte = caixa && (caixa.querySelector('.palco:not(.palco--carregando) img.leque--meio') || caixa.querySelector('.palco:not(.palco--carregando) img'));
+      if (!fonte || semMovimento() || !fonte.animate) { pulsar(); return; }
+      const de = fonte.getBoundingClientRect(), para = botaoSacola.querySelector('.icone').getBoundingClientRect();
+      if (!de.width || !para.width) { pulsar(); return; }
+      const lado = Math.min(de.width, de.height, 160);
+      const voo = fonte.cloneNode(); voo.removeAttribute('class'); voo.className = 'voando'; voo.alt = ''; voo.removeAttribute('loading');
+      voo.style.cssText = `left:${de.left + (de.width - lado) / 2}px;top:${de.top + (de.height - lado) / 2}px;width:${lado}px;height:${lado}px`;
+      document.body.append(voo);
+      const dx = para.left + para.width / 2 - (de.left + de.width / 2), dy = para.top + para.height / 2 - (de.top + de.height / 2);
+      voo.animate([
+        { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+        { transform: `translate(${dx * 0.55}px, ${dy * 0.35 - 60}px) scale(0.6)`, opacity: 1, offset: 0.45 },
+        { transform: `translate(${dx}px, ${dy}px) scale(0.16)`, opacity: 0.4 },
+      ], { duration: 600, easing: 'cubic-bezier(0.55, 0, 0.35, 1)' }).finished.then(() => { voo.remove(); pulsar(); }, () => voo.remove());
+    }
+
+    function adicionar(tipo, id, qtd, origem) {
       const atual = sacola.itens.find(i => i.tipo === tipo && i.id === id);
       if (atual) atual.qtd = Math.min(20, atual.qtd + qtd); else sacola.itens.push({ tipo, id, qtd });
       guardar();
       atualizarSacola();
       const nome = tipo === 'kit' ? porKit.get(id).nome : nomeCompleto(porProduto.get(id));
       avisar(`Adicionado à sacola: ${nome}.`);
-      botaoSacola.classList.remove('pulsa'); void botaoSacola.offsetWidth; botaoSacola.classList.add('pulsa');
+      voar(origem);
       toast.hidden = false; clearTimeout(toast._t); toast._t = setTimeout(() => { toast.hidden = true; }, 2200);
     }
 
@@ -896,19 +1166,82 @@
        adicionar, tirar dúvida (WhatsApp) e "Combina com" (mesma coleção)
        ========================================================================= */
     const janelaDetalhe = document.getElementById('detalhe');
-    function abrirDetalhe(tipo, id) {
+    let quemAbriu = null;
+    /* ao fechar, o foco volta para o card que abriu a janela */
+    janelaDetalhe.addEventListener('close', () => { if (quemAbriu && quemAbriu.isConnected) quemAbriu.focus(); });
+
+    /* zoom 2×: mouse (segue o cursor), toque duplo + arrastar, e teclado (botão + setas) */
+    function ativarZoom(palco) {
+      const img = palco.querySelector('img');
+      if (!img) return;
+      palco.classList.add('palco--zoom');
+      const botao = el('button', 'zoom-botao'); botao.type = 'button';
+      botao.setAttribute('aria-pressed', 'false');
+      const rotulo = el('span', '', 'Ampliar');
+      botao.innerHTML = ic('search'); botao.append(rotulo);
+      palco.append(botao);
+      let ox = 50, oy = 50, arrastando = null, ultimoToque = 0;
+      const mover = (x, y) => { ox = Math.min(100, Math.max(0, x)); oy = Math.min(100, Math.max(0, y)); img.style.transformOrigin = `${ox}% ${oy}%`; };
+      const pontoEm = (ev) => { const r = palco.getBoundingClientRect(); return [((ev.clientX - r.left) / r.width) * 100, ((ev.clientY - r.top) / r.height) * 100]; };
+      const ampliar = (sim) => {
+        palco.classList.toggle('ampliado', sim);
+        botao.setAttribute('aria-pressed', String(sim));
+        rotulo.textContent = sim ? 'Reduzir' : 'Ampliar';
+        if (!sim) mover(50, 50);
+      };
+      const fino = matchMedia('(hover: hover) and (pointer: fine)');
+      palco.addEventListener('pointerenter', (ev) => { if (ev.pointerType === 'mouse' && fino.matches) ampliar(true); });
+      palco.addEventListener('pointerleave', (ev) => { if (ev.pointerType === 'mouse' && fino.matches) ampliar(false); });
+      palco.addEventListener('pointermove', (ev) => {
+        if (ev.target === botao || botao.contains(ev.target)) return;
+        if (ev.pointerType === 'mouse') { if (palco.classList.contains('ampliado')) mover(...pontoEm(ev)); return; }
+        if (arrastando && palco.classList.contains('ampliado')) {
+          /* arrastar com o dedo: move a área ampliada no sentido contrário */
+          const r = palco.getBoundingClientRect();
+          mover(arrastando.ox - ((ev.clientX - arrastando.x) / r.width) * 100, arrastando.oy - ((ev.clientY - arrastando.y) / r.height) * 100);
+        }
+      });
+      palco.addEventListener('pointerdown', (ev) => {
+        if (ev.pointerType === 'mouse' || botao.contains(ev.target)) return;
+        const agora = Date.now();
+        if (agora - ultimoToque < 320) { /* toque duplo */
+          const ligar = !palco.classList.contains('ampliado');
+          if (ligar) mover(...pontoEm(ev));
+          ampliar(ligar); ultimoToque = 0; return;
+        }
+        ultimoToque = agora;
+        arrastando = { x: ev.clientX, y: ev.clientY, ox, oy };
+      });
+      ['pointerup', 'pointercancel'].forEach(t => palco.addEventListener(t, () => { arrastando = null; }));
+      botao.addEventListener('click', () => ampliar(!palco.classList.contains('ampliado')));
+      botao.addEventListener('keydown', (ev) => {
+        const passo = { ArrowLeft: [-10, 0], ArrowRight: [10, 0], ArrowUp: [0, -10], ArrowDown: [0, 10] }[ev.key];
+        if (!passo || !palco.classList.contains('ampliado')) return;
+        ev.preventDefault(); mover(ox + passo[0], oy + passo[1]);
+      });
+    }
+
+    function abrirDetalhe(tipo, id, opener) {
       const it = itemDe(tipo, id);
       const ehKit = tipo === 'kit';
       const nome = ehKit ? it.nome : it.nome;
       const nomeMsg = ehKit ? it.nome : nomeCompleto(it);
       let qtd = 1;
+      if (opener) quemAbriu = opener;
 
       const topo = el('div', 'janela__topo');
       const fechar = el('button', 'janela__fechar'); fechar.type = 'button'; fechar.dataset.fechar = ''; fechar.innerHTML = ic('x'); fechar.append('Fechar');
 
       const grade = el('div', 'detalhe__grade');
       const colFoto = el('div', 'detalhe__foto');
-      colFoto.append(ehKit ? quadroKit(it) : foto(it));
+      const palco = ehKit ? palcoKit(it) : palcoProduto(it, 'grande');
+      colFoto.append(palco);
+      if (!ehKit && it.foto) {
+        palco.append(el('span', 'palco__colecao', porColecao.get(it.colecao).nome));
+        ativarZoom(palco);
+        const dica = el('p', 'detalhe__dica', matchMedia('(hover: hover) and (pointer: fine)').matches ? 'Passe o mouse sobre a foto para ampliar.' : 'Toque duas vezes na foto para ampliar.');
+        colFoto.append(dica);
+      }
       const texto = el('div', 'detalhe__texto');
       topo.append(el('p', 'produto__marca', ehKit ? 'Kit' : `${MARCAS[it.marca].nome} · ${porColecao.get(it.colecao).nome}`), fechar);
       const h2 = el('h2', 'detalhe__nome', nome); h2.id = 'detalhe-nome';
@@ -935,7 +1268,7 @@
 
       const compra = el('div', 'detalhe__compra');
       const add = el('button', 'btn btn--primario'); add.type = 'button'; add.innerHTML = ic('shopping-bag'); add.append('Adicionar à sacola');
-      add.addEventListener('click', () => { adicionar(tipo, id, qtd); janelaDetalhe.close(); });
+      add.addEventListener('click', () => { adicionar(tipo, id, qtd, add); janelaDetalhe.close(); });
       compra.append(controleQuantidade(1, nome, (v) => { qtd = v; }), add);
       texto.append(compra);
       const duvida = el('a', 'detalhe__duvida'); duvida.href = whats(`Oi. Tenho uma dúvida sobre o produto ${nomeMsg} da Boutique do site.`);
@@ -946,16 +1279,62 @@
         const outros = PRODUTOS.filter(p => p.colecao === it.colecao && p.id !== it.id).slice(0, 4);
         if (outros.length) {
           const ul = el('ul', 'combina');
-          outros.forEach(p => { const li = el('li'); const b = el('button', '', p.nome); b.type = 'button'; b.addEventListener('click', () => abrirDetalhe('produto', p.id)); li.append(b); ul.append(li); });
+          outros.forEach(p => {
+            const li = el('li'); const b = el('button'); b.type = 'button';
+            const mini = palcoProduto(p, 'mini'); mini.setAttribute('aria-hidden', 'true');
+            b.append(mini, el('span', '', p.nome));
+            b.addEventListener('click', () => abrirDetalhe('produto', p.id));
+            li.append(b); ul.append(li);
+          });
           texto.append(bloco('Combina com', ul));
         }
       }
       grade.append(colFoto, texto);
-      janelaDetalhe.replaceChildren(grade);
-      if (!janelaDetalhe.open) janelaDetalhe.showModal();
-      janelaDetalhe.scrollTop = 0;
-      fechar.focus();
+
+      const montar = () => {
+        janelaDetalhe.replaceChildren(grade);
+        if (!janelaDetalhe.open) janelaDetalhe.showModal();
+        janelaDetalhe.scrollTop = 0;
+        fechar.focus();
+      };
+      /* a foto do card "expande" até a janela (View Transitions); sem suporte, a janela entra com fade + escala */
+      const fotoCard = !janelaDetalhe.open && opener && opener.closest('.produto, .kit')?.querySelector('.palco');
+      if (fotoCard && document.startViewTransition && !semMovimento()) {
+        fotoCard.style.viewTransitionName = 'foto-produto';
+        const t = document.startViewTransition(() => {
+          fotoCard.style.viewTransitionName = '';
+          palco.style.viewTransitionName = 'foto-produto';
+          montar();
+        });
+        t.finished.finally(() => { palco.style.viewTransitionName = ''; });
+      } else montar();
     }
+
+    /* =========================================================================
+       DADOS ESTRUTURADOS — Product (nome, marca, imagem, descrição); sem
+       "offers" enquanto não houver preço
+       ========================================================================= */
+    (() => {
+      const base = 'https://mezzetti4096.github.io/nuovi-capelli/assets/img/produtos/';
+      const ld = {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        name: 'Boutique Nuovi',
+        itemListElement: PRODUTOS.map((p, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          item: Object.assign({
+            '@type': 'Product',
+            name: nomeCompleto(p),
+            brand: { '@type': 'Brand', name: MARCAS[p.marca].nome },
+            description: p.descricao,
+          }, p.foto ? { image: `${base}${p.foto}-1200.webp` } : {},
+            p.preco != null ? { offers: { '@type': 'Offer', price: p.preco.toFixed(2), priceCurrency: 'BRL', availability: 'https://schema.org/InStock' } } : {}),
+        })),
+      };
+      const s = document.createElement('script'); s.type = 'application/ld+json'; s.textContent = JSON.stringify(ld);
+      document.head.append(s);
+    })();
 
     /* ---------- início ---------- */
     aplicar();
