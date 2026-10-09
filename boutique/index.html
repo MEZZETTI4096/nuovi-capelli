@@ -1306,7 +1306,8 @@
           palco.style.viewTransitionName = 'foto-produto';
           montar();
         });
-        t.finished.finally(() => { palco.style.viewTransitionName = ''; });
+        t.ready.catch(() => {}); /* o navegador pode pular a animação (aba em segundo plano): a janela abre do mesmo jeito */
+        t.finished.finally(() => { palco.style.viewTransitionName = ''; fotoCard.style.viewTransitionName = ''; });
       } else montar();
     }
 
